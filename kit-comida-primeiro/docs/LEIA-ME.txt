@@ -1,0 +1,12 @@
+Kit Comida Primeiro
+Material de apoio da aula "Creatina e Whey Protein: modismo inadequado", 42º Congresso Brasileiro de Pediatria, Belo Horizonte, outubro de 2026.
+Getúlio Bernardo Morato Filho, Escola Superior de Ciências da Saúde, Brasília, DF.
+
+Como abrir
+Abra o arquivo index.html em qualquer navegador. Ele leva às quatro ferramentas (pasta ferramentas), aos materiais em PDF e Word (pasta materiais) e ao carrossel (carrossel/index.html).
+As ferramentas funcionam sem internet; com internet, usam as fontes tipográficas do kit.
+
+Antes de publicar o carrossel
+Preencha nome, CRM e RQE no último cartão, pela versão editável (carrossel/17-carrossel-editavel.html). A Resolução CFM nº 2.336/2023 pede essa identificação na publicidade médica e também na página principal do perfil.
+
+Uso educacional livre, com citação da fonte. Orientação geral, que não substitui a avaliação individual. Revisado em outubro de 2026.

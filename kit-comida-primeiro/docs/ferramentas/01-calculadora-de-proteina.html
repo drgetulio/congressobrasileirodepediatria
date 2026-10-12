@@ -1,0 +1,152 @@
+<!doctype html><html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><title>Calculadora de proteína · Kit Comida Primeiro</title><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&family=Source+Serif+4:opsz,wght@8..60,500;8..60,600&display=swap"><style>
+/* Kit Comida Primeiro na tela: ficha clínica, número do item em serifa, cor por público */
+:root{--bg:#f6f7fa;--surface:#fff;--ink:#1d2130;--muted:#596074;--rule:#dde1ea;--head:#1f2552;
+--blue:#224f9d;--amber:#a86400;--green:#457011;--indigo:#3b3f8f;--red:#a3341f;
+--t-blue:#eaf0f9;--t-amber:#fcf2de;--t-green:#edf4e1;--t-indigo:#ecedf7;--t-red:#fbebe7;--track:#e8ebf2;
+--serif:"Source Serif 4",Georgia,"Times New Roman",serif;--sans:"IBM Plex Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+--acc:var(--indigo);--tint:var(--t-indigo)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#11131a;--surface:#191c26;--ink:#e6e8ef;--muted:#a2a8b9;--rule:#2b3040;--head:#dfe3ff;
+--blue:#8fb0ef;--amber:#efb55a;--green:#a6d07a;--indigo:#b4b7ff;--red:#f19a86;--t-blue:#1c2640;--t-amber:#2d2312;--t-green:#1e2917;--t-indigo:#22233c;--t-red:#33201b;--track:#2a2f3e;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#11131a;--surface:#191c26;--ink:#e6e8ef;--muted:#a2a8b9;--rule:#2b3040;--head:#dfe3ff;
+--blue:#8fb0ef;--amber:#efb55a;--green:#a6d07a;--indigo:#b4b7ff;--red:#f19a86;--t-blue:#1c2640;--t-amber:#2d2312;--t-green:#1e2917;--t-indigo:#22233c;--t-red:#33201b;--track:#2a2f3e;color-scheme:dark}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:16px;line-height:1.55;font-variant-numeric:tabular-nums}
+.wrap{max-width:1040px;margin:0 auto;padding-inline:20px;padding-block:28px 56px}
+a{color:var(--blue)}
+.ped{--acc:var(--blue);--tint:var(--t-blue)}.fam{--acc:var(--amber);--tint:var(--t-amber)}.eq{--acc:var(--green);--tint:var(--t-green)}.app{--acc:var(--indigo);--tint:var(--t-indigo)}
+.bar-top{display:flex;justify-content:space-between;align-items:baseline;gap:12px;border-bottom:2px solid var(--acc);padding-bottom:8px;margin-bottom:22px;flex-wrap:wrap}
+.brand{font-family:var(--serif);font-weight:600;font-size:18px;color:var(--head);text-decoration:none}
+.brand span{color:var(--amber)}
+.tag{font-size:12px;text-transform:uppercase;letter-spacing:.1em;font-weight:600;color:var(--acc)}
+.tb{display:grid;grid-template-columns:auto 1fr;gap:6px 18px;align-items:start;margin-bottom:18px}
+.tb .num{font-family:var(--serif);font-weight:600;font-size:52px;line-height:.9;color:var(--acc);padding-right:16px;border-right:1px solid var(--rule)}
+h1{font-family:var(--serif);font-weight:600;font-size:clamp(26px,4vw,36px);line-height:1.1;color:var(--head);margin:0 0 8px;text-wrap:balance}
+h2{font-family:var(--serif);font-weight:600;font-size:22px;color:var(--head);margin:0 0 10px;line-height:1.2}
+h3{font-family:var(--serif);font-weight:600;font-size:18px;color:var(--head);margin:0 0 6px;line-height:1.25}
+.lede{color:var(--muted);font-size:17px;margin:0;max-width:62ch}
+.k{display:block;font-family:var(--sans);font-size:12px;text-transform:uppercase;letter-spacing:.1em;color:var(--acc);font-weight:600;margin-bottom:4px}
+.card{background:var(--surface);border:1px solid var(--rule);border-radius:10px;padding:18px}
+.tint{background:var(--tint);border-radius:10px;padding:16px 18px}
+.grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:16px}
+.grid3{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,220px),1fr));gap:14px}
+.grid2>*,.grid3>*{min-width:0}
+.stack{display:flex;flex-direction:column;gap:14px}
+label{font-size:14px;font-weight:600;color:var(--head);display:block;margin-bottom:6px}
+input[type=number],select{font:inherit;font-size:18px;padding:10px 12px;border:1px solid var(--rule);border-radius:8px;background:var(--surface);color:var(--ink);width:100%}
+input:focus-visible,select:focus-visible,button:focus-visible,a:focus-visible{outline:3px solid var(--acc);outline-offset:2px}
+button{font:inherit;cursor:pointer}
+.btn{background:var(--acc);color:var(--surface);border:0;border-radius:8px;padding:10px 16px;font-weight:600;font-size:15px}
+.btn.ghost{background:transparent;color:var(--acc);border:1.5px solid var(--acc)}
+.btn:disabled{opacity:.45;cursor:default}
+.tile .v{font-family:var(--serif);font-weight:600;font-size:34px;line-height:1;color:var(--acc)}
+.tile .v small{font-size:16px;font-weight:600;margin-left:4px}
+.tile .d{font-size:14px;color:var(--muted);margin-top:6px}
+.meter{position:relative;height:14px;background:var(--track);border-radius:7px;overflow:visible;margin:14px 0 26px}
+.meter i{position:absolute;left:0;top:0;bottom:0;border-radius:7px;background:var(--acc);transition:width .25s}
+.meter .goal{position:absolute;top:-6px;bottom:-6px;border-left:2px dashed var(--head)}
+.meter .goal span{position:absolute;top:22px;transform:translateX(-50%);font-size:12px;color:var(--muted);white-space:nowrap}
+.meter .zero{position:absolute;left:0;top:22px;font-size:12px;color:var(--muted)}
+.foods{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,250px),1fr));gap:8px}
+.food{display:grid;grid-template-columns:1fr auto;gap:2px 10px;align-items:center;border:1px solid var(--rule);border-radius:8px;padding:8px 10px;background:var(--surface)}
+.food .n{font-weight:600;font-size:15px}
+.food .m{font-size:12.5px;color:var(--muted);grid-column:1}
+.food .p{font-size:13px;color:var(--acc);font-weight:600}
+.qty{display:flex;align-items:center;gap:6px;grid-row:1/3;grid-column:2}
+.qty button{width:32px;height:32px;border-radius:50%;border:1.5px solid var(--acc);background:transparent;color:var(--acc);font-weight:700;font-size:18px;line-height:1}
+.qty b{min-width:18px;text-align:center}
+.food.on{border-color:var(--acc);background:var(--tint)}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{border:1.5px solid var(--acc);color:var(--acc);background:transparent;border-radius:999px;padding:6px 12px;font-size:14px;font-weight:600}
+.chip[aria-pressed="true"]{background:var(--acc);color:var(--surface)}
+.status{display:inline-block;border-radius:999px;padding:4px 12px;font-weight:600;font-size:14px}
+.status.ok{background:var(--t-green);color:var(--green)}.status.warn{background:var(--t-amber);color:var(--amber)}.status.bad{background:var(--t-red);color:var(--red)}
+.src{font-size:13px;color:var(--muted);border-top:1px solid var(--rule);padding-top:12px;margin-top:28px}
+.src ol{padding-left:20px;margin:6px 0 0}
+.src li{overflow-wrap:anywhere}
+sup.r{font-size:.62em;color:var(--acc);font-weight:600;line-height:0}
+.back{font-size:14px;font-weight:600;color:var(--acc);text-decoration:none;background:none;border:0;padding:0}
+.big{font-family:var(--serif);font-size:24px;line-height:1.35;color:var(--head)}
+.q-opts{display:flex;gap:12px;flex-wrap:wrap}
+.q-opts .btn{font-size:17px;padding:12px 22px}
+.btn.choice{background:var(--surface);color:var(--head);border:1.5px solid var(--acc);min-width:140px}
+.btn.choice:hover{background:var(--tint)}
+.fb{border-radius:10px;padding:14px 16px;margin-top:14px}
+.fb.ok{background:var(--t-green)}.fb.no{background:var(--t-red)}
+.fb b{display:block;font-family:var(--serif);font-size:19px;margin-bottom:4px}
+.fb.ok b{color:var(--green)}.fb.no b{color:var(--red)}
+.progress{display:flex;gap:4px;margin:6px 0 16px}
+.progress i{flex:1;height:6px;border-radius:3px;background:var(--track)}
+.progress i.done{background:var(--acc)}
+.progress i.cur{background:var(--head)}
+.step{border-left:3px solid var(--acc);padding-left:14px}
+.opt{display:flex;gap:10px;align-items:flex-start;padding:8px 0;border-bottom:1px solid var(--rule);font-size:15px}
+.opt input{width:20px;height:20px;margin-top:2px;accent-color:var(--acc);flex:none}
+.summary{white-space:pre-wrap;font-family:ui-monospace,"SFMono-Regular",Menlo,monospace;font-size:13.5px;line-height:1.55;background:var(--surface);border:1px solid var(--rule);border-radius:8px;padding:14px;overflow-x:auto}
+.note{font-size:14px;color:var(--muted)}
+table.mini{width:100%;border-collapse:collapse;font-size:15px}
+table.mini td{padding:7px 0;border-bottom:1px solid var(--rule)}
+table.mini td:last-child{text-align:right;font-weight:600;color:var(--acc)}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style></head><body class="app"><main class="wrap"><div class="bar-top"><a class="brand" href="../index.html" onclick="if(history.length>1){history.back();return false}">Kit <span>Comida Primeiro</span></a><span class="tag">Ferramenta · 01 de 20</span></div>
+<div class="tb"><div class="num">01</div><div><h1>Calculadora de proteína do jovem atleta</h1>
+<p class="lede">Informe o peso, a idade e o número de refeições. A meta do atleta, de cerca de 1,5&nbsp;g/kg/dia, é dividida pelas refeições; depois, monte o lanche pós-treino com alimentos brasileiros e compare com a meta.</p></div></div>
+<div class="grid3" style="margin-bottom:18px">
+ <div><label for="peso">Peso (kg)</label><input id="peso" type="number" min="25" max="120" step="0.5" value="60"></div>
+ <div><label for="idade">Idade</label><select id="idade"><option value="10">10 anos</option><option value="11">11 anos</option><option value="12">12 anos</option><option value="13">13 anos</option><option value="14">14 anos</option><option value="15" selected>15 anos</option><option value="16">16 anos</option><option value="17">17 anos</option><option value="18">18 anos</option></select></div>
+ <div><label for="ref">Refeições por dia</label><select id="ref"><option>4</option><option selected>5</option><option>6</option></select></div>
+</div>
+<div class="grid3" id="tiles"></div>
+<p class="note" id="ctx" style="margin-top:12px"></p>
+<div class="card" style="margin-top:22px">
+ <h2><span class="k">Monte o lanche pós-treino</span>Meta por refeição: <span id="goalTxt"></span></h2>
+ <div class="meter" id="meter"><i id="fill"></i><span class="zero">0 g</span><span class="goal" id="goal"><span id="goalLbl"></span></span></div>
+ <p class="big" id="sumTxt" style="font-size:22px"></p>
+ <div class="chips" id="combos" style="margin:12px 0 16px" aria-label="Lanches prontos"></div>
+ <div class="foods" id="foods"></div>
+ <p class="note" style="margin-top:12px">Valores de proteína e energia por medida caseira da Tabela Brasileira de Composição de Alimentos, versão 7.3.</p>
+</div>
+<div class="src"><b>Fontes</b><ol><li>Institute of Medicine. Dietary reference intakes for energy, carbohydrate, fiber, fat, fatty acids, cholesterol, protein, and amino acids. Washington (DC): National Academies Press; 2005. doi:10.17226/10490</li><li>Desbrow B. Youth athlete development and nutrition. Sports Med. 2021;51(Suppl 1):3-12. doi:10.1007/s40279-021-01534-6</li><li>Steffl M, Kinkorova I, Kokstejn J, Petr M. Macronutrient intake in soccer players: a meta-analysis. Nutrients. 2019;11(6):1305. doi:10.3390/nu11061305</li><li>Collins J, Maughan RJ, Gleeson M, et al. UEFA expert group statement on nutrition in elite football. Br J Sports Med. 2021;55(8):416. doi:10.1136/bjsports-2019-101961</li><li>Tabela Brasileira de Composição de Alimentos (TBCA). Universidade de São Paulo (USP). Food Research Center (FoRC). Versão 7.3. São Paulo; 2025. Disponível em: http://www.fcf.usp.br/tbca</li></ol></div><p class="note" style="margin-top:18px">Kit Comida Primeiro · material de apoio da aula “Creatina e Whey Protein: modismo inadequado”, 42º Congresso Brasileiro de Pediatria, 2026. Getúlio Bernardo Morato Filho, Escola Superior de Ciências da Saúde, Brasília, DF. Orientação geral, que não substitui a avaliação individual.</p>
+<script>
+const FOODS=[{"k": "leite", "n": "Leite integral", "m": "copo americano duplo (240 mL)", "p": 7.66, "kc": 149}, {"k": "leited", "n": "Leite desnatado", "m": "copo americano duplo (240 mL)", "p": 7.49, "kc": 87}, {"k": "pao", "n": "Pão francês", "m": "1 unidade (50 g)", "p": 4.91, "kc": 149}, {"k": "paoint", "n": "Pão de forma integral", "m": "1 fatia (25 g)", "p": 2.64, "kc": 62}, {"k": "minas", "n": "Queijo minas frescal", "m": "1 fatia média (30 g)", "p": 4.76, "kc": 72}, {"k": "mussarela", "n": "Queijo muçarela", "m": "1 fatia (20 g)", "p": 4.77, "kc": 64}, {"k": "ricota", "n": "Ricota", "m": "1 fatia (30 g)", "p": 3.78, "kc": 41}, {"k": "requeijao", "n": "Requeijão", "m": "1 colher de sopa cheia (30 g)", "p": 2.97, "kc": 84}, {"k": "iogurte", "n": "Iogurte natural", "m": "1 pote (170 g)", "p": 6.75, "kc": 106}, {"k": "ovo", "n": "Ovo cozido", "m": "1 unidade (50 g)", "p": 5.2, "kc": 62}, {"k": "frango", "n": "Peito de frango grelhado", "m": "1 filé médio (110 g)", "p": 35.3, "kc": 165}, {"k": "patinho", "n": "Patinho grelhado", "m": "1 porção média (100 g)", "p": 36.0, "kc": 211}, {"k": "moida", "n": "Carne moída refogada", "m": "1 colher de servir cheia (60 g)", "p": 15.7, "kc": 129}, {"k": "sardinha", "n": "Sardinha em molho de tomate", "m": "1 lata (125 g)", "p": 31.0, "kc": 264}, {"k": "feijao", "n": "Feijão carioca cozido", "m": "1 concha cheia (140 g)", "p": 6.68, "kc": 99}, {"k": "arroz", "n": "Arroz branco cozido", "m": "1 escumadeira cheia (85 g)", "p": 2.02, "kc": 111}, {"k": "lentilha", "n": "Lentilha cozida", "m": "1 concha cheia (85 g)", "p": 6.21, "kc": 83}, {"k": "grao", "n": "Grão-de-bico cozido", "m": "1 concha cheia (120 g)", "p": 9.04, "kc": 138}, {"k": "amendoim", "n": "Amendoim torrado", "m": "1 colher de sopa cheia (19 g)", "p": 5.23, "kc": 118}, {"k": "soja", "n": "Bebida de soja", "m": "copo americano duplo (240 mL)", "p": 6.55, "kc": 100}, {"k": "tofu", "n": "Tofu", "m": "1 colher de sopa cheia (30 g)", "p": 1.97, "kc": 20}, {"k": "aveia", "n": "Aveia em flocos finos", "m": "1 colher de sopa cheia (15 g)", "p": 2.34, "kc": 56}, {"k": "banana", "n": "Banana prata", "m": "1 unidade (40 g)", "p": 0.44, "kc": 42}, {"k": "tapioca", "n": "Tapioca sem recheio", "m": "1 unidade (60 g)", "p": 0.21, "kc": 173}], COMBOS=[{"n": "Clássico de padaria", "parts": [["leite", 1], ["pao", 1], ["minas", 1]], "note": "O lanche da aula"}, {"n": "Pão com ovo", "parts": [["pao", 1], ["ovo", 2]], "note": ""}, {"n": "Pão francês com muçarela", "parts": [["pao", 1], ["mussarela", 2]], "note": ""}, {"n": "Vitamina de banana com aveia", "parts": [["leite", 1], ["aveia", 2], ["banana", 2]], "note": "Bom quando o apetite está baixo"}, {"n": "Iogurte com aveia e banana", "parts": [["iogurte", 1], ["aveia", 2], ["banana", 2]], "note": ""}, {"n": "Tapioca com ovo e queijo", "parts": [["tapioca", 1], ["ovo", 2], ["minas", 1]], "note": ""}, {"n": "Sanduíche integral de ricota", "parts": [["paoint", 2], ["ricota", 2]], "note": ""}, {"n": "Pão integral com amendoim e bebida de soja", "parts": [["paoint", 2], ["amendoim", 1], ["soja", 1]], "note": "Sem ingredientes de origem animal"}, {"n": "Grão-de-bico com pão", "parts": [["grao", 1], ["pao", 1]], "note": "Sem ingredientes de origem animal"}, {"n": "Leite desnatado com pão e requeijão", "parts": [["leited", 1], ["pao", 1], ["requeijao", 1]], "note": ""}, {"n": "Leite, pão francês e dois ovos", "parts": [["leite", 1], ["pao", 1], ["ovo", 2]], "note": "Para quem pesa 70 kg ou mais"}, {"n": "Leite e pão francês com muçarela", "parts": [["leite", 1], ["pao", 1], ["mussarela", 2]], "note": "Para quem pesa 70 kg ou mais"}, {"n": "Grão-de-bico em dobro com pão", "parts": [["grao", 2], ["pao", 1]], "note": "Sem ingredientes de origem animal"}, {"n": "Prato do almoço: arroz, feijão e frango", "parts": [["arroz", 2], ["feijao", 1], ["frango", 1]], "note": "Refeição completa depois do treino da manhã"}, {"n": "Prato vegetariano: arroz, feijão e ovos", "parts": [["arroz", 2], ["feijao", 1], ["ovo", 2]], "note": ""}];
+const $=id=>document.getElementById(id);
+const f1=x=>(Math.round(x*10+1e-7)/10).toLocaleString('pt-BR',{minimumFractionDigits:1,maximumFractionDigits:1});
+const f0=x=>Math.round(x).toLocaleString('pt-BR');
+let qty={leite:1,pao:1,minas:1};
+function peso(){const v=parseFloat($('peso').value);return isFinite(v)&&v>=25&&v<=120?v:null}
+function render(){
+ const w=peso(), age=+$('idade').value, n=+$('ref').value;
+ if(!w){$('tiles').innerHTML='<p class="note">Informe um peso entre 25 e 120 kg.</p>';return}
+ const rda = age>=14 ? `<span class="v">${f0(0.85*w)}<small>g/dia</small></span><div class="d">Recomendação geral de 14 a 18 anos: 0,85&nbsp;g/kg/dia<sup class="r">1</sup></div>`
+                     : `<span class="v">${f0(0.95*w)}<small>g/dia</small></span><div class="d">Recomendação geral de 9 a 13 anos: 0,95&nbsp;g/kg/dia<sup class="r">1</sup></div>`;
+ const teen=age>=13, day=(teen?1.5:0.95)*w, meal=day/n;
+ const ath = teen ? `<span class="v">${f0(day)}<small>g/dia</small></span><div class="d">Adolescente atleta, de 13 a 18 anos: cerca de 1,5&nbsp;g/kg/dia, que cobre crescimento e recuperação<sup class="r">2</sup></div>`
+                  : `<span class="v">${f0(day)}<small>g/dia</small></span><div class="d">De 10 a 12 anos, a revisão não fixa meta própria para atletas: use 0,95&nbsp;g/kg/dia como piso e avalie a dieta<sup class="r">1,2</sup></div>`;
+ $('tiles').innerHTML=`<div class="card tile">${rda}</div>
+  <div class="card tile">${ath}</div>
+  <div class="card tile"><span class="v">${f0(meal)}<small>g</small></span><div class="d">Por refeição: ${f0(day)}&nbsp;g divididos em ${n} refeições${n===5&&teen?', ou cerca de 0,3&nbsp;g/kg em cada uma, como propõe a revisão':''}<sup class="r">2</sup>.</div></div>`;
+ $('ctx').innerHTML=`Para comparar: numa meta-análise com 647 jovens futebolistas de clubes de elite e subelite, o consumo médio foi de 1,9&nbsp;g/kg/dia, o que daria ${f0(1.9*w)}&nbsp;g para este peso<sup class="r">3</sup>. Especialistas em futebol de base consideram adequado até 1,6&nbsp;g/kg/dia para juniores, alcançável com a dieta<sup class="r">4</sup>.`;
+ $('goalTxt').textContent=f1(meal)+' g';
+ const tot=Object.entries(qty).reduce((s,[k,q])=>s+q*FOODS.find(f=>f.k===k).p,0);
+ const kc=Object.entries(qty).reduce((s,[k,q])=>s+q*FOODS.find(f=>f.k===k).kc,0);
+ const max=Math.max(meal*1.6,tot*1.05,10);
+ $('fill').style.width=Math.min(100,tot/max*100)+'%';
+ $('goal').style.left=(meal/max*100)+'%'; $('goalLbl').textContent='meta '+f1(meal)+' g';
+ const diff=tot-meal;
+ $('sumTxt').innerHTML = tot===0 ? 'Escolha alimentos abaixo ou um lanche pronto.' :
+   `${f1(tot)} g de proteína, ${f0(kc)} kcal. ` + (diff>=0 ? (diff<=meal*0.1 ? '<span class="status ok">Na meta</span>' : `<span class="status ok">Passa ${f1(diff)} g da meta</span>`) : (-diff<=meal*0.1 ? `<span class="status warn">Perto da meta: faltam ${f1(-diff)} g</span>` : `<span class="status warn">Faltam ${f1(-diff)} g</span>`));
+ $('foods').innerHTML=FOODS.map(f=>{const q=qty[f.k]||0;return `<div class="food${q?' on':''}"><span class="n">${f.n}</span><span class="m">${f.m} · <span class="p">${f1(f.p)} g</span></span>
+  <span class="qty"><button aria-label="Tirar ${f.n}" data-k="${f.k}" data-d="-1">−</button><b>${q}</b><button aria-label="Pôr ${f.n}" data-k="${f.k}" data-d="1">+</button></span></div>`}).join('');
+}
+function combos(){
+ $('combos').innerHTML=COMBOS.map((c,i)=>`<button class="chip" data-c="${i}" aria-pressed="false">${c.n}</button>`).join('')+'<button class="chip" data-c="clear" aria-pressed="false">Limpar</button>';
+}
+document.addEventListener('click',e=>{
+ const b=e.target.closest('button'); if(!b) return;
+ if(b.dataset.k){const k=b.dataset.k;qty[k]=Math.max(0,(qty[k]||0)+(+b.dataset.d));if(!qty[k])delete qty[k];render()}
+ if(b.dataset.c){ if(b.dataset.c==='clear'){qty={}} else {qty={};for(const [k,q] of COMBOS[+b.dataset.c].parts) qty[k]=(qty[k]||0)+q}
+   document.querySelectorAll('#combos .chip').forEach(x=>x.setAttribute('aria-pressed',x===b&&b.dataset.c!=='clear'?'true':'false')); render()}
+});
+['peso','idade','ref'].forEach(id=>$(id).addEventListener('input',render));
+combos(); render();
+document.querySelector('#combos .chip').setAttribute('aria-pressed','true');
+</script></main></body></html>

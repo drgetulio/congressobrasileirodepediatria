@@ -1,0 +1,153 @@
+<!doctype html><html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><title>Conduta passo a passo · Kit Comida Primeiro</title><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&family=Source+Serif+4:opsz,wght@8..60,500;8..60,600&display=swap"><style>
+/* Kit Comida Primeiro na tela: ficha clínica, número do item em serifa, cor por público */
+:root{--bg:#f6f7fa;--surface:#fff;--ink:#1d2130;--muted:#596074;--rule:#dde1ea;--head:#1f2552;
+--blue:#224f9d;--amber:#a86400;--green:#457011;--indigo:#3b3f8f;--red:#a3341f;
+--t-blue:#eaf0f9;--t-amber:#fcf2de;--t-green:#edf4e1;--t-indigo:#ecedf7;--t-red:#fbebe7;--track:#e8ebf2;
+--serif:"Source Serif 4",Georgia,"Times New Roman",serif;--sans:"IBM Plex Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+--acc:var(--indigo);--tint:var(--t-indigo)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#11131a;--surface:#191c26;--ink:#e6e8ef;--muted:#a2a8b9;--rule:#2b3040;--head:#dfe3ff;
+--blue:#8fb0ef;--amber:#efb55a;--green:#a6d07a;--indigo:#b4b7ff;--red:#f19a86;--t-blue:#1c2640;--t-amber:#2d2312;--t-green:#1e2917;--t-indigo:#22233c;--t-red:#33201b;--track:#2a2f3e;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#11131a;--surface:#191c26;--ink:#e6e8ef;--muted:#a2a8b9;--rule:#2b3040;--head:#dfe3ff;
+--blue:#8fb0ef;--amber:#efb55a;--green:#a6d07a;--indigo:#b4b7ff;--red:#f19a86;--t-blue:#1c2640;--t-amber:#2d2312;--t-green:#1e2917;--t-indigo:#22233c;--t-red:#33201b;--track:#2a2f3e;color-scheme:dark}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:16px;line-height:1.55;font-variant-numeric:tabular-nums}
+.wrap{max-width:1040px;margin:0 auto;padding-inline:20px;padding-block:28px 56px}
+a{color:var(--blue)}
+.ped{--acc:var(--blue);--tint:var(--t-blue)}.fam{--acc:var(--amber);--tint:var(--t-amber)}.eq{--acc:var(--green);--tint:var(--t-green)}.app{--acc:var(--indigo);--tint:var(--t-indigo)}
+.bar-top{display:flex;justify-content:space-between;align-items:baseline;gap:12px;border-bottom:2px solid var(--acc);padding-bottom:8px;margin-bottom:22px;flex-wrap:wrap}
+.brand{font-family:var(--serif);font-weight:600;font-size:18px;color:var(--head);text-decoration:none}
+.brand span{color:var(--amber)}
+.tag{font-size:12px;text-transform:uppercase;letter-spacing:.1em;font-weight:600;color:var(--acc)}
+.tb{display:grid;grid-template-columns:auto 1fr;gap:6px 18px;align-items:start;margin-bottom:18px}
+.tb .num{font-family:var(--serif);font-weight:600;font-size:52px;line-height:.9;color:var(--acc);padding-right:16px;border-right:1px solid var(--rule)}
+h1{font-family:var(--serif);font-weight:600;font-size:clamp(26px,4vw,36px);line-height:1.1;color:var(--head);margin:0 0 8px;text-wrap:balance}
+h2{font-family:var(--serif);font-weight:600;font-size:22px;color:var(--head);margin:0 0 10px;line-height:1.2}
+h3{font-family:var(--serif);font-weight:600;font-size:18px;color:var(--head);margin:0 0 6px;line-height:1.25}
+.lede{color:var(--muted);font-size:17px;margin:0;max-width:62ch}
+.k{display:block;font-family:var(--sans);font-size:12px;text-transform:uppercase;letter-spacing:.1em;color:var(--acc);font-weight:600;margin-bottom:4px}
+.card{background:var(--surface);border:1px solid var(--rule);border-radius:10px;padding:18px}
+.tint{background:var(--tint);border-radius:10px;padding:16px 18px}
+.grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:16px}
+.grid3{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,220px),1fr));gap:14px}
+.grid2>*,.grid3>*{min-width:0}
+.stack{display:flex;flex-direction:column;gap:14px}
+label{font-size:14px;font-weight:600;color:var(--head);display:block;margin-bottom:6px}
+input[type=number],select{font:inherit;font-size:18px;padding:10px 12px;border:1px solid var(--rule);border-radius:8px;background:var(--surface);color:var(--ink);width:100%}
+input:focus-visible,select:focus-visible,button:focus-visible,a:focus-visible{outline:3px solid var(--acc);outline-offset:2px}
+button{font:inherit;cursor:pointer}
+.btn{background:var(--acc);color:var(--surface);border:0;border-radius:8px;padding:10px 16px;font-weight:600;font-size:15px}
+.btn.ghost{background:transparent;color:var(--acc);border:1.5px solid var(--acc)}
+.btn:disabled{opacity:.45;cursor:default}
+.tile .v{font-family:var(--serif);font-weight:600;font-size:34px;line-height:1;color:var(--acc)}
+.tile .v small{font-size:16px;font-weight:600;margin-left:4px}
+.tile .d{font-size:14px;color:var(--muted);margin-top:6px}
+.meter{position:relative;height:14px;background:var(--track);border-radius:7px;overflow:visible;margin:14px 0 26px}
+.meter i{position:absolute;left:0;top:0;bottom:0;border-radius:7px;background:var(--acc);transition:width .25s}
+.meter .goal{position:absolute;top:-6px;bottom:-6px;border-left:2px dashed var(--head)}
+.meter .goal span{position:absolute;top:22px;transform:translateX(-50%);font-size:12px;color:var(--muted);white-space:nowrap}
+.meter .zero{position:absolute;left:0;top:22px;font-size:12px;color:var(--muted)}
+.foods{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,250px),1fr));gap:8px}
+.food{display:grid;grid-template-columns:1fr auto;gap:2px 10px;align-items:center;border:1px solid var(--rule);border-radius:8px;padding:8px 10px;background:var(--surface)}
+.food .n{font-weight:600;font-size:15px}
+.food .m{font-size:12.5px;color:var(--muted);grid-column:1}
+.food .p{font-size:13px;color:var(--acc);font-weight:600}
+.qty{display:flex;align-items:center;gap:6px;grid-row:1/3;grid-column:2}
+.qty button{width:32px;height:32px;border-radius:50%;border:1.5px solid var(--acc);background:transparent;color:var(--acc);font-weight:700;font-size:18px;line-height:1}
+.qty b{min-width:18px;text-align:center}
+.food.on{border-color:var(--acc);background:var(--tint)}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{border:1.5px solid var(--acc);color:var(--acc);background:transparent;border-radius:999px;padding:6px 12px;font-size:14px;font-weight:600}
+.chip[aria-pressed="true"]{background:var(--acc);color:var(--surface)}
+.status{display:inline-block;border-radius:999px;padding:4px 12px;font-weight:600;font-size:14px}
+.status.ok{background:var(--t-green);color:var(--green)}.status.warn{background:var(--t-amber);color:var(--amber)}.status.bad{background:var(--t-red);color:var(--red)}
+.src{font-size:13px;color:var(--muted);border-top:1px solid var(--rule);padding-top:12px;margin-top:28px}
+.src ol{padding-left:20px;margin:6px 0 0}
+.src li{overflow-wrap:anywhere}
+sup.r{font-size:.62em;color:var(--acc);font-weight:600;line-height:0}
+.back{font-size:14px;font-weight:600;color:var(--acc);text-decoration:none;background:none;border:0;padding:0}
+.big{font-family:var(--serif);font-size:24px;line-height:1.35;color:var(--head)}
+.q-opts{display:flex;gap:12px;flex-wrap:wrap}
+.q-opts .btn{font-size:17px;padding:12px 22px}
+.btn.choice{background:var(--surface);color:var(--head);border:1.5px solid var(--acc);min-width:140px}
+.btn.choice:hover{background:var(--tint)}
+.fb{border-radius:10px;padding:14px 16px;margin-top:14px}
+.fb.ok{background:var(--t-green)}.fb.no{background:var(--t-red)}
+.fb b{display:block;font-family:var(--serif);font-size:19px;margin-bottom:4px}
+.fb.ok b{color:var(--green)}.fb.no b{color:var(--red)}
+.progress{display:flex;gap:4px;margin:6px 0 16px}
+.progress i{flex:1;height:6px;border-radius:3px;background:var(--track)}
+.progress i.done{background:var(--acc)}
+.progress i.cur{background:var(--head)}
+.step{border-left:3px solid var(--acc);padding-left:14px}
+.opt{display:flex;gap:10px;align-items:flex-start;padding:8px 0;border-bottom:1px solid var(--rule);font-size:15px}
+.opt input{width:20px;height:20px;margin-top:2px;accent-color:var(--acc);flex:none}
+.summary{white-space:pre-wrap;font-family:ui-monospace,"SFMono-Regular",Menlo,monospace;font-size:13.5px;line-height:1.55;background:var(--surface);border:1px solid var(--rule);border-radius:8px;padding:14px;overflow-x:auto}
+.note{font-size:14px;color:var(--muted)}
+table.mini{width:100%;border-collapse:collapse;font-size:15px}
+table.mini td{padding:7px 0;border-bottom:1px solid var(--rule)}
+table.mini td:last-child{text-align:right;font-weight:600;color:var(--acc)}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style></head><body class="app"><main class="wrap"><div class="bar-top"><a class="brand" href="../index.html" onclick="if(history.length>1){history.back();return false}">Kit <span>Comida Primeiro</span></a><span class="tag">Ferramenta · 03 de 20</span></div>
+<div class="tb"><div class="num">03</div><div><h1>Conduta passo a passo</h1>
+<p class="lede">Para o adolescente que pediu ou já usa suplemento. Marque o que encontrou na consulta; o resumo da conduta, com as fontes, se monta ao lado e pode ser copiado para o prontuário. A tela abre com o caso da aula como exemplo.</p></div></div>
+<div class="grid2">
+<div class="stack">
+ <p class="note" style="margin:0">O passo 1 (perguntar antes de opinar) e o passo 6 (comida primeiro e retorno marcado) entram sempre no resumo, como na versão impressa.</p>
+ <div class="card step" style="--acc:var(--red)"><h3>Passo 2. Algum sinal que muda a prioridade?</h3>
+  <label class="opt"><input type="checkbox" data-g="al" value="reds">Restrição alimentar, perda de peso ou alteração menstrual</label>
+  <label class="opt"><input type="checkbox" data-g="al" value="dism">Sofrimento com a aparência, rotina rígida de treino e dieta</label>
+  <label class="opt"><input type="checkbox" data-g="al" value="aas">Acne intensa, ginecomastia, mudança rápida do corpo ou do humor</label></div>
+ <div class="card step"><h3>Passo 3. O que ele já usa?</h3>
+  <label class="opt"><input type="checkbox" data-g="uso" value="creatina" checked>Creatina</label>
+  <label class="opt"><input type="checkbox" data-g="uso" value="proteina" checked>Proteína em pó (whey ou outra)</label>
+  <label class="opt"><input type="checkbox" data-g="uso" value="estimulante">Energético, pré-treino ou cafeína em pó</label>
+  <label class="opt"><input type="checkbox" data-g="uso" value="risco">Produto sem procedência, comprado pela internet ou com promessa hormonal</label>
+  <label class="opt"><input type="checkbox" data-g="uso" value="nada">Ainda não usa; só pediu (desmarca os demais)</label></div>
+ <div class="card step"><h3>Passo 4. Há indicação clínica?</h3>
+  <label class="opt"><input type="radio" name="ind" value="nao" checked>Não</label>
+  <label class="opt"><input type="radio" name="ind" value="restr">Dieta restritiva que não alcança a meta, como em alguns vegetarianos</label>
+  <label class="opt"><input type="radio" name="ind" value="doenca">Doença com indicação estabelecida</label></div>
+ <div class="card step" style="--acc:var(--amber)"><h3>Passo 5. Há comida suficiente em casa?</h3>
+  <label class="opt"><input type="checkbox" data-g="soc" value="acesso">Pouco acesso a comida (insegurança alimentar)</label></div>
+</div>
+<div class="stack" style="position:sticky;top:12px;align-self:start">
+ <div class="card"><h2><span class="k">Resumo da conduta</span>O que fazer</h2><ol id="out" style="padding-left:20px;margin:0"></ol></div>
+ <div class="card"><h3>Texto para o prontuário</h3><div class="summary" id="rec"></div>
+ <div style="display:flex;gap:10px;margin-top:10px;flex-wrap:wrap"><button class="btn" id="copy">Copiar texto</button><button class="btn ghost" id="clear">Limpar marcações</button></div>
+ <p class="note" id="copied" aria-live="polite"></p></div>
+</div></div>
+<div class="src"><b>Fontes</b><ol><li>Eisenberg ME, Wall M, Neumark-Sztainer D. Muscle-enhancing behaviors among adolescent girls and boys. Pediatrics. 2012;130(6):1019-26.</li><li>Brasil. Agência Nacional de Vigilância Sanitária. Instrução Normativa nº 28/2018 e Instrução Normativa nº 373/2025.</li><li>Desbrow B. Youth athlete development and nutrition. Sports Med. 2021;51(Suppl 1):3-12.</li><li>Steffl M et al. Macronutrient intake in soccer players: a meta-analysis. Nutrients. 2019;11(6):1305.</li><li>American Academy of Pediatrics. Sports drinks and energy drinks for children and adolescents: are they appropriate? Pediatrics. 2011;127(6):1182-9.</li><li>Tucker J et al. Unapproved pharmaceutical ingredients included in dietary supplements associated with US Food and Drug Administration warnings. JAMA Netw Open. 2018;1(6):e183337.</li><li>LaBotz M, Griesemer BA; Council on Sports Medicine and Fitness. Use of performance-enhancing substances. Pediatrics. 2016;138(1):e20161300.</li><li>Barretto JR, Gouveia MADC, Alves C. Use of dietary supplements by children and adolescents. J Pediatr (Rio J). 2024;100 Suppl 1:S31-9.</li><li>Hargreaves D et al. Strategies and interventions for healthy adolescent growth, nutrition, and development. Lancet. 2022;399(10320):198-210.</li><li>Maughan RJ et al. IOC consensus statement: dietary supplements and the high-performance athlete. Br J Sports Med. 2018;52(7):439-55.</li><li>Mountjoy M et al. 2023 International Olympic Committee consensus statement on Relative Energy Deficiency in Sport (REDs). Br J Sports Med. 2023;57(17):1073-97.</li><li>Nagata JM et al. Muscle dysmorphia in adolescents and young adults. Lancet Child Adolesc Health. 2026;10(2):122-34.</li><li>Paruthi S et al. Recommended amount of sleep for pediatric populations. J Clin Sleep Med. 2016;12(6):785-6.</li><li>Sociedade Brasileira de Pediatria, Departamento Científico de Nutrologia. Consumo de bebidas energéticas por crianças e adolescentes. Documento Científico nº 10. Rio de Janeiro: SBP; 2022.</li><li>Health Canada. Caffeine in foods [Internet]. Ottawa: Government of Canada; 2025.</li></ol></div><p class="note" style="margin-top:18px">Kit Comida Primeiro · material de apoio da aula “Creatina e Whey Protein: modismo inadequado”, 42º Congresso Brasileiro de Pediatria, 2026. Getúlio Bernardo Morato Filho, Escola Superior de Ciências da Saúde, Brasília, DF. Orientação geral, que não substitui a avaliação individual.</p>
+<script>
+const $=id=>document.getElementById(id);
+const S=n=>`<sup class="r">${n}</sup>`;
+function sel(g){return [...document.querySelectorAll(`input[data-g="${g}"]:checked`)].map(x=>x.value)}
+function build(){
+ const uso=sel('uso'), al=sel('al'), soc=sel('soc'), ind=document.querySelector('input[name=ind]:checked').value;
+ const L=[], R=[];
+ L.push('Perguntar sem julgamento o que usa, para quê, quanto, onde comprou e quem indicou; conversar também a sós'+S(1)+'.');
+ if(al.includes('reds')){L.push('Restrição, perda de peso ou alteração menstrual: avaliar deficiência energética relativa no esporte'+S(11)+'.');R.push('Sinais de baixa disponibilidade energética: avaliação dirigida.')}
+ if(al.includes('dism')){L.push('Sofrimento com a aparência ou rotina rígida: rastrear dismorfia muscular e encaminhar à saúde mental quando indicado'+S(12)+'.');R.push('Rastreio de dismorfia muscular indicado.')}
+ if(al.includes('aas')){L.push('Acne intensa, ginecomastia ou mudança rápida do corpo ou do humor: considerar uso de esteroides anabolizantes'+S(7)+'.');R.push('Sinais sugestivos de esteroides anabolizantes: avaliação clínica e laboratorial dirigida.')}
+ if(uso.includes('creatina')){L.push('Combinar a suspensão da creatina: não é autorizada em suplementos de 0 a 18 anos'+S(2)+'.');R.push('Combinada a suspensão da creatina (não autorizada em suplementos antes dos 19 anos).')}
+ if(uso.includes('proteina')){L.push('Calcular a proteína da dieta antes de decidir: a necessidade gira em torno de 1,5 g/kg/dia'+S(3)+'; numa meta-análise com 647 jovens futebolistas de clubes de elite e subelite, o consumo médio foi de 1,9 g/kg/dia'+S(4)+'.');R.push('Proteína em pó: estimada a ingestão da dieta; orientado plano alimentar.')}
+ if(uso.includes('estimulante')){L.push('Desaconselhar energético e pré-treino: não são apropriados para crianças e adolescentes'+S('5,14')+'; somar a cafeína de todas as fontes do dia, com teto de 2,5 mg/kg/dia'+S(15)+'.');R.push('Orientado suspender energético ou pré-treino.')}
+ if(uso.includes('risco')){L.push('Investigar esteroides e outras substâncias: entre 92 produtos de ganho muscular já sob alerta oficial nos Estados Unidos, 82 continham esteroides ou similares'+S(6)+'.');R.push('Produto sem procedência ou com promessa hormonal: investigação dirigida.')}
+ if(ind==='restr'){L.push('Dieta restritiva abaixo da meta: avaliação nutricional completa; o suplemento pode ter lugar, com acompanhamento'+S('8,10')+'.');R.push('Indicação possível: dieta restritiva abaixo da meta; avaliação nutricional.')}
+ if(soc.includes('acesso')){L.push('Pouco acesso a comida: acionar o serviço social e a escola; rede de proteção social e alimentação escolar antes de qualquer produto'+S(9)+'.');R.push('Insegurança alimentar: acionados serviço social e escola.')}
+ if(ind==='doenca'){L.push('Doença com indicação estabelecida: prescrição médica e seguimento especializado.');R.push('Indicação clínica estabelecida: prescrição e seguimento especializado.')}
+ L.push('Comida primeiro: cerca de 0,3 g/kg de proteína em cada uma de 5 refeições, lanche pós-treino de comida, água no treino e sono de 8 a 10 horas de 13 a 18 anos (9 a 12 horas de 6 a 12 anos)'+S('3,13')+'.');
+ R.push('Orientação: comida primeiro, lanche pós-treino, hidratação e sono adequado à idade.');
+ L.push('Registrar no prontuário e marcar retorno com a família; com a concordância do adolescente, incluir o treinador no plano.');
+ $('out').innerHTML=L.map(x=>`<li style="margin-bottom:8px">${x}</li>`).join('');
+ const usoTxt = uso.filter(u=>u!=='nada').map(u=>({creatina:'creatina',proteina:'proteína em pó',estimulante:'energético/pré-treino',risco:'produto sem procedência'}[u])).join(', ')||'nenhum (apenas pedido)';
+ $('rec').textContent=`AVALIAÇÃO DE SUPLEMENTOS (adolescente que pratica esporte)\nEm uso: ${usoTxt}.\n`+R.map(x=>'- '+x).join('\n')+'\nRetorno combinado com a família.';
+}
+document.addEventListener('change',e=>{const t=e.target;
+ if(t.dataset&&t.dataset.g==='uso'&&t.checked){
+  if(t.value==='nada'){document.querySelectorAll('input[data-g="uso"]').forEach(x=>{if(x!==t)x.checked=false})}
+  else{const n=document.querySelector('input[data-g="uso"][value="nada"]');if(n)n.checked=false}}
+ build()});
+$('clear').addEventListener('click',()=>{document.querySelectorAll('input[type=checkbox]').forEach(x=>x.checked=false);document.querySelector('input[name=ind][value=nao]').checked=true;build()});
+$('copy').addEventListener('click',async()=>{const t=$('rec').textContent;try{await navigator.clipboard.writeText(t);$('copied').textContent='Texto copiado.'}catch(e){const r=document.createRange();r.selectNodeContents($('rec'));const s=getSelection();s.removeAllRanges();s.addRange(r);$('copied').textContent='Texto selecionado; use Ctrl+C ou o menu para copiar.'}});
+build();
+</script></main></body></html>

@@ -1,0 +1,130 @@
+<!doctype html><html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><title>Água no treino · Kit Comida Primeiro</title><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&family=Source+Serif+4:opsz,wght@8..60,500;8..60,600&display=swap"><style>
+/* Kit Comida Primeiro na tela: ficha clínica, número do item em serifa, cor por público */
+:root{--bg:#f6f7fa;--surface:#fff;--ink:#1d2130;--muted:#596074;--rule:#dde1ea;--head:#1f2552;
+--blue:#224f9d;--amber:#a86400;--green:#457011;--indigo:#3b3f8f;--red:#a3341f;
+--t-blue:#eaf0f9;--t-amber:#fcf2de;--t-green:#edf4e1;--t-indigo:#ecedf7;--t-red:#fbebe7;--track:#e8ebf2;
+--serif:"Source Serif 4",Georgia,"Times New Roman",serif;--sans:"IBM Plex Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+--acc:var(--indigo);--tint:var(--t-indigo)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#11131a;--surface:#191c26;--ink:#e6e8ef;--muted:#a2a8b9;--rule:#2b3040;--head:#dfe3ff;
+--blue:#8fb0ef;--amber:#efb55a;--green:#a6d07a;--indigo:#b4b7ff;--red:#f19a86;--t-blue:#1c2640;--t-amber:#2d2312;--t-green:#1e2917;--t-indigo:#22233c;--t-red:#33201b;--track:#2a2f3e;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#11131a;--surface:#191c26;--ink:#e6e8ef;--muted:#a2a8b9;--rule:#2b3040;--head:#dfe3ff;
+--blue:#8fb0ef;--amber:#efb55a;--green:#a6d07a;--indigo:#b4b7ff;--red:#f19a86;--t-blue:#1c2640;--t-amber:#2d2312;--t-green:#1e2917;--t-indigo:#22233c;--t-red:#33201b;--track:#2a2f3e;color-scheme:dark}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:16px;line-height:1.55;font-variant-numeric:tabular-nums}
+.wrap{max-width:1040px;margin:0 auto;padding-inline:20px;padding-block:28px 56px}
+a{color:var(--blue)}
+.ped{--acc:var(--blue);--tint:var(--t-blue)}.fam{--acc:var(--amber);--tint:var(--t-amber)}.eq{--acc:var(--green);--tint:var(--t-green)}.app{--acc:var(--indigo);--tint:var(--t-indigo)}
+.bar-top{display:flex;justify-content:space-between;align-items:baseline;gap:12px;border-bottom:2px solid var(--acc);padding-bottom:8px;margin-bottom:22px;flex-wrap:wrap}
+.brand{font-family:var(--serif);font-weight:600;font-size:18px;color:var(--head);text-decoration:none}
+.brand span{color:var(--amber)}
+.tag{font-size:12px;text-transform:uppercase;letter-spacing:.1em;font-weight:600;color:var(--acc)}
+.tb{display:grid;grid-template-columns:auto 1fr;gap:6px 18px;align-items:start;margin-bottom:18px}
+.tb .num{font-family:var(--serif);font-weight:600;font-size:52px;line-height:.9;color:var(--acc);padding-right:16px;border-right:1px solid var(--rule)}
+h1{font-family:var(--serif);font-weight:600;font-size:clamp(26px,4vw,36px);line-height:1.1;color:var(--head);margin:0 0 8px;text-wrap:balance}
+h2{font-family:var(--serif);font-weight:600;font-size:22px;color:var(--head);margin:0 0 10px;line-height:1.2}
+h3{font-family:var(--serif);font-weight:600;font-size:18px;color:var(--head);margin:0 0 6px;line-height:1.25}
+.lede{color:var(--muted);font-size:17px;margin:0;max-width:62ch}
+.k{display:block;font-family:var(--sans);font-size:12px;text-transform:uppercase;letter-spacing:.1em;color:var(--acc);font-weight:600;margin-bottom:4px}
+.card{background:var(--surface);border:1px solid var(--rule);border-radius:10px;padding:18px}
+.tint{background:var(--tint);border-radius:10px;padding:16px 18px}
+.grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:16px}
+.grid3{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,220px),1fr));gap:14px}
+.grid2>*,.grid3>*{min-width:0}
+.stack{display:flex;flex-direction:column;gap:14px}
+label{font-size:14px;font-weight:600;color:var(--head);display:block;margin-bottom:6px}
+input[type=number],select{font:inherit;font-size:18px;padding:10px 12px;border:1px solid var(--rule);border-radius:8px;background:var(--surface);color:var(--ink);width:100%}
+input:focus-visible,select:focus-visible,button:focus-visible,a:focus-visible{outline:3px solid var(--acc);outline-offset:2px}
+button{font:inherit;cursor:pointer}
+.btn{background:var(--acc);color:var(--surface);border:0;border-radius:8px;padding:10px 16px;font-weight:600;font-size:15px}
+.btn.ghost{background:transparent;color:var(--acc);border:1.5px solid var(--acc)}
+.btn:disabled{opacity:.45;cursor:default}
+.tile .v{font-family:var(--serif);font-weight:600;font-size:34px;line-height:1;color:var(--acc)}
+.tile .v small{font-size:16px;font-weight:600;margin-left:4px}
+.tile .d{font-size:14px;color:var(--muted);margin-top:6px}
+.meter{position:relative;height:14px;background:var(--track);border-radius:7px;overflow:visible;margin:14px 0 26px}
+.meter i{position:absolute;left:0;top:0;bottom:0;border-radius:7px;background:var(--acc);transition:width .25s}
+.meter .goal{position:absolute;top:-6px;bottom:-6px;border-left:2px dashed var(--head)}
+.meter .goal span{position:absolute;top:22px;transform:translateX(-50%);font-size:12px;color:var(--muted);white-space:nowrap}
+.meter .zero{position:absolute;left:0;top:22px;font-size:12px;color:var(--muted)}
+.foods{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,250px),1fr));gap:8px}
+.food{display:grid;grid-template-columns:1fr auto;gap:2px 10px;align-items:center;border:1px solid var(--rule);border-radius:8px;padding:8px 10px;background:var(--surface)}
+.food .n{font-weight:600;font-size:15px}
+.food .m{font-size:12.5px;color:var(--muted);grid-column:1}
+.food .p{font-size:13px;color:var(--acc);font-weight:600}
+.qty{display:flex;align-items:center;gap:6px;grid-row:1/3;grid-column:2}
+.qty button{width:32px;height:32px;border-radius:50%;border:1.5px solid var(--acc);background:transparent;color:var(--acc);font-weight:700;font-size:18px;line-height:1}
+.qty b{min-width:18px;text-align:center}
+.food.on{border-color:var(--acc);background:var(--tint)}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{border:1.5px solid var(--acc);color:var(--acc);background:transparent;border-radius:999px;padding:6px 12px;font-size:14px;font-weight:600}
+.chip[aria-pressed="true"]{background:var(--acc);color:var(--surface)}
+.status{display:inline-block;border-radius:999px;padding:4px 12px;font-weight:600;font-size:14px}
+.status.ok{background:var(--t-green);color:var(--green)}.status.warn{background:var(--t-amber);color:var(--amber)}.status.bad{background:var(--t-red);color:var(--red)}
+.src{font-size:13px;color:var(--muted);border-top:1px solid var(--rule);padding-top:12px;margin-top:28px}
+.src ol{padding-left:20px;margin:6px 0 0}
+.src li{overflow-wrap:anywhere}
+sup.r{font-size:.62em;color:var(--acc);font-weight:600;line-height:0}
+.back{font-size:14px;font-weight:600;color:var(--acc);text-decoration:none;background:none;border:0;padding:0}
+.big{font-family:var(--serif);font-size:24px;line-height:1.35;color:var(--head)}
+.q-opts{display:flex;gap:12px;flex-wrap:wrap}
+.q-opts .btn{font-size:17px;padding:12px 22px}
+.btn.choice{background:var(--surface);color:var(--head);border:1.5px solid var(--acc);min-width:140px}
+.btn.choice:hover{background:var(--tint)}
+.fb{border-radius:10px;padding:14px 16px;margin-top:14px}
+.fb.ok{background:var(--t-green)}.fb.no{background:var(--t-red)}
+.fb b{display:block;font-family:var(--serif);font-size:19px;margin-bottom:4px}
+.fb.ok b{color:var(--green)}.fb.no b{color:var(--red)}
+.progress{display:flex;gap:4px;margin:6px 0 16px}
+.progress i{flex:1;height:6px;border-radius:3px;background:var(--track)}
+.progress i.done{background:var(--acc)}
+.progress i.cur{background:var(--head)}
+.step{border-left:3px solid var(--acc);padding-left:14px}
+.opt{display:flex;gap:10px;align-items:flex-start;padding:8px 0;border-bottom:1px solid var(--rule);font-size:15px}
+.opt input{width:20px;height:20px;margin-top:2px;accent-color:var(--acc);flex:none}
+.summary{white-space:pre-wrap;font-family:ui-monospace,"SFMono-Regular",Menlo,monospace;font-size:13.5px;line-height:1.55;background:var(--surface);border:1px solid var(--rule);border-radius:8px;padding:14px;overflow-x:auto}
+.note{font-size:14px;color:var(--muted)}
+table.mini{width:100%;border-collapse:collapse;font-size:15px}
+table.mini td{padding:7px 0;border-bottom:1px solid var(--rule)}
+table.mini td:last-child{text-align:right;font-weight:600;color:var(--acc)}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style></head><body class="app"><main class="wrap"><div class="bar-top"><a class="brand" href="../index.html" onclick="if(history.length>1){history.back();return false}">Kit <span>Comida Primeiro</span></a><span class="tag">Ferramenta · 02 de 20</span></div>
+<div class="tb"><div class="num">02</div><div><h1>Água no treino</h1>
+<p class="lede">Quanto beber durante o treino e como saber, pela balança, se o plano funcionou. Ponto de partida para um plano individual, revisto ao longo da puberdade.</p></div></div>
+<div class="grid2">
+<div class="card stack"><h2><span class="k">Plano para o treino</span>Quanto oferecer</h2>
+ <div class="grid2"><div><label for="w">Peso (kg)</label><input id="w" type="number" min="25" max="120" step="0.5" value="60"></div>
+ <div><label for="min">Duração do treino (min)</label><input id="min" type="number" min="15" max="300" step="5" value="90"></div></div>
+ <div class="grid3" id="plan"></div>
+ <p class="note">Cerca de 13&nbsp;mL/kg por hora de exercício costumam bastar para evitar déficit importante no atleta em desenvolvimento<sup class="r">1</sup>. Água é a bebida principal<sup class="r">2</sup>. Volumes arredondados para múltiplos de 5&nbsp;mL, como na versão impressa.</p>
+</div>
+<div class="card stack"><h2><span class="k">Teste da balança</span>O plano funcionou?</h2>
+ <div class="grid2"><div><label for="pre">Peso antes (kg)</label><input id="pre" type="number" step="0.1" value="60"></div>
+ <div><label for="pos">Peso depois (kg)</label><input id="pos" type="number" step="0.1" value="59.1"></div></div>
+ <div id="res"></div>
+ <p class="note">Pese com pouca roupa, antes e depois, sem suor e com a bexiga vazia no início. A meta é perder no máximo 2% do peso e não ganhar peso<sup class="r">1</sup>.</p>
+</div>
+</div>
+<div class="tint" style="margin-top:18px"><h3>Por que lembrar o adolescente de beber</h3>
+<p style="margin:0">Adolescentes treinados podem perder mais de 4% do peso em campo, com taxas de suor de até 2,16&nbsp;L por hora. O jovem atleta pode não reconhecer os sinais de estresse pelo calor, esquecer de beber se ninguém lembrar e continuar se exercitando para acompanhar os colegas<sup class="r">1</sup>. No calor, em treino intenso ou longo e com uniforme pesado, as medidas que reduzem a carga de calor devem ser adotadas de forma antecipada<sup class="r">1</sup>. A bebida esportiva fica para atividades intensas e prolongadas<sup class="r">2</sup>.</p></div>
+<div class="src"><b>Fontes</b><ol><li>Desbrow B. Youth athlete development and nutrition. Sports Med. 2021;51(Suppl 1):3-12. doi:10.1007/s40279-021-01534-6</li><li>American Academy of Pediatrics Committee on Nutrition; Council on Sports Medicine and Fitness. Sports drinks and energy drinks for children and adolescents: are they appropriate? Pediatrics. 2011;127(6):1182-9. doi:10.1542/peds.2011-0965</li></ol></div><p class="note" style="margin-top:18px">Kit Comida Primeiro · material de apoio da aula “Creatina e Whey Protein: modismo inadequado”, 42º Congresso Brasileiro de Pediatria, 2026. Getúlio Bernardo Morato Filho, Escola Superior de Ciências da Saúde, Brasília, DF. Orientação geral, que não substitui a avaliação individual.</p>
+<script>
+const $=id=>document.getElementById(id);
+const nf=(x,d=0)=>x.toLocaleString('pt-BR',{minimumFractionDigits:d,maximumFractionDigits:d});
+function r5(x){return Math.round(x/5)*5}
+function plan(){const w=parseFloat($('w').value),m=parseFloat($('min').value);
+ if(!(w>=25&&w<=120&&m>=15&&m<=300)){$('plan').innerHTML='<p class="note">Informe peso entre 25 e 120 kg e duração entre 15 e 300 minutos.</p>';return}
+ const h=13*w, tot=h*m/60;
+ $('plan').innerHTML=`<div class="tile"><span class="v">${nf(r5(tot))}<small>mL</small></span><div class="d">no treino todo</div></div>
+ <div class="tile"><span class="v">${nf(r5(h))}<small>mL</small></span><div class="d">por hora</div></div>
+ <div class="tile"><span class="v">${nf(r5(h/4))}<small>mL</small></span><div class="d">a cada 15 minutos</div></div>`;}
+function test(){const a=parseFloat($('pre').value),b=parseFloat($('pos').value);
+ if(!(a>0&&b>0)){$('res').innerHTML='';return}
+ const pct=(a-b)/a*100, lim=a*0.02;
+ let s;
+ if(pct<0) s=`<span class="status warn">Ganhou ${nf(b-a,1)} kg</span><p>Bebeu além do necessário. Reduza o volume no próximo treino<sup class="r">1</sup>.</p>`;
+ else if(pct<=2) s=`<span class="status ok">Perdeu ${nf(pct,1)}% do peso</span><p>Dentro da meta de até 2% (${nf(lim,1)} kg para este peso)<sup class="r">1</sup>.</p>`;
+ else s=`<span class="status bad">Perdeu ${nf(pct,1)}% do peso</span><p>Acima de 2% (${nf(lim,1)} kg). Aumente a ingestão no próximo treino e reavalie, sobretudo no calor<sup class="r">1</sup>.</p>`;
+ $('res').innerHTML=s;}
+['w','min'].forEach(i=>$(i).addEventListener('input',plan));['pre','pos'].forEach(i=>$(i).addEventListener('input',test));
+plan();test();
+</script></main></body></html>

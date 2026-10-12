@@ -1,0 +1,15 @@
+# dependências
+node_modules/
+__pycache__/
+*.pyc
+
+# resultados intermediários da construção (o site final fica em docs/)
+fonte/out/
+fonte/site/
+fonte/zip/
+fonte/carrossel/carrossel.html
+fonte/carrossel/17-*
+
+# sistema
+.DS_Store
+Thumbs.db
