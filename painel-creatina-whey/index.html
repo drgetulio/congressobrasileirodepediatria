@@ -8,13 +8,13 @@
 <style>
 /* Layout: atlas de painéis de instrumento. Cada seção abre com uma pergunta clínica, mostra um palco 3D à esquerda e a leitura à direita; tudo empilha em uma coluna no celular. */
 :root{
-  --bg:#ECF1F0; --panel:#FFFFFF; --panel-2:#F4F8F7; --ink:#10212A; --ink-2:#44565F; --ink-3:#687A82; --line:#D3DDDB; --line-2:#E3EAE9;
-  --accent:#0B5CAD; --accent-ink:#FFFFFF; --br:#B98100; --br-soft:#F6E7BF;
-  --s-atl:#2A6FD6; --s-sau:#12946A; --s-cli:#E0612A;
-  --d-fav:#2E7D4F; --d-mis:#B7791F; --d-nul:#8696A0; --d-ale:#C2412D; --d-fis:#5E7480;
-  --globe-sea:#E6EEEE; --globe-dot:#97A9AD; --globe-lit:#486A75; --grat:#C9D5D4;
+  --bg:#F6F8FC; --panel:#FFFFFF; --panel-2:#EEF3FA; --ink:#252A5A; --ink-2:#4A5078; --ink-3:#5D6386; --line:#D9DFEC; --line-2:#E6EBF3;
+  --accent:#224F9D; --accent-ink:#FFFFFF; --br:#9A6700; --br-soft:#FDF3DC;
+  --s-atl:#376AB1; --s-sau:#5E8212; --s-cli:#B44890;
+  --d-fav:#5E8212; --d-mis:#B97A00; --d-nul:#8C93AD; --d-ale:#B4432B; --d-fis:#4890CC;
+  --globe-sea:#E9F0FA; --globe-dot:#A9B6D3; --globe-lit:#376AB1; --grat:#CFD9EA;
   --atom-c:#3E4B54; --atom-h:#DCE3E5; --atom-n:#2F5FD0; --atom-o:#D2402F; --atom-p:#E08A1E;
-  --shadow:0 1px 0 rgba(16,33,42,.04), 0 8px 24px -16px rgba(16,33,42,.28);
+  --shadow:0 1px 0 rgba(37,42,90,.04), 0 8px 24px -16px rgba(37,42,90,.28);
   --f-display:"Schibsted Grotesk","Arial Narrow",system-ui,sans-serif;
   --f-body:"Atkinson Hyperlegible",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
   --f-mono:"IBM Plex Mono",ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
@@ -23,22 +23,22 @@
 }
 @media (prefers-color-scheme: dark){
   :root:not([data-theme="light"]){
-    --bg:#091216; --panel:#0F1B21; --panel-2:#132229; --ink:#E3ECEE; --ink-2:#A6B6BC; --ink-3:#7A8D94; --line:#22343C; --line-2:#1A2B32;
-    --accent:#7FB2FF; --accent-ink:#06121A; --br:#FFC83D; --br-soft:#3A3014;
-    --s-atl:#5B8DF2; --s-sau:#23A87A; --s-cli:#E2672F;
-    --d-fav:#58B97E; --d-mis:#E0A245; --d-nul:#93A3AB; --d-ale:#F0705A; --d-fis:#8FA4AE;
-    --globe-sea:#10242B; --globe-dot:#2C4650; --globe-lit:#7393A0; --grat:#1C343C;
+    --bg:#12152B; --panel:#1B1F3D; --panel-2:#222754; --ink:#E8EBF7; --ink-2:#B6BCDB; --ink-3:#9AA0BF; --line:#2E3460; --line-2:#262B52;
+    --accent:#8FB0E3; --accent-ink:#12152B; --br:#F2C25A; --br-soft:#3A3220;
+    --s-atl:#6F9BE0; --s-sau:#A9D25A; --s-cli:#E07AB8;
+    --d-fav:#A9D25A; --d-mis:#F2C25A; --d-nul:#9AA0BF; --d-ale:#F09A86; --d-fis:#7FB8E6;
+    --globe-sea:#161A38; --globe-dot:#343A6B; --globe-lit:#8FB0E3; --grat:#252A55;
     --atom-c:#9AA8B0; --atom-h:#E9EEF0; --atom-n:#6E96FF; --atom-o:#FF6A55; --atom-p:#FFAA3D;
     --shadow:0 1px 0 rgba(0,0,0,.2), 0 10px 30px -18px rgba(0,0,0,.8);
     color-scheme:dark;
   }
 }
 :root[data-theme="dark"]{
-  --bg:#091216; --panel:#0F1B21; --panel-2:#132229; --ink:#E3ECEE; --ink-2:#A6B6BC; --ink-3:#7A8D94; --line:#22343C; --line-2:#1A2B32;
-  --accent:#7FB2FF; --accent-ink:#06121A; --br:#FFC83D; --br-soft:#3A3014;
-  --s-atl:#5B8DF2; --s-sau:#23A87A; --s-cli:#E2672F;
-  --d-fav:#58B97E; --d-mis:#E0A245; --d-nul:#93A3AB; --d-ale:#F0705A; --d-fis:#8FA4AE;
-  --globe-sea:#10242B; --globe-dot:#2C4650; --globe-lit:#7393A0; --grat:#1C343C;
+  --bg:#12152B; --panel:#1B1F3D; --panel-2:#222754; --ink:#E8EBF7; --ink-2:#B6BCDB; --ink-3:#9AA0BF; --line:#2E3460; --line-2:#262B52;
+  --accent:#8FB0E3; --accent-ink:#12152B; --br:#F2C25A; --br-soft:#3A3220;
+  --s-atl:#6F9BE0; --s-sau:#A9D25A; --s-cli:#E07AB8;
+  --d-fav:#A9D25A; --d-mis:#F2C25A; --d-nul:#9AA0BF; --d-ale:#F09A86; --d-fis:#7FB8E6;
+  --globe-sea:#161A38; --globe-dot:#343A6B; --globe-lit:#8FB0E3; --grat:#252A55;
   --atom-c:#9AA8B0; --atom-h:#E9EEF0; --atom-n:#6E96FF; --atom-o:#FF6A55; --atom-p:#FFAA3D;
   --shadow:0 1px 0 rgba(0,0,0,.2), 0 10px 30px -18px rgba(0,0,0,.8);
   color-scheme:dark;
@@ -62,7 +62,8 @@ p{margin:0}
 .muted{color:var(--ink-3)}
 
 /* Barra de navegação */
-.topbar{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:var(--panel);border-bottom:1px solid var(--line)}
+.topbar{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:var(--panel);border-bottom:1px solid var(--line);box-shadow:inset 0 5px 0 #eaaa0e}
+.topbar .wrap{padding-top:15px}
 .topbar .wrap{display:flex;align-items:center;gap:16px;padding-block:10px}
 .brand{font-family:var(--f-display);font-weight:800;font-size:var(--t-md);white-space:nowrap;color:var(--ink);text-decoration:none;display:flex;align-items:center;gap:8px}
 .brand svg{flex:none}
