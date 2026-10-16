@@ -29,6 +29,23 @@ a.card:hover,a.card:focus-visible{box-shadow:0 6px 18px -10px rgba(37,42,90,.45)
 a.card:hover .cta,a.card:focus-visible .cta{background:var(--ink)}
 a.card:hover .seta,a.card:focus-visible .seta{transform:translateX(4px)}
 @media (prefers-reduced-motion:reduce){.cta,.cta .seta{transition:none}}
+.contato{display:grid;grid-template-columns:1fr auto;gap:20px 32px;align-items:center;background:var(--card);border:1px solid var(--line);border-top:5px solid var(--gold);border-radius:12px;padding:20px}
+.contato h2{margin:0 0 4px;font-size:1.1rem;color:var(--accent)}
+.contato .sub{color:var(--muted);font-size:.93rem;margin-bottom:14px}
+.btn{display:inline-flex;align-items:center;gap:8px;background:var(--accent);color:var(--card);font-weight:600;font-size:.95rem;line-height:1.2;padding:10px 16px;border-radius:8px;text-decoration:none;transition:background .15s}
+.btn .seta{display:inline-block;transition:transform .15s}
+.btn:hover,.btn:focus-visible{background:var(--ink)}
+.btn:hover .seta,.btn:focus-visible .seta{transform:translateX(4px)}
+.btn:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.rotulo{margin:16px 0 4px;font-size:.78rem;letter-spacing:.08em;text-transform:uppercase;font-weight:600;color:var(--gold-t)}
+.emails{list-style:none;margin:0;padding:0;display:grid;gap:4px;font-size:.98rem}
+.emails a{color:var(--accent);font-weight:600;overflow-wrap:anywhere}
+.qr{margin:0;display:grid;justify-items:center;gap:8px;text-align:center;max-width:210px}
+.qr img{width:168px;height:168px;display:block;border-radius:8px;background:#fff}
+.qr figcaption{font-size:.82rem;color:var(--muted)}
+.qr figcaption a{display:inline-block;margin-top:6px;color:var(--accent);font-weight:600}
+@media (max-width:560px){.contato{grid-template-columns:1fr}.qr{justify-self:center}}
+@media (prefers-reduced-motion:reduce){.btn,.btn .seta{transition:none}}
 footer a{color:var(--accent);font-weight:600}
 footer{font-size:.85rem;color:var(--muted);border-top:1px solid var(--line);padding-top:14px;display:grid;gap:6px}
 </style>
@@ -60,8 +77,26 @@ footer{font-size:.85rem;color:var(--muted);border-top:1px solid var(--line);padd
     </a>
   </section>
 
+  <section class="contato" aria-labelledby="contato-titulo">
+    <div>
+      <h2 id="contato-titulo">Contato</h2>
+      <p class="sub">Dúvidas e sugestões sobre os materiais são bem-vindas.</p>
+      <a class="btn" href="https://www.instagram.com/drgetulio/" target="_blank" rel="noopener">Instagram @drgetulio <span class="seta" aria-hidden="true">→</span></a>
+      <p class="rotulo">E-mail</p>
+      <ul class="emails">
+        <li><a href="mailto:drgetulio@gmail.com">drgetulio@gmail.com</a></li>
+        <li><a href="mailto:drgetulio@escs.edu.br">drgetulio@escs.edu.br</a></li>
+        <li><a href="mailto:getulio.filho@ceub.edu.br">getulio.filho@ceub.edu.br</a></li>
+      </ul>
+    </div>
+    <figure class="qr">
+      <img src="qr-materiais.svg" width="168" height="168" alt="Código QR que abre a página dos materiais extras da aula, drgetulio.github.io/congressobrasileirodepediatria">
+      <figcaption>Aponte a câmera do celular para abrir esta página.<br><a href="qr-materiais.png" download>Baixar o código em PNG</a></figcaption>
+    </figure>
+  </section>
+
   <footer>
-    <p>Getúlio Bernardo Morato Filho, professor da Escola Superior de Ciências da Saúde (ESCS) e do Centro Universitário de Brasília (UniCEUB), supervisor do Programa de Residência Médica do Hospital Materno-Infantil de Brasília (HMIB), Brasília, Distrito Federal. Instagram: <a href="https://www.instagram.com/drgetulio/">@drgetulio</a>.</p>
+    <p>Getúlio Bernardo Morato Filho, professor da Escola Superior de Ciências da Saúde (ESCS) e do Centro Universitário de Brasília (UniCEUB), supervisor do Programa de Residência Médica do Hospital Materno-Infantil de Brasília (HMIB), Brasília, Distrito Federal.</p>
     <p>Material de apoio ao ensino. Orientação geral, que não substitui a avaliação individual nem constitui recomendação de uso ou de dose de suplementos para crianças ou adolescentes.</p>
   </footer>
 </main>
