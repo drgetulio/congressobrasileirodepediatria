@@ -1,17 +1,18 @@
-/* Kit Comida Primeiro: identidade dos materiais impressos.
+/* Kit Comida Primeiro: identidade dos materiais impressos, nas cores do 42º Congresso Brasileiro de Pediatria.
    Conceito: documento clínico de consultório. Cabeçalho de receituário, número do item em serifa,
-   cor por público (pediatra azul, família âmbar, equipe verde, ferramenta índigo), números tabulares. */
+   cor por público (pediatra azul, família dourado, equipe verde, ferramenta violeta), números tabulares. */
 :root {
-  --ink: #1d2130;
-  --muted: #5a6072;
-  --rule: #d7dbe4;
+  --ink: #262a36;
+  --muted: #5d6386;
+  --rule: #d9dfec;
   --paper: #ffffff;
-  --navy: #1f2552;
-  --blue: #224f9d;   --tint-blue: #eaf0f9;
-  --amber: #b86e00;  --tint-amber: #fcf2de;
-  --green: #4a7613;  --tint-green: #edf4e1;
-  --indigo: #3b3f8f; --tint-indigo: #ecedf7;
-  --red: #a3341f;    --tint-red: #fbebe7;
+  --navy: #252a5a;
+  --blue: #224f9d;   --tint-blue: #e9f0fa;
+  --amber: #9a6700;  --tint-amber: #fdf3dc;
+  --green: #4f6f0f;  --tint-green: #eef6dd;
+  --indigo: #483c90; --tint-indigo: #eeecf6;
+  --red: #b4432b;    --tint-red: #fbeae6;
+  --gold: #eaaa0e;
   --serif: "Source Serif 4", "Caladea", Georgia, serif;
   --sans: "IBM Plex Sans", "Carlito", "DejaVu Sans", sans-serif;
   --mono: "IBM Plex Mono", "DejaVu Sans Mono", monospace;
@@ -29,6 +30,10 @@ body { font-family: var(--sans); color: var(--ink); font-size: 9.2pt; line-heigh
 .page { width: 210mm; height: 297mm; position: relative; overflow: hidden; page-break-after: always;
         display: flex; flex-direction: column; padding: 11mm 14mm 9mm 14mm; background: var(--paper); }
 .page:last-child { page-break-after: auto; }
+/* faixa dourada do modelo do congresso, dentro da margem superior, sem alterar a diagramação */
+.page::before { content: ""; position: absolute; left: 0; right: 0; top: 0; height: 1.8mm; background: var(--gold); }
+.sz-A6 .page::before { height: 1.2mm; }
+.sz-A3 .page::before { height: 2.6mm; }
 .sz-A5 .page { width: 148mm; height: 210mm; padding: 8mm 10mm 7mm; }
 .sz-A6 .page { width: 105mm; height: 148mm; padding: 6mm 7mm 5mm; font-size: 7.6pt; }
 .sz-A3 .page { width: 297mm; height: 420mm; padding: 18mm 20mm 14mm; }
@@ -131,7 +136,7 @@ sup.r { font-size: .6em; line-height: 0; vertical-align: .62em; color: var(--acc
 .sz-A6 .sources { padding-top: 1mm; }
 
 /* barra a partir de zero */
-.bar { position: relative; height: 3.2mm; background: #f1f3f7; border-radius: .6mm; }
+.bar { position: relative; height: 3.2mm; background: #eef1f7; border-radius: .6mm; }
 .bar i { position: absolute; left: 0; top: 0; bottom: 0; background: var(--acc); border-radius: .6mm; }
 .bar .tgt { position: absolute; top: -1mm; bottom: -1mm; width: 0; border-left: 1pt dashed var(--navy); }
 
@@ -168,7 +173,7 @@ table.kv tr:last-child td { border-bottom: none; }
 .qs ul { list-style: none; padding-left: 0; }
 .qs li { padding-left: 4mm; position: relative; }
 .qs li::before { content: "?"; position: absolute; left: 0; top: 0; font-family: var(--serif); font-weight: 700; color: var(--acc); }
-.rec { font-family: var(--mono); font-size: 8.1pt; line-height: 1.55; background: #f7f8fb; border: .6pt solid var(--rule); border-radius: 1.4mm; padding: 3.4mm 4mm; white-space: pre-wrap; color: #262a36; }
+.rec { font-family: var(--mono); font-size: 8.1pt; line-height: 1.55; background: #f6f8fc; border: .6pt solid var(--rule); border-radius: 1.4mm; padding: 3.4mm 4mm; white-space: pre-wrap; color: #262a36; }
 .rec b { font-family: var(--sans); font-weight: 600; color: var(--navy); font-size: 7.6pt; letter-spacing: .06em; text-transform: uppercase; }
 .rec .f { color: var(--acc); }
 .band { display: grid; grid-template-columns: 30mm 1fr 1fr; gap: 0 4mm; border-top: 1pt solid var(--acc); padding-top: 2mm; }
@@ -269,7 +274,7 @@ table.kv tr:last-child td { border-bottom: none; }
 .sz-A3 .sources ol { font-size: 8pt; }
 .sz-A3 .kf { font-size: 8pt; }
 .sz-A3 .kh .brand { font-size: 14pt; } .sz-A3 .kh .meta { font-size: 9pt; }
-ol.allrefs { columns: 2; column-gap: 7mm; font-size: 7pt; line-height: 1.34; color: #3d4252; padding-left: 4.4mm; }
+ol.allrefs { columns: 2; column-gap: 7mm; font-size: 7pt; line-height: 1.34; color: #3d4266; padding-left: 4.4mm; }
 ol.allrefs li { break-inside: avoid; overflow-wrap: anywhere; }
 ol.allrefs li + li { margin-top: .9mm; }
 ol.allrefs a, .bib a { color: inherit; text-decoration: none; }
@@ -285,7 +290,7 @@ ol.allrefs a, .bib a { color: inherit; text-decoration: none; }
 .case .vig { font-family: var(--serif); font-size: 10.4pt; line-height: 1.42; color: var(--navy); }
 .case ol.qq { padding-left: 4.6mm; }
 .case ol.qq li { font-weight: 600; color: var(--navy); }
-.letter { font-family: var(--serif); font-size: 9.7pt; line-height: 1.4; color: #20243a; display: flex; flex-direction: column; gap: 2.4mm; }
+.letter { font-family: var(--serif); font-size: 9.7pt; line-height: 1.4; color: #252a5a; display: flex; flex-direction: column; gap: 2.4mm; }
 .letter .hdr { display: flex; justify-content: space-between; font-family: var(--sans); font-size: 8.4pt; color: var(--muted); }
 .letter ol { padding-left: 5mm; }
 .letter ol li { margin-top: 1.6mm; }

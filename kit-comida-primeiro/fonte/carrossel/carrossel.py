@@ -14,33 +14,34 @@ FONTS = emb('Source Serif 4', 'source-serif-4', 600) + emb('Source Serif 4', 'so
         emb('IBM Plex Sans', 'ibm-plex-sans', 400) + emb('IBM Plex Sans', 'ibm-plex-sans', 600)
 
 SLIDE_CSS = """
-.s{width:1080px;height:1350px;position:relative;overflow:hidden;display:flex;flex-direction:column;padding:92px 92px 76px;font-family:'IBM Plex Sans',sans-serif;color:#1d2130;background:#fff}
+.s{width:1080px;height:1350px;position:relative;overflow:hidden;display:flex;flex-direction:column;padding:92px 92px 76px;font-family:'IBM Plex Sans',sans-serif;color:#262a36;background:#fff}
 .s *{margin:0;padding:0;box-sizing:border-box}
-.s.navy{background:#1f2552;color:#fff}
-.s.amber{background:#fcf2de}
-.s .top{display:flex;justify-content:space-between;font-size:30px;letter-spacing:.12em;text-transform:uppercase;font-weight:600;color:#b86e00}
-.s.navy .top{color:#f0b95a}
-.s .top span:last-child{color:#7d8397;letter-spacing:.06em}
+.s.navy{background:#252a5a;color:#fff}
+.s::before{content:'';position:absolute;left:0;right:0;top:0;height:16px;background:#eaaa0e}
+.s.amber{background:#fdf3dc}
+.s .top{display:flex;justify-content:space-between;font-size:30px;letter-spacing:.12em;text-transform:uppercase;font-weight:600;color:#9a6700}
+.s.navy .top{color:#eaaa0e}
+.s .top span:last-child{color:#6b7080;letter-spacing:.06em}
 .s.navy .top span:last-child{color:#aab0d6}
 .s h1{font-family:'Source Serif 4',serif;font-weight:600;font-size:112px;line-height:1.04;letter-spacing:-.01em;margin-top:280px}
-.s .big{font-family:'Source Serif 4',serif;font-weight:600;font-size:250px;line-height:.9;color:#b86e00;margin-top:110px;font-variant-numeric:lining-nums}
+.s .big{font-family:'Source Serif 4',serif;font-weight:600;font-size:250px;line-height:.9;color:#b97a00;margin-top:110px;font-variant-numeric:lining-nums}
 .s .big small{font-size:110px}
-.s p.t{font-size:54px;line-height:1.3;margin-top:46px;color:#1f2552;max-width:900px}
+.s p.t{font-size:54px;line-height:1.3;margin-top:46px;color:#252a5a;max-width:900px}
 .s p.t b{font-weight:600}
-.s p.k{font-size:44px;line-height:1.35;margin-top:40px;color:#4f5568;max-width:880px}
+.s p.k{font-size:44px;line-height:1.35;margin-top:40px;color:#4a5078;max-width:880px}
 .s.navy p.k{color:#d4d8f2}
-.s sup{font-size:30px;color:#b86e00;font-weight:600;position:relative;top:-.95em;vertical-align:baseline;line-height:0;margin-left:4px}
-.s .foot{margin-top:auto;display:flex;justify-content:space-between;align-items:flex-end;font-size:30px;color:#7d8397;gap:24px}
+.s sup{font-size:30px;color:#9a6700;font-weight:600;position:relative;top:-.95em;vertical-align:baseline;line-height:0;margin-left:4px}
+.s .foot{margin-top:auto;display:flex;justify-content:space-between;align-items:flex-end;font-size:30px;color:#6b7080;gap:24px}
 .s.navy .foot{color:#aab0d6}
 .s .list{margin-top:56px;display:flex;flex-direction:column;gap:28px}
-.s .list div{font-family:'Source Serif 4',serif;font-size:68px;font-weight:600;color:#1f2552;display:flex;gap:28px;align-items:baseline}
-.s .list div i{font-style:normal;color:#b86e00;font-family:'IBM Plex Sans',sans-serif;font-size:42px;font-weight:600;width:60px;flex:none}
-.s .list small{display:block;font-family:'IBM Plex Sans',sans-serif;font-size:34px;line-height:1.3;font-weight:400;color:#4f5568;margin-top:10px}
-.s .ident{margin-top:40px;border-top:3px solid #b86e00;padding-top:24px;font-size:32px;line-height:1.4;color:#1f2552}
+.s .list div{font-family:'Source Serif 4',serif;font-size:68px;font-weight:600;color:#252a5a;display:flex;gap:28px;align-items:baseline}
+.s .list div i{font-style:normal;color:#9a6700;font-family:'IBM Plex Sans',sans-serif;font-size:42px;font-weight:600;width:60px;flex:none}
+.s .list small{display:block;font-family:'IBM Plex Sans',sans-serif;font-size:34px;line-height:1.3;font-weight:400;color:#4a5078;margin-top:10px}
+.s .ident{margin-top:40px;border-top:3px solid #eaaa0e;padding-top:24px;font-size:32px;line-height:1.4;color:#252a5a}
 .s .ident b{font-weight:600}
-.s .handle{font-size:34px;color:#b86e00;font-weight:600}
+.s .handle{font-size:34px;color:#9a6700;font-weight:600}
 .s [contenteditable]{outline:none}
-.s .ph{background:rgba(184,110,0,.12);border-radius:8px;padding:0 8px}
+.s .ph{background:rgba(234,170,14,.18);border-radius:8px;padding:0 8px}
 """
 
 def slides(editable=False):
@@ -75,10 +76,10 @@ with sync_playwright() as pw:
 EDIT = """<!doctype html><html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Carrossel editável · Kit Comida Primeiro</title>
 <style>""" + FONTS + """
-:root{--bg:#eef0f5;--ink:#1d2130;--muted:#596074;--acc:#b86e00;--card:#fff;--rule:#dde1ea}
-@media (prefers-color-scheme:dark){:root{--bg:#11131a;--ink:#e6e8ef;--muted:#a2a8b9;--card:#191c26;--rule:#2b3040;--acc:#efb55a}}
+:root{--bg:#eef1f7;--ink:#262a36;--muted:#5d6386;--acc:#8f6200;--card:#fff;--rule:#d9dfec}
+@media (prefers-color-scheme:dark){:root{--bg:#12152b;--ink:#e8ebf7;--muted:#a4aacb;--card:#1b1f3d;--rule:#2e3460;--acc:#f2c25a}}
 *{box-sizing:border-box}
-body{margin:0;background:var(--bg);color:var(--ink);font-family:'IBM Plex Sans',system-ui,sans-serif;line-height:1.5}
+body{margin:0;border-top:6px solid #eaaa0e;background:var(--bg);color:var(--ink);font-family:'IBM Plex Sans',system-ui,sans-serif;line-height:1.5}
 .wrap{max-width:1180px;margin:0 auto;padding:24px 16px 56px}
 h1{font-family:'Source Serif 4',Georgia,serif;font-weight:600;font-size:30px;margin:0 0 6px}
 p.lede{color:var(--muted);margin:0 0 18px;max-width:70ch}
@@ -92,7 +93,7 @@ input{font:inherit;font-size:16px;width:100%;padding:8px 10px;border:1px solid v
 .frame .s{position:absolute;left:0;top:0;transform-origin:0 0}
 .slot .row{display:flex;justify-content:space-between;align-items:center;margin-top:8px;gap:8px}
 button{font:inherit;font-weight:600;font-size:14px;cursor:pointer;border-radius:8px;padding:8px 12px;border:1.5px solid var(--acc);background:transparent;color:var(--acc)}
-button.main{background:var(--acc);color:#fff}
+button.main{background:var(--acc);color:var(--card)}
 button:disabled{opacity:.45;cursor:default}
 #stage{position:fixed;left:-20000px;top:0}
 """ + SLIDE_CSS + """</style></head><body><div class="wrap">

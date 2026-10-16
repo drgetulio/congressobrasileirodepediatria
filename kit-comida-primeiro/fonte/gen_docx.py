@@ -9,7 +9,7 @@ from docx import Document
 from docx.shared import Pt, RGBColor, Cm
 from docx.enum.text import WD_ALIGN_PARAGRAPH
 
-NAVY = RGBColor(0x1F, 0x25, 0x52); ACC = RGBColor(0x4A, 0x76, 0x13); MUT = RGBColor(0x5A, 0x60, 0x72)
+NAVY = RGBColor(0x25, 0x2A, 0x5A); ACC = RGBColor(0x4F, 0x6F, 0x0F); MUT = RGBColor(0x5D, 0x63, 0x86)
 doc = Document()
 for s in doc.sections:
     s.top_margin = s.bottom_margin = Cm(2.2); s.left_margin = s.right_margin = Cm(2.4)
