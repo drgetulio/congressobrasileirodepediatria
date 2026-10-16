@@ -114,7 +114,7 @@ TOP = lambda aud, n: (f'<div class="bar-top"><a class="brand" href="../index.htm
                       f'<span class="tag">Ferramenta · {n:02d} de 20</span></div>')
 SRC = lambda items: '<div class="src"><b>Fontes</b><ol>' + ''.join(f'<li>{html.escape(t)}</li>' for t in items) + '</ol></div>'
 FOOTNOTE = ('<p class="note" style="margin-top:18px">Kit Comida Primeiro · material de apoio da aula “Creatina e Whey Protein: modismo inadequado”, '
-            '42º Congresso Brasileiro de Pediatria, 2026. Getúlio Bernardo Morato Filho, Escola Superior de Ciências da Saúde, Brasília, DF. '
+            '42º Congresso Brasileiro de Pediatria, 2026. Getúlio Bernardo Morato Filho, professor da Escola Superior de Ciências da Saúde (ESCS) e do Centro Universitário de Brasília (UniCEUB), supervisor do Programa de Residência Médica do Hospital Materno-Infantil de Brasília (HMIB), Brasília, Distrito Federal. Instagram: <a href="https://www.instagram.com/drgetulio/">@drgetulio</a>. '
             'Orientação geral, que não substitui a avaliação individual.</p>')
 
 # ------------------------------------------------------------------ 01 calculadora de proteína

@@ -1,6 +1,8 @@
 # Congresso Brasileiro de Pediatria 2026
 
-Materiais de Getúlio Bernardo Morato Filho, Escola Superior de Ciências da Saúde (ESCS), Brasília, Distrito Federal, para o 42º Congresso Brasileiro de Pediatria, Belo Horizonte, outubro de 2026.
+Materiais de Getúlio Bernardo Morato Filho, professor da Escola Superior de Ciências da Saúde (ESCS) e do Centro Universitário de Brasília (UniCEUB), supervisor do Programa de Residência Médica do Hospital Materno-Infantil de Brasília (HMIB), Brasília, Distrito Federal, para o 42º Congresso Brasileiro de Pediatria, Belo Horizonte, outubro de 2026.
+
+Instagram: [@drgetulio](https://www.instagram.com/drgetulio/).
 
 ## Conteúdo
 
