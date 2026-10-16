@@ -12,7 +12,7 @@
   --accent:#224F9D; --accent-ink:#FFFFFF; --br:#9A6700; --br-soft:#FDF3DC;
   --s-atl:#376AB1; --s-sau:#5E8212; --s-cli:#B44890;
   --d-fav:#5E8212; --d-mis:#B97A00; --d-nul:#8C93AD; --d-ale:#B4432B; --d-fis:#4890CC;
-  --globe-sea:#E9F0FA; --globe-dot:#A9B6D3; --globe-lit:#376AB1; --grat:#CFD9EA;
+  --globe-sea:#E9F0FA; --globe-dot:#A9B6D3; --globe-lit:#4890CC; --grat:#CFD9EA;
   --atom-c:#3E4B54; --atom-h:#DCE3E5; --atom-n:#2F5FD0; --atom-o:#D2402F; --atom-p:#E08A1E;
   --shadow:0 1px 0 rgba(37,42,90,.04), 0 8px 24px -16px rgba(37,42,90,.28);
   --f-display:"Schibsted Grotesk","Arial Narrow",system-ui,sans-serif;
@@ -27,7 +27,7 @@
     --accent:#8FB0E3; --accent-ink:#12152B; --br:#F2C25A; --br-soft:#3A3220;
     --s-atl:#6F9BE0; --s-sau:#A9D25A; --s-cli:#E07AB8;
     --d-fav:#A9D25A; --d-mis:#F2C25A; --d-nul:#9AA0BF; --d-ale:#F09A86; --d-fis:#7FB8E6;
-    --globe-sea:#161A38; --globe-dot:#343A6B; --globe-lit:#8FB0E3; --grat:#252A55;
+    --globe-sea:#161A38; --globe-dot:#343A6B; --globe-lit:#4FB3D9; --grat:#252A55;
     --atom-c:#9AA8B0; --atom-h:#E9EEF0; --atom-n:#6E96FF; --atom-o:#FF6A55; --atom-p:#FFAA3D;
     --shadow:0 1px 0 rgba(0,0,0,.2), 0 10px 30px -18px rgba(0,0,0,.8);
     color-scheme:dark;
@@ -38,7 +38,7 @@
   --accent:#8FB0E3; --accent-ink:#12152B; --br:#F2C25A; --br-soft:#3A3220;
   --s-atl:#6F9BE0; --s-sau:#A9D25A; --s-cli:#E07AB8;
   --d-fav:#A9D25A; --d-mis:#F2C25A; --d-nul:#9AA0BF; --d-ale:#F09A86; --d-fis:#7FB8E6;
-  --globe-sea:#161A38; --globe-dot:#343A6B; --globe-lit:#8FB0E3; --grat:#252A55;
+  --globe-sea:#161A38; --globe-dot:#343A6B; --globe-lit:#4FB3D9; --grat:#252A55;
   --atom-c:#9AA8B0; --atom-h:#E9EEF0; --atom-n:#6E96FF; --atom-o:#FF6A55; --atom-p:#FFAA3D;
   --shadow:0 1px 0 rgba(0,0,0,.2), 0 10px 30px -18px rgba(0,0,0,.8);
   color-scheme:dark;
@@ -105,7 +105,7 @@ p{margin:0}
 .tag3d.per{white-space:pre;text-align:center;line-height:1.15;transform:translate(-50%,0)}
 .stage-hint.tr{left:auto;bottom:auto;top:12px;right:12px}
 @media (max-width:640px){.stage-hint.tr{top:auto;bottom:10px;left:12px;right:auto}}
-.tag3d.rowlab{transform:translate(-100%,-50%);color:var(--ink);font-family:var(--f-body);font-size:var(--t-xs);font-weight:700}
+.tag3d.rowlab{transform:translate(0,-50%);color:var(--ink);font-family:var(--f-body);font-size:var(--t-xs);font-weight:700}
 .tip{position:absolute;z-index:5;max-width:260px;background:var(--panel);color:var(--ink);border:1px solid var(--line);border-radius:8px;padding:8px 10px;font-size:var(--t-sm);line-height:1.35;box-shadow:var(--shadow);pointer-events:none;transform:translate(12px,12px)}
 .tip b{font-family:var(--f-display)}
 .tip .m{font-family:var(--f-mono);font-size:var(--t-xs);color:var(--ink-3)}
@@ -486,13 +486,14 @@ footer .wrap{display:grid;gap:6px;border-top:1px solid var(--line);padding-top:1
           <p class="foot">Média e DP. FeNO: fração exalada de óxido nítrico; VEF1: volume expiratório forçado no primeiro segundo, após hiperpneia com ar seco. Efeito mais evidente em atletas atópicos <a href="#ref-simpson2019">[Simpson, 2019]</a>.</p>
         </div>
         <div class="card panel-pad">
-          <p class="eyebrow">Creatina · condições clínicas pediátricas</p>
-          <h3>Sem eventos adversos relevantes relatados</h3>
+          <p class="eyebrow">Creatina · outros dados de segurança</p>
+          <h3>Sem eventos adversos graves atribuídos à creatina</h3>
           <ul class="small" style="margin:0;padding-left:1.1em;display:grid;gap:6px">
             <li>Lúpus de início na infância: depuração de ácido etilenodiaminotetracético marcado com cromo 51 inalterada em 12 semanas <a href="#ref-hayashi2014">[Hayashi, 2014]</a>.</li>
             <li>Dermatomiosite juvenil: função renal preservada <a href="#ref-solis2016">[Solis, 2016]</a>; sem efeitos adversos significativos em 6 meses <a href="#ref-dover2021">[Dover, 2021]</a>.</li>
             <li>Distrofia facioescapuloumeral: creatinina sérica 12,63 µmol/L maior, sem eventos adversos graves <a href="#ref-woodcock2025">[Woodcock, 2025]</a>.</li>
             <li>Fibrose cística: um caso de dor muscular transitória entre 18 pacientes <a href="#ref-braegger2003">[Braegger, 2003]</a>.</li>
+            <li>Futebol americano no ensino médio, Estados Unidos: em surto de rabdomiólise de esforço (22 de 43 jogadores), o uso autorrelatado de creatina (10 de 40) não se associou ao quadro <a href="#ref-oh2012">[Oh, 2012]</a>.</li>
           </ul>
         </div>
         <div class="card panel-pad">
@@ -590,7 +591,7 @@ footer .wrap{display:grid;gap:6px;border-top:1px solid var(--line);padding-top:1
       <div class="method">
         <div class="card panel-pad">
           <h3>Busca e seleção</h3>
-          <p>Levantamento estruturado, não sistemático, no PubMed em 15 de outubro de 2026, complementado por documentos oficiais brasileiros e por uma auditoria independente das referências. Entraram estudos com suplementação de creatina ou de whey em participantes de até 19 anos, ou em categorias juniores e sub-20, com desfecho clínico, de desempenho ou de segurança descrito no resumo. Ficaram de fora fórmulas infantis para lactentes e produtos em que o soro do leite serve apenas de veículo para fortificação.</p>
+          <p>Levantamento estruturado, não sistemático, no PubMed em 15 de outubro de 2026, complementado por documentos oficiais brasileiros e por uma auditoria independente das referências. Entraram estudos com suplementação de creatina ou de whey em participantes de até 19 anos, ou em categorias juniores e sub-20, com desfecho clínico, de desempenho ou de segurança descrito no resumo. Ficaram de fora fórmulas infantis para lactentes e produtos em que o soro do leite serve apenas de veículo para fortificação. Na mesma data, uma busca complementar dirigida a estudos com primeiro autor nos Estados Unidos acrescentou ensaios e inquéritos desse país. Estudos observacionais de segurança aparecem nos cartões da seção de segurança, fora da matriz.</p>
           <p>Contagens da seção de literatura, por quinquênio (creatina; para whey, o mesmo bloco com whey[Title/Abstract]):</p>
           <code class="q">creatine[Title/Abstract] AND (supplementation[Title/Abstract] OR supplemented[Title/Abstract] OR supplement[Title/Abstract] OR supplements[Title/Abstract])</code>
           <code class="q">… AND (child[MeSH Terms] OR adolescent[MeSH Terms])</code>
@@ -601,7 +602,7 @@ footer .wrap{display:grid;gap:6px;border-top:1px solid var(--line);padding-top:1
             <li><b>Direção do resultado</b>: favorável, diferença significativa contra o controle no desfecho principal (nos estudos sem controle, melhora em relação à linha de base, sinalizada no cartão); misto, efeito em parte dos desfechos, efeito sem interação grupo × tempo ou mudança só dentro do grupo, sem comparação entre grupos; nulo, sem diferença; sinal de alerta, efeito ou tendência adversa. A classificação parte do resumo indexado e foi feita pelo autor do painel.</li>
             <li><b>Rigor</b>: sólido, ensaio duplo-cego com placebo ou comparador; translúcido, cegamento simples ou não descrito no resumo, ou controle sem placebo; contorno, estudo aberto sem grupo controle.</li>
             <li>Localização: cidade da instituição do primeiro autor, mesmo quando a coleta ocorreu em outro país (indicado no cartão).</li>
-            <li>A soma de participantes pode incluir sobreposição de amostras do mesmo grupo de pesquisa; dois estudos não informam o tamanho da amostra no resumo.</li>
+            <li>A soma de participantes pode incluir sobreposição de amostras do mesmo grupo de pesquisa; três estudos não informam o tamanho da amostra no resumo.</li>
             <li>Os descritores MeSH dos registros mais recentes podem estar incompletos, o que subestima o último quinquênio pediátrico.</li>
             <li>Estudos anteriores a 2016 entram por serem os ensaios originais nessas populações; para a maioria não há substituto mais recente.</li>
           </ul>
@@ -864,7 +865,62 @@ const STUDIES = [
   dose:'Whey isonitrogenado a duas porções diárias de 175 g de iogurte grego, por 16 semanas', dias:112, desfecho:'Marcadores ósseos e inflamatórios',
   achado:'O aumento da ingestão de proteína, independentemente da fonte, associou-se a flutuações modestas e muitas vezes dependentes do sexo nos marcadores ósseos e inflamatórios; ao fim, a esclerostina estava acima da linha de base só no grupo whey.',
   dir:'nul', cit:'J Nutr. 2026;156(6):101524', doi:'10.1016/j.tjnut.2026.101524', pmid:'41941960',
-  titulo:'Greek yogurt compared with whey protein supplementation in adolescent athletes throughout a competitive season', ini:'Bell M'}
+  titulo:'Greek yogurt compared with whey protein supplementation in adolescent athletes throughout a competitive season', ini:'Bell M'},
+ {id:'kondo2016', sup:'cr', autor:'Kondo', ano:2016, cc:2, cidade:'Salt Lake City', lat:40.76, lon:-111.89, pop:'cli', grupo:'Depressão maior resistente a inibidor seletivo da recaptação de serotonina', meninas:true,
+  idade:'Meninas adolescentes (idade não descrita no resumo)', idadeMed:null, n:null, desenho:'Ensaio randomizado controlado por placebo, com variação de dose; cegamento não descrito no resumo', rig:1,
+  dose:'2, 4 ou 10 g/dia por 8 semanas, como adjuvante ao inibidor seletivo da recaptação de serotonina', dRel:null, dFix:10, dias:56, fases:false,
+  desfecho:'Fosfocreatina do lobo frontal medida por espectroscopia de ressonância magnética de fósforo 31',
+  achado:'A fosfocreatina frontal média aumentou 4,6%, 4,1% e 9,1% com 2, 4 e 10 g/dia e caiu 0,7% com placebo; na amostra total, a fosfocreatina frontal correlacionou-se inversamente com os escores de depressão (P = 0,02). Sem diferença entre os grupos em eventos adversos, ganho de peso ou creatinina sérica.',
+  dir:'fis', cit:'Amino Acids. 2016;48(8):1941-54', doi:'10.1007/s00726-016-2194-3', pmid:'26907087',
+  titulo:'Creatine target engagement with brain bioenergetics: a dose-ranging phosphorus-31 magnetic resonance spectroscopy study of adolescent females with SSRI-resistant depression', ini:'Kondo DG',
+  nota:'O resumo não informa o número de participantes nem compara a eficácia clínica entre os grupos. O gráfico de doses mostra a maior dose testada.'},
+ {id:'khoshoo1996', sup:'wh', autor:'Khoshoo', ano:1996, cc:2, cidade:'Nova Orleans', lat:29.95, lon:-90.07, pop:'cli', grupo:'Comprometimento neurológico grave com refluxo gastroesofágico e alimentação exclusiva por gastrostomia', meninas:null,
+  idade:'4,5 a 14,5 anos', idadeMed:null, n:10, desenho:'Ensaio cruzado randomizado; cegamento não descrito no resumo', rig:1,
+  dose:'Fórmula à base de whey e fórmula à base de caseína, 48 horas cada, em ordem aleatória', dias:2, desfecho:'Refluxo gastroesofágico em pHmetria de 24 horas',
+  achado:'Com a fórmula à base de whey, o número e a duração dos episódios de refluxo diminuíram em relação à fórmula de caseína (P < 0,05).',
+  dir:'fav', cit:'J Pediatr Gastroenterol Nutr. 1996;22(1):48-55', doi:'10.1097/00005176-199601000-00008', pmid:'8788287',
+  titulo:'Incidence of gastroesophageal reflux with whey- and casein-based formulas in infants and in children with severe neurological impairment', ini:'Khoshoo V',
+  nota:'O mesmo artigo descreve 14 lactentes de 3 a 12 meses, em troca sequencial e não randomizada de fórmula infantil, sem diferença entre whey e caseína (P > 0,05); essa parte fica fora do painel pelo critério que exclui fórmulas para lactentes.'},
+ {id:'carcillo2012', sup:'wh', autor:'Carcillo', ano:2012, cc:2, cidade:'Pittsburgh', lat:40.44, lon:-79.99, pop:'cli', grupo:'Crianças em terapia intensiva prolongada', meninas:null,
+  idade:'1 a 17 anos', idadeMed:null, n:293, desenho:'Ensaio randomizado duplo-cego de efetividade comparativa, em 8 unidades de terapia intensiva pediátrica', rig:2,
+  dose:'Whey enteral diário, com soro fisiológico intravenoso, por até 28 dias de internação (dose não descrita no resumo); comparador: zinco, selênio e glutamina enterais com metoclopramida intravenosa', dias:28,
+  desfecho:'Tempo até a primeira infecção ou sepse hospitalar',
+  achado:'Sem diferença entre os grupos no tempo até a primeira infecção ou sepse hospitalar (mediana de 13,2 dias com whey e 12,1 dias com o comparador; P = 0,29) nem na taxa de eventos (4,83 e 4,99 por 100 dias; P = 0,81). No subgrupo imunocomprometido, 9% da amostra, a taxa foi maior com whey (6,09 contra 1,57 por 100 dias; P = 0,011).',
+  dir:'nul', cit:'Pediatr Crit Care Med. 2012;13(2):165-73', doi:'10.1097/PCC.0b013e31823896ae', pmid:'22079954',
+  titulo:'The randomized comparative pediatric critical illness stress-induced immune suppression (CRISIS) prevention trial', ini:'Carcillo JA',
+  nota:'No desenho do ensaio, o whey foi o comparador ativo da combinação de micronutrientes com metoclopramida.'},
+ {id:'lagrone2012', sup:'wh', autor:'LaGrone', ano:2012, cc:2, cidade:'St. Louis', lat:38.63, lon:-90.19, pop:'cli', grupo:'Desnutrição aguda moderada', meninas:null,
+  idade:'6 a 59 meses', idadeMed:null, n:2612, desenho:'Ensaio randomizado de não inferioridade com três braços, cego para o investigador', rig:1,
+  dose:'Alimento suplementar pronto para uso de soja e whey, importado, 75 kcal/kg/dia por até 12 semanas; comparadores: alimento pronto para uso de soja produzido no país e farinha de milho e soja fortificada com óleo e leite em pó desnatado', dias:84,
+  desfecho:'Recuperação da desnutrição',
+  achado:'A recuperação foi de 87,9% (807/918) com o alimento de soja e whey, 87,7% (795/806) com o alimento de soja e 85,9% (763/888) com a farinha fortificada, que não foi inferior aos dois alimentos prontos para uso. O ganho de estatura foi igual nos três braços.',
+  dir:'nul', cit:'Am J Clin Nutr. 2012;95(1):212-9', doi:'10.3945/ajcn.111.022525', pmid:'22170366',
+  titulo:'A novel fortified blended flour, corn-soy blend "plus-plus," is not inferior to lipid-based ready-to-use supplementary foods for the treatment of moderate acute malnutrition in Malawian children', ini:'LaGrone LN',
+  nota:'Conduzido no Malawi. Os alimentos de soja e whey e de soja diferem também na origem da produção, e o resumo não traz teste direto entre esses dois braços.'},
+ {id:'cliffer2020', sup:'wh', autor:'Cliffer', ano:2020, cc:2, cidade:'Boston', lat:42.36, lon:-71.06, pop:'sau', grupo:'Crianças em programa de alimentação suplementar para prevenção de baixa estatura e emaciação', meninas:null,
+  idade:'6 a 23 meses', idadeMed:null, n:6112, desenho:'Ensaio randomizado geográfico (quatro regiões), com quatro alimentos', rig:1,
+  dose:'Farinha de milho, soja e whey com óleo, cerca de 500 kcal/dia, por cerca de 18 meses; referência: farinha de milho e soja Plus com óleo', dias:540,
+  desfecho:'Baixa estatura ao final (escore z de comprimento para idade abaixo de -2) e meses com emaciação (escore z de peso para comprimento abaixo de -2)',
+  achado:'Nenhum alimento impediu a queda do crescimento. Em relação à farinha de milho e soja Plus com óleo, o braço com whey teve mais baixa estatura ao final (razão de chances 2,07; intervalo de confiança de 95%: 1,46 a 2,94) e mais meses com emaciação (razão de taxas de incidência 1,29; 1,09 a 1,51).',
+  dir:'ale', cit:'Curr Dev Nutr. 2020;4(2):nzaa006', doi:'10.1093/cdn/nzaa006', pmid:'32072130',
+  titulo:'Cost-effectiveness of 4 specialized nutritious foods in the prevention of stunting and wasting in children aged 6-23 months in Burkina Faso: a geographically randomized trial', ini:'Cliffer IR',
+  nota:'Conduzido em Burkina Faso. Os alimentos diferem em outros componentes além do whey, e o resumo não atribui o resultado ao whey.'},
+ {id:'griswold2021', sup:'wh', autor:'Griswold', ano:2021, cc:2, cidade:'Boston', lat:42.36, lon:-71.06, pop:'cli', grupo:'Desnutrição aguda moderada', meninas:null,
+  idade:'6 a 59 meses', idadeMed:null, n:2691, desenho:'Ensaio randomizado por conglomerados (29 centros de saúde), com quatro alimentos', rig:1,
+  dose:'Farinha de milho, soja e whey com óleo vegetal fortificado, 550 kcal/dia por cerca de 12 semanas; referência: farinha de milho e soja Plus com óleo vegetal fortificado', dias:84,
+  desfecho:'Recuperação, recuperação sustentada e custo-efetividade',
+  achado:'Em relação à farinha de milho e soja Plus com óleo, a razão de chances de recuperação com a farinha de milho, soja e whey foi de 0,83 (intervalo de confiança de 95%: 0,64 a 1,08), e a de recuperação sustentada, de 1,08 (0,73 a 1,6). Recuperaram-se 63% das 2.653 crianças com dados completos.',
+  dir:'nul', cit:'Am J Clin Nutr. 2021;114(3):973-85', doi:'10.1093/ajcn/nqab140', pmid:'34020452',
+  titulo:'Effectiveness and cost-effectiveness of 4 supplementary foods for treating moderate acute malnutrition: results from a cluster-randomized intervention trial in Sierra Leone', ini:'Griswold SP',
+  nota:'Conduzido em Serra Leoa. Os alimentos diferem em outros componentes além do whey.'},
+ {id:'dalle2023', sup:'wh', autor:'Dalle', ano:2023, cc:2, cidade:'Detroit', lat:42.33, lon:-83.05, pop:'cli', grupo:'Diabetes mellitus tipo 1', meninas:true,
+  idade:'6 a 16 anos (média de 11,6 anos)', idadeMed:11.6, n:11, desenho:'Estudo piloto prospectivo, autocontrolado e não randomizado', rig:1,
+  dose:'Bebida noturna de whey isolado, sem carboidrato e sem gordura, com 0; 12,5; 25; 37,5; 50 e 62,5 g de proteína em 6 noites seguidas', dias:6,
+  desfecho:'Hiperglicemia pós-prandial (elevação de 50 mg/dL ou mais sobre a glicose basal) em monitorização contínua de glicose',
+  achado:'A hiperglicemia pós-prandial ocorreu em 1/11, 5/11, 6/10, 6/9, 5/9 e 8/9 participantes após 0; 12,5; 25; 37,5; 50 e 62,5 g de proteína. Segundo os autores, a associação apareceu com quantidades de proteína menores que as descritas em adultos.',
+  dir:'fis', cit:'Diabetes Metab Syndr. 2023;17(3):102739', doi:'10.1016/j.dsx.2023.102739', pmid:'36905921',
+  titulo:'Protein intake and postprandial hyperglycemia in children and adolescents with type 1 diabetes mellitus, a pilot study', ini:'Dalle D',
+  nota:'Foram recrutados 38 participantes e 11 concluíram a intervenção. Desfecho glicêmico agudo, sem comparação de eficácia.'},
 ];
 
 const LIT = {
@@ -875,7 +931,9 @@ const LIT = {
 const PREV = [
  {grupo:'Metzl, 2001 · EUA · atletas de 10 a 18 anos (n = 1.103)', tipo:'cr', ref:'metzl2001', linhas:[['Total',5.6],['Meninos',8.8],['Meninas',1.8],['12ª série',44.0]]},
  {grupo:'Smith e Dahm, 2000 · EUA · atletas de 14 a 18 anos (n = 328)', tipo:'cr', ref:'smith2000', linhas:[['Total',8.2]]},
+ {grupo:'McGuine, 2002 · EUA · atletas do ensino médio (n = 4.011)', tipo:'cr', ref:'mcguine2002', linhas:[['Total',16.7],['Meninos',25.3],['Meninas',3.9],['12ª série',24.6]]},
  {grupo:'Eisenberg, 2012 · EUA · escolares, média de 14,4 anos (n = 2.793)', tipo:'wh', ref:'eisenberg2012', linhas:[['Meninos',34.7],['Meninas',21.2]]},
+ {grupo:'Wardenaar, 2024 · EUA · atletas de 14 a 19 anos (n = 225)', tipo:'mix', ref:'wardenaar2024', linhas:[['Proteína em pó',58,'wh'],['Creatina',23,'cr']]},
  {grupo:'Millán-Jiménez, 2023 · Espanha · escolares (n = 263)', tipo:'wh', ref:'millan2023', linhas:[['Suplemento proteico',10.6]]},
  {grupo:'PeNSE 2015 · Brasil · 9º ano', tipo:'any', ref:'pense2015', linhas:[['Meninos',8.6],['Meninas',5.6]]}
 ];
@@ -934,6 +992,9 @@ const OTHER_REFS = [
  {id:'ganson2024', ini:'Ganson KT, Testa A, Nagata JM', titulo:'Creatine monohydrate use is prospectively associated with muscle dysmorphia symptomatology', cit:'Eat Behav. 2024;54:101910', doi:'10.1016/j.eatbeh.2024.101910', pmid:'39173400', ano:2024},
  {id:'metzl2001', ini:'Metzl JD', etal:true, titulo:'Creatine use among young athletes', cit:'Pediatrics. 2001;108(2):421-5', doi:'10.1542/peds.108.2.421', pmid:'11483809', ano:2001, classico:'inquérito clássico de prevalência'},
  {id:'smith2000', ini:'Smith J, Dahm DL', titulo:'Creatine use among a select population of high school athletes', cit:'Mayo Clin Proc. 2000;75(12):1257-63', doi:'10.4065/75.12.1257', pmid:'11126833', ano:2000, classico:'inquérito clássico de prevalência'},
+ {id:'mcguine2002', ini:'McGuine TA', etal:true, titulo:'Creatine supplementation in Wisconsin high school athletes', cit:'WMJ. 2002;101(2):25-30', pmid:'12085493', ano:2002, classico:'inquérito clássico de prevalência'},
+ {id:'wardenaar2024', ini:'Wardenaar FC', etal:true, titulo:"High school athletes' use and knowledge of (safe) nutritional supplement use: an exploratory study", cit:'J Diet Suppl. 2024;21(4):478-94', doi:'10.1080/19390211.2023.2301361', pmid:'38230707', ano:2024},
+ {id:'oh2012', ini:'Oh JY', etal:true, titulo:'Acute exertional rhabdomyolysis and triceps compartment syndrome during a high school football camp', cit:'Sports Health. 2012;4(1):57-62', doi:'10.1177/1941738111413874', pmid:'23016070', ano:2012, classico:'relato de surto sem equivalente mais recente'},
  {id:'eisenberg2012', ini:'Eisenberg ME, Wall M, Neumark-Sztainer D', titulo:'Muscle-enhancing behaviors among adolescent girls and boys', cit:'Pediatrics. 2012;130(6):1019-26', doi:'10.1542/peds.2012-0095', pmid:'23166333', ano:2012, classico:'estudo de prevalência de base populacional'},
  {id:'millan2023', ini:'Millán-Jiménez A', etal:true, titulo:'Protein supplement consumption prevalence, habits and complications in adolescents', cit:'An Pediatr (Engl Ed). 2023;99(4):240-51', doi:'10.1016/j.anpede.2023.08.014', pmid:'37770287', ano:2023},
  {id:'nagata2022', ini:'Nagata JM', etal:true, titulo:'Muscle-building behaviors from adolescence to emerging adulthood: a prospective cohort study', cit:'Prev Med Rep. 2022;27:101778', doi:'10.1016/j.pmedr.2022.101778', pmid:null, ano:2022},
@@ -1452,7 +1513,7 @@ var mxAPI = null;
     side.innerHTML = '<p class="eyebrow">Leitura da matriz</p>'+
       '<p class="insight"><b>Creatina, atletas jovens:</b> '+athFavDB+' dos '+crAthFav.length+' resultados favoráveis vieram de ensaios duplo-cegos; os protocolos com duração descrita tiveram de '+Math.min.apply(null,favDays)+' a '+Math.max.apply(null,favDays)+' dias.</p>'+
       '<p class="insight"><b>Creatina, condições clínicas:</b> '+crCliFavDB.length+' dos '+crCliFav.length+' resultados favoráveis veio de ensaio duplo-cego; entre os '+crCliDB.length+' duplo-cegos, '+cnt(crCliDB,function(s){return s.dir==='nul';})+' foram nulos, '+cnt(crCliDB,function(s){return s.dir==='mis';})+' misto e '+cnt(crCliDB,function(s){return s.dir==='fav';})+' favorável.</p>'+
-      '<p class="insight"><b>Whey:</b> o único sinal adverso veio de adolescentes com sobrepeso; os favoráveis são clínicos (desnutrição moderada e infecção pelo HIV) e medem recuperação nutricional ou glutationa, não desempenho.</p>'+
+      '<p class="insight"><b>Whey:</b> os '+cnt(WH,function(s){return s.dir==='ale';})+' sinais de alerta vieram de não atletas (adolescentes com sobrepeso e crianças de 6 a 23 meses em programa de alimentação suplementar); os '+cnt(WH,function(s){return s.dir==='fav';})+' resultados favoráveis são clínicos (desnutrição aguda moderada, infecção pelo HIV e refluxo em crianças com comprometimento neurológico) e medem recuperação nutricional, glutationa ou refluxo, não desempenho.</p>'+
       '<div><p class="eyebrow" style="margin-bottom:6px">Referência meta-analítica · creatina em distrofias musculares</p><svg class="chart" id="forestKley" role="img" aria-label="Diferença média de força em distrofias musculares"></svg>'+
       '<p class="foot">Diferença média e intervalo de confiança de 95% (IC 95%) em seis ensaios randomizados com 192 participantes, crianças e adultos, contra placebo '+rl('kley2013','Kley, 2013')+'. Na deficiência de guanidinoacetato metiltransferase (GAMT), a creatina oral integra o tratamento, com ornitina, benzoato de sódio e dieta com restrição proteica '+rl('ream2023','Ream, 2023')+'.</p></div>'+
       '<p class="foot">Revisões narrativas sobre creatina relatam melhora em parte dos desfechos e ausência de eventos adversos nos estudos com adolescentes '+rl('jagim2018','Jagim, 2018')+' '+rl('jagim2021','Jagim e Kerksick, 2021')+'.</p>'+
@@ -1519,12 +1580,13 @@ var mxAPI = null;
   }
   layout();
   pieces.forEach(function(m){ var u = m.userData; u.x = u.tx; u.z = u.tz; u.y = u.ty; u.sc = u.tsc; m.position.set(u.x, u.y, u.z); });
-  var rowTags = ROWS.map(function(r){ var t = overlayTag(ov, 'rowlab', POP[r].label); t.userData = new THREE.Vector3(XS[3]+cell/2, 0, ZS[r]+cell/2+0.12); return t; });
+  var ROWSHORT = {atl:'Atletas', cli:'Clínicas', sau:'Não atletas'};
+  var rowTags = ROWS.map(function(r){ var t = overlayTag(ov, 'rowlab', POP[r].label); t.userData = new THREE.Vector3(XS[3]+cell/2+0.14, 0, ZS[r]); t.dataset.r = r; return t; });
   var SHORT = {fav:'Favorável', mis:'Misto', nul:'Nulo', ale:'Alerta'};
   var colTags = COLS.map(function(c, ci){ var t = overlayTag(ov, 'strong', SHORT[c]); t.userData = new THREE.Vector3(XS[ci], 0, 2.85); return t; });
   var sel = null;
   function setLift(id){ pieces.forEach(function(m){ m.userData.tl = (m.userData.s.id===id || m.userData.s.id===sel) ? 1 : 0; }); S.kick(); }
-  S.onResize = function(){ var d = fitBox(S, 3.25, 2.95, 1.03); S.camera.position.set(0, 0.45+d*0.72, 0.65+d*0.69); S.camera.lookAt(0, 0.45, 0.65); };
+  S.onResize = function(){ var narrow = S.w < 520; rowTags.forEach(function(t){ t.textContent = narrow ? ROWSHORT[t.dataset.r] : POP[t.dataset.r].label; }); var cx = narrow ? 0.62 : 0.55, d = fitBox(S, narrow ? 3.75 : 3.6, 2.95, 1.03); S.camera.position.set(cx, 0.45+d*0.72, 0.65+d*0.69); S.camera.lookAt(cx, 0.45, 0.65); };
   grp.rotation.y = -0.06;
   var dragging=false, vel=0;
   function tipHTML(s){ return '<b>'+esc(studyLabel(s))+'</b> · '+SUP[s.sup].label+' · '+esc(COUNTRY[s.cc])+'<br>'+esc(s.grupo)+'<br><span class="m">'+(s.n?'n = '+nf(s.n):'n não informado')+' · '+esc(RIG[s.rig])+'</span>'; }
@@ -1613,7 +1675,7 @@ function drawPrev(svg){
   svg.setAttribute('viewBox','0 0 '+W+' '+H); svg.setAttribute('height',H); clear(svg);
   var defs = svgEl('defs',{},svg); var pat = svgEl('pattern',{id:'hatch',width:6,height:6,patternUnits:'userSpaceOnUse',patternTransform:'rotate(45)'},defs);
   svgEl('rect',{width:6,height:6,fill:'var(--br-soft)'},pat); svgEl('line',{x1:0,y1:0,x2:0,y2:6,stroke:'var(--br)','stroke-width':3},pat);
-  var x = function(v){ return L + v/50*(R-L); };
+  var x = function(v){ return L + v/60*(R-L); };
   var gridG = svgEl('g',{},svg), barG = svgEl('g',{},svg);
   var yTop = y;
   PREV.forEach(function(g){
@@ -1622,14 +1684,14 @@ function drawPrev(svg){
     y += gap;
     g.linhas.forEach(function(l){
       var rl0 = svgEl('text',{x:L-8,y:y+rowH/2+4,'text-anchor':'end',class:'lbl'},barG); rl0.textContent = l[0]; if (narrow) rl0.style.fontSize = '10px';
-      var fill = g.tipo==='any' ? 'url(#hatch)' : (g.tipo==='wh' ? 'var(--accent)' : 'var(--globe-lit)');
+      var tp = l[2] || g.tipo; var fill = tp==='any' ? 'url(#hatch)' : (tp==='wh' ? 'var(--accent)' : 'var(--globe-lit)');
       svgEl('rect',{x:L,y:y+4,width:Math.max(1,x(l[1])-L),height:rowH-9,rx:3,fill:fill},barG);
       svgEl('text',{x:x(l[1])+6,y:y+rowH/2+4,class:'strong'},barG).textContent = nf(l[1],1)+'%';
       y += rowH;
     });
   });
   var ya = y+6; svgEl('line',{x1:L,x2:R,y1:ya,y2:ya,stroke:'var(--line)'},gridG);
-  [0,10,20,30,40,50].forEach(function(t){ svgEl('line',{x1:x(t),x2:x(t),y1:yTop+gap-4,y2:ya,stroke:'var(--line-2)'},gridG); svgEl('text',{x:x(t),y:ya+16,'text-anchor':'middle'},gridG).textContent = t+'%'; });
+  [0,10,20,30,40,50,60].forEach(function(t){ svgEl('line',{x1:x(t),x2:x(t),y1:yTop+gap-4,y2:ya,stroke:'var(--line-2)'},gridG); svgEl('text',{x:x(t),y:ya+16,'text-anchor':'middle'},gridG).textContent = t+'%'; });
 }
 function drawNeed(svg){
   var D = PROTEIN.need, W = widthOf(svg), H = 230; svg.setAttribute('viewBox','0 0 '+W+' '+H); svg.setAttribute('height',H); clear(svg);
@@ -1712,7 +1774,7 @@ var noDose = CR.filter(function(s){ return (s.dRel==null && s.dFix==null) || !s.
 $('#doseNote').innerHTML = '<span class="legend" style="margin-bottom:8px">'+Object.keys(POP).map(function(k){ return '<span><i style="background:var('+POP[k].v+');border-radius:50%"></i>'+POP[k].label+'</span>'; }).join('')+'<span><i style="background:transparent;border-radius:50%;box-shadow:inset 0 0 0 2px var(--ink-2)"></i>Duas fases, dose inicial</span><span><i class="ring"></i>Estudo brasileiro</span></span><br>'+
   'Fora dos gráficos, por dose ou duração não descritas no resumo: '+noDose.map(function(s){ return esc(studyLabel(s)); }).join('; ')+'. Os atletas jovens receberam creatina por 5 a '+maxAthDays+' dias; as condições clínicas, por até 180 dias.';
 $('#prevLegend').innerHTML = '<span><i style="background:var(--globe-lit)"></i>Creatina</span><span><i style="background:var(--accent)"></i>Suplemento proteico</span><span><i style="background:var(--br-soft);box-shadow:inset 0 0 0 2px var(--br)"></i>Qualquer produto para ganho de massa</span>';
-$('#prevInsight').innerHTML = 'Em '+rl('eisenberg2012','Eisenberg, 2012')+', 34,7% dos meninos e 21,2% das meninas usavam proteína em pó ou shakes, valores bem acima do uso de creatina nos inquéritos com atletas, embora populações e períodos sejam diferentes. Em '+rl('metzl2001','Metzl, 2001')+', o uso de creatina chegou a 44% na 12ª série.';
+$('#prevInsight').innerHTML = 'Na mesma amostra de 225 atletas de 14 a 19 anos, '+rl('wardenaar2024','Wardenaar, 2024')+' registrou uso de proteína em pó por 58% e de creatina por 23% no último ano. Entre escolares, '+rl('eisenberg2012','Eisenberg, 2012')+' encontrou uso de proteína em pó ou shakes por 34,7% dos meninos e 21,2% das meninas. O uso de creatina cresce com a série escolar: chegou a 44% na 12ª série em '+rl('metzl2001','Metzl, 2001')+' e a 24,6% em '+rl('mcguine2002','McGuine, 2002')+'.';
 $('#protNeedFoot').innerHTML = 'Recomendação do Institute of Medicine '+rl('iom2005','Institute of Medicine, 2005')+', necessidade estimada do atleta jovem '+rl('desbrow2021','Desbrow, 2021')+' e consumo médio em meta-análise de futebolistas '+rl('steffl2019','Steffl, 2019')+'. Eixo a partir de zero.';
 $('#protSnackFoot').innerHTML = 'Valores da Tabela Brasileira de Composição de Alimentos (TBCA) '+rl('tbca')+'. Meta de 18 g para um adolescente de 60 kg, caso ilustrativo baseado em '+rl('desbrow2021','Desbrow, 2021')+'.';
 $('#wheyAth').innerHTML = whAth.sort(function(a,b){ return a.ano-b.ano; }).map(function(s){ return '<li><button type="button" data-sid="'+s.id+'"><span class="sw" style="background:var('+DIR[s.dir].v+');border-radius:2px"></span><span class="t">'+esc(studyLabel(s))+'<small>'+esc(s.grupo)+' · n = '+s.n+' · '+esc(s.desfecho)+'</small></span><span class="d">'+DIR[s.dir].label+'</span></button></li>'; }).join('');
