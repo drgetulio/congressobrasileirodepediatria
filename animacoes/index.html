@@ -1,0 +1,400 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Animações da aula Creatina e Whey</title>
+<meta name="description" content="Vídeos animados dos slides da fala Creatina e Whey Protein: modismo inadequado, 42º Congresso Brasileiro de Pediatria, e três animações sobre a fisiologia da creatina.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@500&family=IBM+Plex+Sans:ital,wght@0,400;0,600;0,700;1,400&display=swap">
+<style>
+/* Layout: cabeçalho curto com a seleção fixa no topo; grade de vídeos em duas colunas, uma no celular. Paleta do template do 42º CBP. */
+:root {
+  --bg: #F6F8FC;
+  --surface: #FFFFFF;
+  --ink: #252A5A;
+  --muted: #5D6386;
+  --line: #D9DFEC;
+  --accent: #224F9D;
+  --amber: #B97A00;
+  --amber-soft: #FDF3DC;
+  --green: #5E8212;
+  --font-body: "IBM Plex Sans", "Segoe UI", system-ui, sans-serif;
+  --font-data: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #12152B; --surface: #1B1F3D; --ink: #E8EBF7; --muted: #A4AACB; --line: #2E3460;
+    --accent: #8FB0E3; --amber: #F2C25A; --amber-soft: #3A3220; --green: #A9D25A; color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #12152B; --surface: #1B1F3D; --ink: #E8EBF7; --muted: #A4AACB; --line: #2E3460;
+  --accent: #8FB0E3; --amber: #F2C25A; --amber-soft: #3A3220; --green: #A9D25A; color-scheme: dark;
+}
+* { box-sizing: border-box; }
+body { background: var(--bg); color: var(--ink); font-family: var(--font-body); font-size: 16px; line-height: 1.5; padding: 0 20px 64px; }
+.wrap { max-width: 1240px; margin: 0 auto; }
+header { padding-block: 40px 20px; display: grid; gap: 10px; max-width: 70ch; }
+.eyebrow { font-family: var(--font-data); font-size: 12px; letter-spacing: .08em; text-transform: uppercase; color: var(--amber); }
+h1 { margin: 0; font-size: clamp(28px, 4.2vw, 44px); line-height: 1.1; font-weight: 700; text-wrap: balance; }
+header p { margin: 0; color: var(--muted); }
+.bar { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 2; background: var(--bg); padding-block: 12px; border-bottom: 1px solid var(--line); display: flex; flex-wrap: wrap; gap: 10px 16px; align-items: center; }
+.bar .label { font-weight: 600; }
+.bar output { font-family: var(--font-data); font-size: 14px; color: var(--accent); min-width: 0; overflow-wrap: anywhere; flex: 1 1 260px; }
+.bar button { font: inherit; font-size: 14px; font-weight: 600; color: var(--surface); background: var(--accent); border: 0; border-radius: 6px; padding: 8px 14px; cursor: pointer; }
+.bar button:focus-visible, .pick input:focus-visible { outline: 3px solid var(--amber); outline-offset: 2px; }
+.bar .hint { font-size: 13px; color: var(--muted); }
+.grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 28px 24px; padding-top: 24px; }
+@media (max-width: 760px) { .grid { grid-template-columns: minmax(0, 1fr); } }
+.clip { display: grid; gap: 12px; align-content: start; min-width: 0; }
+.frame { position: relative; border-radius: 8px; overflow: hidden; background: #000; aspect-ratio: 16 / 9; max-width: 100%; box-shadow: 0 0 0 1px var(--line); }
+.frame video { width: 100%; height: 100%; display: block; }
+.clip.chosen .frame { box-shadow: 0 0 0 3px var(--amber); }
+.meta { display: grid; gap: 6px; min-width: 0; }
+.row { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 4px 12px; font-family: var(--font-data); font-size: 12px; letter-spacing: .04em; }
+.num { color: var(--accent); text-transform: uppercase; }
+.file { color: var(--muted); font-variant-numeric: tabular-nums; }
+.meta h2 { margin: 0; font-size: 19px; line-height: 1.25; font-weight: 600; text-wrap: balance; }
+.meta p { margin: 0; color: var(--muted); font-size: 15px; max-width: 62ch; }
+.pick { display: inline-flex; align-items: center; gap: 8px; font-size: 14px; font-weight: 600; cursor: pointer; width: fit-content; margin-top: 2px; padding: 6px 12px 6px 8px; border-radius: 999px; border: 1px solid var(--line); background: var(--surface); }
+.pick input { width: 18px; height: 18px; accent-color: var(--amber); margin: 0; }
+.clip.chosen .pick { background: var(--amber-soft); border-color: var(--amber); color: var(--ink); }
+.extra { margin-top: 56px; padding-top: 28px; border-top: 1px solid var(--line); display: grid; gap: 8px; }
+.section-title { margin: 0; font-size: clamp(22px, 3vw, 30px); line-height: 1.15; font-weight: 700; text-wrap: balance; }
+.section-lead { margin: 0; color: var(--muted); max-width: 70ch; }
+.extra .grid { padding-top: 16px; }
+footer { margin-top: 48px; padding-top: 16px; border-top: 1px solid var(--line); color: var(--muted); font-size: 13px; max-width: 80ch; }
+@media (prefers-reduced-motion: reduce) { * { scroll-behavior: auto; } }
+.back { margin: 0; font-size: 14px; }
+.back a { color: var(--accent); font-weight: 600; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div class="eyebrow">42º Congresso Brasileiro de Pediatria · mesa-redonda</div>
+    <p class="back"><a href="../index.html">Página inicial</a></p>
+    <h1>Animações da aula Creatina e Whey Protein</h1>
+    <p>Vinte vídeos de 30 segundos, sem áudio, um para cada slide da fala “Creatina e Whey Protein: modismo inadequado”, apresentada em 16 de outubro de 2026, em Belo Horizonte. Cada vídeo acompanha a explicação do slide e termina no slide estático. No fim da página, três animações sobre a fisiologia da creatina: a primeira com 45 segundos e as outras duas com 30.</p>
+  </header>
+  <main class="grid">
+    <article class="clip" id="s01" data-n="01">
+      <div class="frame">
+        <video src="v/Slide-01.mp4" poster="p/Slide-01.jpg" controls preload="none" playsinline muted></video>
+      </div>
+      <div class="meta">
+        <div class="row">
+          <span class="num">Slide 01</span>
+          <span class="file">Slide-01.mp4 · 0:30</span>
+        </div>
+        <h2>Creatina e Whey Protein: modismo inadequado</h2>
+        <p>O painel azul desce como cortina, o título entra linha a linha e “modismo” ganha um sublinhado quando a fala chega à crítica.</p>
+      </div>
+    </article>
+    <article class="clip" id="s02" data-n="02">
+      <div class="frame">
+        <video src="v/Slide-02.mp4" poster="p/Slide-02.jpg" controls preload="none" playsinline muted></video>
+      </div>
+      <div class="meta">
+        <div class="row">
+          <span class="num">Slide 02</span>
+          <span class="file">Slide-02.mp4 · 0:30</span>
+        </div>
+        <h2>Não tenho conflitos de interesse e declaro o uso de inteligência artificial</h2>
+        <p>As duas declarações entram na ordem da fala: primeiro os conflitos de interesse, com “Não recebo” marcado; depois o uso de inteligência artificial, com a responsabilidade pelo conteúdo marcada.</p>
+      </div>
+    </article>
+    <article class="clip" id="s03" data-n="03">
+      <div class="frame">
+        <video src="v/Slide-03.mp4" poster="p/Slide-03.jpg" controls preload="none" playsinline muted></video>
+      </div>
+      <div class="meta">
+        <div class="row">
+          <span class="num">Slide 03</span>
+          <span class="file">Slide-03.mp4 · 0:30</span>
+        </div>
+        <h2>Caso fictício: um adolescente de 15 anos chega pedindo creatina e whey</h2>
+        <p>Primeiro os dados do rapaz, depois como ele está e então a pergunta. O time inteiro de camisas aparece e o foco se fecha nele.</p>
+      </div>
+    </article>
+    <article class="clip" id="s04" data-n="04">
+      <div class="frame">
+        <video src="v/Slide-04.mp4" poster="p/Slide-04.jpg" controls preload="none" playsinline muted></video>
+      </div>
+      <div class="meta">
+        <div class="row">
+          <span class="num">Slide 04</span>
+          <span class="file">Slide-04.mp4 · 0:30</span>
+        </div>
+        <h2>A dúvida do paciente vira a pergunta clínica desta aula</h2>
+        <p>A pergunta clínica se abre, os termos em disputa ganham cor enquanto são ditos e o roteiro da aula se desenha embaixo.</p>
+      </div>
+    </article>
+    <article class="clip" id="s05" data-n="05">
+      <div class="frame">
+        <video src="v/Slide-05.mp4" poster="p/Slide-05.jpg" controls preload="none" playsinline muted></video>
+      </div>
+      <div class="meta">
+        <div class="row">
+          <span class="num">Slide 05</span>
+          <span class="file">Slide-05.mp4 · 0:30</span>
+        </div>
+        <h2>Muitos meninos já usam produto para ganhar músculo</h2>
+        <p>Cada percentual conta até o valor no momento em que é dito, com aproximação no cartão americano. Depois, a ressalva sobre os inquéritos e a revisão brasileira.</p>
+      </div>
+    </article>
+    <article class="clip" id="s06" data-n="06">
+      <div class="frame">
+        <video src="v/Slide-06.mp4" poster="p/Slide-06.jpg" controls preload="none" playsinline muted></video>
+      </div>
+      <div class="meta">
+        <div class="row">
+          <span class="num">Slide 06</span>
+          <span class="file">Slide-06.mp4 · 0:30</span>
+        </div>
+        <h2>O suplemento concentra numa colher o que a comida já traz</h2>
+        <p>Creatina e whey entram na ordem da fala, cada um com a origem resumida logo abaixo do cartão.</p>
+      </div>
+    </article>
+    <article class="clip" id="s07" data-n="07">
+      <div class="frame">
+        <video src="v/Slide-07.mp4" poster="p/Slide-07.jpg" controls preload="none" playsinline muted></video>
+      </div>
+      <div class="meta">
+        <div class="row">
+          <span class="num">Slide 07</span>
+          <span class="file">Slide-07.mp4 · 0:30</span>
+        </div>
+        <h2>O jovem futebolista já come mais proteína do que precisa</h2>
+        <p>As barras crescem na escala do slide. A linha da necessidade sai da segunda barra e vira a chave do excedente; depois entram o carboidrato e o dado brasileiro.</p>
+      </div>
+    </article>
+    <article class="clip" id="s08" data-n="08">
+      <div class="frame">
+        <video src="v/Slide-08.mp4" poster="p/Slide-08.jpg" controls preload="none" playsinline muted></video>
+      </div>
+      <div class="meta">
+        <div class="row">
+          <span class="num">Slide 08</span>
+          <span class="file">Slide-08.mp4 · 0:30</span>
+        </div>
+        <h2>O ganho é pequeno em adultos e pouco estudado em adolescentes</h2>
+        <p>A tabela se abre por coluna: adultos com o dado de cada célula, depois adolescentes. No fim, as linhas voltam à altura do slide.</p>
+      </div>
+    </article>
+    <article class="clip" id="s09" data-n="09">
+      <div class="frame">
+        <video src="v/Slide-09.mp4" poster="p/Slide-09.jpg" controls preload="none" playsinline muted></video>
+      </div>
+      <div class="meta">
+        <div class="row">
+          <span class="num">Slide 09</span>
+          <span class="file">Slide-09.mp4 · 0:30</span>
+        </div>
+        <h2>A segurança da creatina antes dos 18 anos ainda é pouco estudada</h2>
+        <p>Três graus de certeza, cartão a cartão, cada um com o detalhe dito em voz alta. No fim, entra a faixa do exame de rotina: em adultos, a creatina eleva a creatinina, e o rim se avalia com creatinina e cistatina C.</p>
+      </div>
+    </article>
+    <article class="clip" id="s10" data-n="10">
+      <div class="frame">
+        <video src="v/Slide-10.mp4" poster="p/Slide-10.jpg" controls preload="none" playsinline muted></video>
+      </div>
+      <div class="meta">
+        <div class="row">
+          <span class="num">Slide 10</span>
+          <span class="file">Slide-10.mp4 · 0:30</span>
+        </div>
+        <h2>O conteúdo do pote nem sempre corresponde ao rótulo</h2>
+        <p>Quatro faixas entram na ordem da fala: diurético não declarado no whey, creatina abaixo do teor, as creatinas conferidas pela Anvisa e os metais e microplásticos. O detalhe de cada estudo aparece na coluna da direita. Por fim, a faixa da fiscalização mostra o que a regra exige e o que acontece na prática.</p>
+      </div>
+    </article>
+    <article class="clip" id="s11" data-n="11">
+      <div class="frame">
+        <video src="v/Slide-11.mp4" poster="p/Slide-11.jpg" controls preload="none" playsinline muted></video>
+      </div>
+      <div class="meta">
+        <div class="row">
+          <span class="num">Slide 11</span>
+          <span class="file">Slide-11.mp4 · 0:30</span>
+        </div>
+        <h2>Proteína em pó na adolescência associou-se a esteroides ou outras substâncias</h2>
+        <p>A linha de nulidade se traça, cada estimativa surge no próprio lugar e o intervalo se abre a partir do ponto, com aproximação no intervalo das meninas.</p>
+      </div>
+    </article>
+    <article class="clip" id="s12" data-n="12">
+      <div class="frame">
+        <video src="v/Slide-12.mp4" poster="p/Slide-12.jpg" controls preload="none" playsinline muted></video>
+      </div>
+      <div class="meta">
+        <div class="row">
+          <span class="num">Slide 12</span>
+          <span class="file">Slide-12.mp4 · 0:30</span>
+        </div>
+        <h2>No atleta jovem, o Comitê Olímpico Internacional põe a dieta à frente do suplemento</h2>
+        <p>A citação se lê em três respirações, com os trechos centrais marcados; embaixo, a autoria, Consenso do Comitê Olímpico Internacional, e o que o consenso pede.</p>
+      </div>
+    </article>
+    <article class="clip" id="s13" data-n="13">
+      <div class="frame">
+        <video src="v/Slide-13.mp4" poster="p/Slide-13.jpg" controls preload="none" playsinline muted></video>
+      </div>
+      <div class="meta">
+        <div class="row">
+          <span class="num">Slide 13</span>
+          <span class="file">Slide-13.mp4 · 0:30</span>
+        </div>
+        <h2>O princípio é comida primeiro, mas nem sempre só comida</h2>
+        <p>Comida primeiro: a definição, a sequência com as setas do slide e o contorno tracejado do suplemento; depois, o recado do futebol juvenil e, por fim, a frase you cannot outrun a bad diet.</p>
+      </div>
+    </article>
+    <article class="clip" id="s14" data-n="14">
+      <div class="frame">
+        <video src="v/Slide-14.mp4" poster="p/Slide-14.jpg" controls preload="none" playsinline muted></video>
+      </div>
+      <div class="meta">
+        <div class="row">
+          <span class="num">Slide 14</span>
+          <span class="file">Slide-14.mp4 · 0:30</span>
+        </div>
+        <h2>O suplemento tem lugar em situações específicas, avaliadas caso a caso</h2>
+        <p>Três situações em que o suplemento cabe, cada uma com o exemplo apontado para o cartão; no fim, a faixa da avaliação profissional.</p>
+      </div>
+    </article>
+    <article class="clip" id="s15" data-n="15">
+      <div class="frame">
+        <video src="v/Slide-15.mp4" poster="p/Slide-15.jpg" controls preload="none" playsinline muted></video>
+      </div>
+      <div class="meta">
+        <div class="row">
+          <span class="num">Slide 15</span>
+          <span class="file">Slide-15.mp4 · 0:30</span>
+        </div>
+        <h2>Leite, pão e queijo somam 17 g de proteína, perto da meta de 18 g</h2>
+        <p>A meta de 18 g se marca primeiro. Leite, pão e queijo chegam em arco e viram segmentos da barra, que termina perto da meta.</p>
+      </div>
+    </article>
+    <article class="clip" id="s16" data-n="16">
+      <div class="frame">
+        <video src="v/Slide-16.mp4" poster="p/Slide-16.jpg" controls preload="none" playsinline muted></video>
+      </div>
+      <div class="meta">
+        <div class="row">
+          <span class="num">Slide 16</span>
+          <span class="file">Slide-16.mp4 · 0:30</span>
+        </div>
+        <h2>No consultório, a primeira conduta é perguntar sobre suplementos</h2>
+        <p>A pergunta do pediatra nasce do ícone do médico. À direita, uma nota por vez: quando perguntar, sigilo, família e treinador.</p>
+      </div>
+    </article>
+    <article class="clip" id="s17" data-n="17">
+      <div class="frame">
+        <video src="v/Slide-17.mp4" poster="p/Slide-17.jpg" controls preload="none" playsinline muted></video>
+      </div>
+      <div class="meta">
+        <div class="row">
+          <span class="num">Slide 17</span>
+          <span class="file">Slide-17.mp4 · 0:30</span>
+        </div>
+        <h2>Se o adolescente já usa, o pediatra investiga produto, dose e imagem corporal</h2>
+        <p>A tabela da conduta se monta linha a linha, com a nuance de cada linha embaixo do texto e dois dados na coluna da direita.</p>
+      </div>
+    </article>
+    <article class="clip" id="s18" data-n="18">
+      <div class="frame">
+        <video src="v/Slide-18.mp4" poster="p/Slide-18.jpg" controls preload="none" playsinline muted></video>
+      </div>
+      <div class="meta">
+        <div class="row">
+          <span class="num">Slide 18</span>
+          <span class="file">Slide-18.mp4 · 0:30</span>
+        </div>
+        <h2>Para o adolescente do caso, a conduta é comida e treino, sem suplemento</h2>
+        <p>O plano aparece apagado e cada item se acende na ordem da fala, começando pelo “sem creatina nem whey”.</p>
+      </div>
+    </article>
+    <article class="clip" id="s19" data-n="19">
+      <div class="frame">
+        <video src="v/Slide-19.mp4" poster="p/Slide-19.jpg" controls preload="none" playsinline muted></video>
+      </div>
+      <div class="meta">
+        <div class="row">
+          <span class="num">Slide 19</span>
+          <span class="file">Slide-19.mp4 · 0:30</span>
+        </div>
+        <h2>Três mensagens resumem a conduta no consultório</h2>
+        <p>Três mensagens, uma de cada vez, com o trecho central marcado; no fim, as três voltam juntas.</p>
+      </div>
+    </article>
+    <article class="clip" id="s20" data-n="20">
+      <div class="frame">
+        <video src="v/Slide-20.mp4" poster="p/Slide-20.jpg" controls preload="none" playsinline muted></video>
+      </div>
+      <div class="meta">
+        <div class="row">
+          <span class="num">Slide 20</span>
+          <span class="file">Slide-20.mp4 · 0:30</span>
+        </div>
+        <h2>Encerramento</h2>
+        <p>A câmera se afasta do logotipo e revela a Pampulha ao entardecer; o agradecimento sobe letra por letra.</p>
+      </div>
+    </article>
+  </main>
+  <section class="extra" aria-labelledby="fisio">
+    <div class="eyebrow">Fisiologia da creatina</div>
+    <h2 id="fisio" class="section-title">Três animações independentes dos slides</h2>
+    <p class="section-lead">Mesmo visual da aula, com as referências no rodapé. Na apresentação, os vídeos 1 e 2 entram depois do slide 6, quando a creatina é apresentada, e o vídeo 3 depois do slide 8, que discute o ganho em adolescentes.</p>
+    <div class="grid">
+      <article class="clip" id="sC1" data-n="C1">
+        <div class="frame">
+          <video src="v/Creatina-1_da-dieta-ao-musculo.mp4" poster="p/Creatina-1_da-dieta-ao-musculo.jpg" controls preload="none" playsinline muted></video>
+        </div>
+        <div class="meta">
+          <div class="row">
+            <span class="num">Fisiologia 1</span>
+            <span class="file">Creatina-1_da-dieta-ao-musculo.mp4 · 0:45</span>
+          </div>
+          <h2>Da dieta ao músculo</h2>
+          <p>A creatina absorvida segue pelo sangue até a fibra; a câmera se aproxima sem corte até a membrana, onde o transportador leva a creatina com dois sódios e um cloreto e a bomba de sódio e potássio mantém o gradiente. No citosol, a creatina quinase forma fosfocreatina; a câmera sobe ao sarcômero e mostra 10 s de esforço máximo: cada cabeça de miosina gasta ATP a cada ciclo, a fosfocreatina refaz o ATP a partir do ADP e o estoque de fosfocreatina cai. No fim, a creatinina segue para a urina e o efeito do suplemento sobre a creatinina sérica.</p>
+        </div>
+      </article>
+      <article class="clip" id="sC2" data-n="C2">
+        <div class="frame">
+          <video src="v/Creatina-2_sintese-endogena.mp4" poster="p/Creatina-2_sintese-endogena.jpg" controls preload="none" playsinline muted></video>
+        </div>
+        <div class="meta">
+          <div class="row">
+            <span class="num">Fisiologia 2</span>
+            <span class="file">Creatina-2_sintese-endogena.mp4 · 0:30</span>
+          </div>
+          <h2>Síntese endógena, do rim ao fígado</h2>
+          <p>As moléculas reagem em fórmula estrutural: a AGAT leva o grupo amidino da arginina para a glicina, e a GAMT recebe o metil da S-adenosilmetionina. Cada parte da creatina mantém a cor de origem até o fim. Fecham o vídeo o custo em grupos metil, a contribuição diária, o freio da creatina sobre a AGAT e o tratamento da deficiência de GAMT.</p>
+        </div>
+      </article>
+      <article class="clip" id="sC3" data-n="C3">
+        <div class="frame">
+          <video src="v/Creatina-3_ganho-possivel-no-jovem.mp4" poster="p/Creatina-3_ganho-possivel-no-jovem.jpg" controls preload="none" playsinline muted></video>
+        </div>
+        <div class="meta">
+          <div class="row">
+            <span class="num">Fisiologia 3</span>
+            <span class="file">Creatina-3_ganho-possivel-no-jovem.mp4 · 0:30</span>
+          </div>
+          <h2>Onde pode haver ganho no jovem</h2>
+          <p>Modalidades com predomínio do sistema anaeróbio alático, em esforços únicos, máximos e curtos ou repetidos com pausas curtas; os estudos com adolescentes nadadores e futebolistas; a menor massa livre de gordura da criança e o estoque que enche com menos gramas, com a resposta medida em um estudo. Fecha com a diferença entre ganho possível e indicação.</p>
+        </div>
+      </article>
+    </div>
+  </section>
+  <footer>Vídeos em 1920 × 1080, 30 quadros por segundo, H.264, sem áudio. Elaboração: Getúlio Bernardo Morato Filho, Escola Superior de Ciências da Saúde (ESCS), Brasília, Distrito Federal. Material de apoio ao ensino; não constitui recomendação de uso nem de dose de suplementos para crianças ou adolescentes. Ícones das bibliotecas Font Awesome Free (licença CC BY 4.0) e Game Icons (licença CC BY 3.0, autores em game-icons.net); fonte IBM Plex Sans (SIL Open Font License).</footer>
+</div>
+<script>
+(function () {
+  // um vídeo por vez
+  var vids = Array.prototype.slice.call(document.querySelectorAll('video'));
+  vids.forEach(function (v) { v.addEventListener('play', function () { vids.forEach(function (o) { if (o !== v) o.pause(); }); }); });
+})();
+</script>
+</body>
+</html>
