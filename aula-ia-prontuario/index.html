@@ -1,0 +1,694 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
+<title>Do teclado ao olhar · IA no prontuário médico</title>
+<meta name="description" content="Materiais da aula IA no prontuário médico, VII Congresso de Ética Médica do DF.">
+</head>
+<body>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,700&family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=IBM+Plex+Mono:wght@400;600&display=swap">
+<style>
+/* Layout: coluna editorial de leitura, com faixa de navegação fixa pelas quatro perguntas da aula; a nota da Laura é o elemento de assinatura. */
+:root{
+--bg:#1E0718; --surface:#2B0C24; --surface2:#3A1231; --ink:#F6EEF3; --muted:#CDB6C6; --line:#4E1E43;
+--gold:#DDC28C; --green:#4BE08F; --rose:#F7A8C8; --red:#FF6B6B; --paper:#FBF7EF; --paper-ink:#2A0820; --strike:#B3261E; --ins:#1E7B4A;
+--display:"Fraunces", "Iowan Old Style", Georgia, serif;
+--body:"Atkinson Hyperlegible", "Segoe UI", Arial, sans-serif;
+--mono:"IBM Plex Mono", ui-monospace, Menlo, Consolas, monospace;
+color-scheme:dark;
+}
+@media (prefers-color-scheme: light){ :root:not([data-theme="dark"]){
+--bg:#FAF6F9; --surface:#FFFFFF; --surface2:#F3E9F0; --ink:#2A0820; --muted:#6B4A60; --line:#E4D3DF;
+--gold:#8A6420; --green:#13774A; --rose:#A82D63; --red:#C62828; --paper:#FFFDF8; --paper-ink:#2A0820; color-scheme:light } }
+:root[data-theme="light"]{
+--bg:#FAF6F9; --surface:#FFFFFF; --surface2:#F3E9F0; --ink:#2A0820; --muted:#6B4A60; --line:#E4D3DF;
+--gold:#8A6420; --green:#13774A; --rose:#A82D63; --red:#C62828; --paper:#FFFDF8; --paper-ink:#2A0820; color-scheme:light }
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:17px;line-height:1.6;margin:0}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--bg)}
+a{color:var(--gold)}
+a:focus-visible,button:focus-visible,input:focus-visible,summary:focus-visible{outline:3px solid var(--green);outline-offset:2px}
+.wrap{max-width:1080px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+h1,h2,h3{font-family:var(--display);line-height:1.15;text-wrap:balance;margin:0}
+h1{font-size:clamp(2.6rem,7vw,4.6rem);font-weight:700;letter-spacing:-.01em}
+h2{font-size:clamp(1.7rem,3.6vw,2.4rem);font-weight:700}
+h3{font-size:1.3rem;font-weight:700}
+p{margin:0}
+.eyebrow{font-size:.78rem;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);font-weight:700}
+.muted{color:var(--muted)}
+sup.r a{font-size:.72em;text-decoration:none;color:var(--gold);font-weight:700}
+/* navegação */
+nav.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:9;background:color-mix(in srgb,var(--bg) 92%,transparent);backdrop-filter:blur(6px);border-bottom:1px solid var(--line)}
+nav.top .wrap{display:flex;gap:6px;overflow-x:auto;padding-block:10px;scrollbar-width:none}
+nav.top a{flex:none;text-decoration:none;color:var(--ink);font-size:.92rem;padding:6px 12px;border-radius:999px;border:1px solid var(--line)}
+nav.top a:hover{border-color:var(--gold);color:var(--gold)}
+/* hero */
+header.hero .wrap{display:grid;grid-template-columns:1.1fr .9fr;gap:40px;align-items:center;padding-block:56px 40px}
+.hero p.lede{font-size:1.25rem;color:var(--muted);margin-top:16px;max-width:34ch}
+.who{margin-top:24px;display:grid;gap:2px}
+.who b{color:var(--gold);font-size:1.05rem}
+.contact{margin-top:18px;display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.contact code{font-family:var(--mono);background:var(--surface);border:1px solid var(--line);padding:6px 10px;border-radius:8px}
+.note{background:var(--paper);color:var(--paper-ink);border-radius:10px;padding:26px 26px 22px;font-family:var(--mono);font-size:.98rem;line-height:1.7;box-shadow:0 18px 40px rgba(0,0,0,.35);transform:rotate(-1.2deg)}
+.note .lbl{font-family:var(--body);font-weight:700;color:#7A2A63;font-size:.85rem;letter-spacing:.06em;text-transform:uppercase;margin-bottom:10px}
+.note del{color:var(--strike);text-decoration-thickness:2px}
+.note ins{color:var(--ins);text-decoration:none;font-weight:600}
+@media (prefers-reduced-motion:no-preference){
+.note ins{animation:write 1.1s ease-out .6s both}
+.note del{animation:strike .5s ease-out .2s both}
+@keyframes write{from{opacity:.25}to{opacity:1}}
+@keyframes strike{from{text-decoration-color:transparent}to{text-decoration-color:var(--strike)}}
+}
+.motto{margin-top:18px;font-family:var(--display);font-size:1.35rem;color:var(--gold)}
+/* índice */
+.index{padding-block:24px 8px}
+.index ol{list-style:none;padding:0;margin:18px 0 0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:18px 24px}
+.index li h3{font-size:1.05rem;color:var(--gold);margin-bottom:6px;font-family:var(--body);letter-spacing:.02em}
+.index li a{display:block;text-decoration:none;color:var(--ink);padding:3px 0;font-size:.95rem}
+.index li a span{color:var(--muted);font-variant-numeric:tabular-nums;margin-right:6px}
+.index li a:hover{color:var(--gold)}
+/* seções */
+section.block{padding-block:48px 8px;border-top:1px solid var(--line);margin-top:32px}
+section.block > .wrap > header{display:grid;gap:8px;margin-bottom:22px;max-width:70ch}
+.item{padding-block:22px;display:grid;gap:12px;scroll-margin-top:70px}
+.item + .item{border-top:1px dashed var(--line)}
+.item h3 .n{color:var(--gold);font-variant-numeric:tabular-nums;margin-right:8px}
+.item > p{max-width:70ch}
+.doc{background:var(--paper);color:var(--paper-ink);border-radius:10px;padding:22px 24px;font-size:.97rem;line-height:1.6;max-width:78ch}
+.doc h4{font-family:var(--display);font-size:1.15rem;margin:0 0 8px}
+.doc h5{font-size:.95rem;margin:14px 0 4px;text-transform:uppercase;letter-spacing:.06em;color:#7A2A63}
+.doc p,.doc li{margin:0 0 6px}
+.doc ul,.doc ol{padding-left:22px;margin:4px 0 8px}
+.doc .fill{border-bottom:1px solid #9b8592;display:inline-block;min-width:8ch}
+.doc .sig{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-top:18px}
+.doc .sig div{border-top:1px solid #9b8592;padding-top:4px;font-size:.88rem}
+.say{font-family:var(--display);font-size:1.2rem;font-style:italic;background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:18px 20px;max-width:70ch}
+.rec{font-family:var(--mono);font-size:.95rem;background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:16px 18px;max-width:78ch}
+.actions{display:flex;gap:8px;flex-wrap:wrap}
+button{font:inherit;font-size:.92rem;cursor:pointer;border-radius:999px;padding:8px 14px;border:1px solid var(--gold);background:transparent;color:var(--gold)}
+button:hover{background:var(--gold);color:var(--bg)}
+button.done{border-color:var(--green);color:var(--green)}
+.cols{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px}
+.cell{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:16px 18px;min-width:0}
+.cell h4{font-family:var(--display);font-size:1.1rem;color:var(--gold);margin:0 0 6px}
+.tbl{overflow-x:auto;border:1px solid var(--line);border-radius:10px}
+table{border-collapse:collapse;width:100%;font-size:.93rem;min-width:640px}
+th,td{text-align:left;padding:10px 12px;border-bottom:1px solid var(--line);vertical-align:top}
+th{background:var(--surface2);font-weight:700}
+td.num{font-variant-numeric:tabular-nums;white-space:nowrap}
+ul.check{list-style:none;padding:0;margin:0;display:grid;gap:8px;max-width:70ch}
+ul.check label{display:flex;gap:10px;align-items:flex-start;cursor:pointer}
+ul.check input{margin-top:5px;width:18px;height:18px;accent-color:var(--green)}
+.pill{display:inline-block;font-size:.8rem;padding:2px 9px;border-radius:999px;border:1px solid var(--line);color:var(--muted)}
+/* caso interativo */
+.case{font-family:var(--mono);background:var(--paper);color:var(--paper-ink);border-radius:10px;padding:20px 22px;max-width:70ch;line-height:1.9}
+.case .hot{cursor:pointer;border-bottom:2px dotted #b993a9;padding:0 2px}
+.case .hot.found{background:#f9d9d5;border-bottom-color:var(--strike)}
+.case .hot.ok{background:#e8f3ec;border-bottom-color:transparent}
+.feedback{min-height:1.6em;max-width:70ch}
+/* calculadora */
+.calc{display:grid;grid-template-columns:1fr 1fr;gap:24px;align-items:start}
+.calc label{display:grid;gap:4px;font-size:.95rem}
+.calc input[type=range]{width:100%;accent-color:var(--gold)}
+.calc output{font-variant-numeric:tabular-nums;color:var(--gold);font-weight:700}
+.big{font-family:var(--display);font-size:3.4rem;color:var(--gold);line-height:1}
+.err{color:var(--red)}
+canvas{width:100%;height:auto;border-radius:10px;background:var(--surface);border:1px solid var(--line)}
+/* linha do tempo */
+.tl{list-style:none;padding:0;margin:0;display:grid;gap:0;max-width:78ch}
+.tl li{display:grid;grid-template-columns:120px 1fr;gap:16px;padding:10px 0;border-bottom:1px solid var(--line)}
+.tl li b{color:var(--gold);font-variant-numeric:tabular-nums}
+/* quiz */
+.q{display:grid;gap:8px;max-width:70ch;padding-block:10px}
+.q .opts{display:grid;gap:6px}
+.q button.opt{text-align:left;border-radius:10px;border-color:var(--line);color:var(--ink)}
+.q button.opt:hover{background:var(--surface2);color:var(--ink)}
+.q button.opt.right{border-color:var(--green);color:var(--green)}
+.q button.opt.wrong{border-color:var(--rose);color:var(--rose)}
+dl.gloss{display:grid;grid-template-columns:minmax(140px,220px) 1fr;gap:10px 20px;max-width:80ch}
+dl.gloss dt{font-weight:700;color:var(--gold)}
+dl.gloss dd{margin:0}
+ol.refs{padding-left:2.4em;max-width:90ch;font-size:.92rem;display:grid;gap:6px}
+ol.refs li:target{background:var(--surface2);border-radius:6px}
+footer.end{padding-block:48px;border-top:1px solid var(--line);margin-top:40px}
+footer.end .wrap{display:grid;gap:10px}
+@media (max-width:860px){
+header.hero .wrap{grid-template-columns:1fr;padding-block:36px 24px}
+.index ol{grid-template-columns:repeat(2,minmax(0,1fr))}
+.calc{grid-template-columns:1fr}
+}
+@media (max-width:520px){
+.index ol{grid-template-columns:1fr}
+.tl li{grid-template-columns:1fr;gap:2px}
+dl.gloss{grid-template-columns:1fr}
+.doc .sig{grid-template-columns:1fr}
+}
+</style>
+<nav class="top" aria-label="Seções"><div class="wrap">
+<a href="#consente">Termos e consentimento</a>
+<a href="#escreve">Quem escreve</a>
+<a href="#decide">Quem decide</a>
+<a href="#guarda">Quem guarda</a>
+<a href="#alem">Para ir além</a>
+<a href="#referencias">Referências</a>
+</div></nav>
+<header class="hero"><div class="wrap">
+<div>
+<p class="eyebrow">VII Congresso de Ética Médica do DF · Mesa 3 · 22/10/2026</p>
+<h1>Do teclado ao olhar</h1>
+<p class="lede">IA no prontuário médico: transcrição de consultas, diagnóstico assistido e consentimento na prática. Aqui estão os 20 materiais prometidos na aula, prontos para usar no consultório.</p>
+<div class="who">
+<b>Getúlio Bernardo Morato Filho</b>
+<span class="muted">Pediatra, com área de atuação em Medicina do Adolescente · Médico do Esporte</span>
+<span class="muted">CRM-DF 13610 · Ex-Conselheiro do CRM-DF</span>
+<span class="muted">Supervisor do Programa de Residência Médica em Pediatria do HMIB</span>
+</div>
+<div class="contact">
+<code id="email">drgetulio@gmail.com</code>
+<button type="button" data-copy-text="drgetulio@gmail.com">Copiar e-mail</button>
+</div>
+</div>
+<div>
+<div class="note" aria-label="Nota da residente Laura revisada">
+<div class="lbl">Rascunho do escriba, revisado</div>
+Mãe refere tosse há 3 dias, <del>sem febre</del> <ins>febre de 39 °C, ausente desde ontem</ins>.<br>
+Exame: bom estado geral, <del>otoscopia sem alterações</del>, pulmões limpos. <ins>Otoscopia não realizada.</ins><br>
+<ins>Escriba de IA usado com concordância da mãe; texto revisado pela médica.</ins>
+</div>
+<p class="motto">A IA pode escrever o prontuário. Só o médico pode assiná-lo.</p>
+</div>
+</div></header>
+<div class="wrap index" id="indice">
+<p class="eyebrow">Os 20 materiais</p>
+<ol>
+<li><h3>Quem consente?</h3>
+<a href="#m1"><span>1</span>Termo para adultos</a>
+<a href="#m2"><span>2</span>Termo do responsável e assentimento</a>
+<a href="#m3"><span>3</span>Roteiros de 20 segundos</a>
+<a href="#m4"><span>4</span>Frases para o prontuário</a>
+<a href="#m5"><span>5</span>Quando desligar o escriba</a></li>
+<li><h3>Quem escreve?</h3>
+<a href="#m6"><span>6</span>O caso da Laura: ache os erros</a>
+<a href="#m7"><span>7</span>Revisão em 60 segundos</a>
+<a href="#m8"><span>8</span>Preparar a sala</a>
+<a href="#m9"><span>9</span>Nota errada já assinada</a></li>
+<li><h3>Quem decide?</h3>
+<a href="#m10"><span>10</span>Calculadora das zebras</a>
+<a href="#m11"><span>11</span>Registrar o raciocínio</a>
+<a href="#m12"><span>12</span>Quem responde na Justiça</a>
+<a href="#m13"><span>13</span>Antídotos do viés de automação</a></li>
+<li><h3>Quem guarda?</h3>
+<a href="#m14"><span>14</span>Perguntas ao fornecedor</a>
+<a href="#m15"><span>15</span>Ferramentas e áudio</a>
+<a href="#m16"><span>16</span>Política institucional modelo</a>
+<a href="#m17"><span>17</span>Linha do tempo regulatória</a>
+<h3 style="margin-top:14px">Para ir além</h3>
+<a href="#m18"><span>18</span>Evidências em uma tabela</a>
+<a href="#m19"><span>19</span>Teste em 5 perguntas e glossário</a>
+<a href="#referencias"><span>20</span>Referências completas</a></li>
+</ol>
+</div>
+<!-- QUEM CONSENTE -->
+<section class="block" id="consente"><div class="wrap">
+<header><p class="eyebrow">Quem consente?</p><h2>Termos, roteiros e registros</h2>
+<p class="muted">Os modelos seguem a estrutura que o CFM recomenda para o consentimento livre e esclarecido: linguagem clara, identificação, finalidade, benefícios, riscos, alternativas, direito de recusar sem prejuízo e assinaturas em duas vias <sup class="r"><a href="#ref-69">[69]</a></sup>. Eles também atendem ao dever de informar o paciente sobre o uso de IA e de respeitar a recusa <sup class="r"><a href="#ref-45">[45]</a></sup>. São modelos de referência: adapte os campos ao seu serviço e submeta a versão final à assessoria jurídica e à comissão de ética da instituição.</p></header>
+<article class="item" id="m1">
+<h3><span class="n">1</span>Termo de consentimento para uso de escriba de IA (adultos)</h3>
+<p>Na maioria das consultas, o consentimento verbal registrado no prontuário é suficiente <sup class="r"><a href="#ref-69">[69]</a></sup><sup class="r"><a href="#ref-14">[14]</a></sup>. Use o termo escrito quando a instituição exigir, em pesquisa, ou quando o áudio for guardado por mais tempo.</p>
+<div class="doc" id="t1">
+<h4>Termo de consentimento livre e esclarecido para uso de ferramenta de inteligência artificial na documentação da consulta</h4>
+<h5>Identificação</h5>
+<p>Paciente: <span class="fill">&nbsp;</span> Data de nascimento: <span class="fill">&nbsp;</span></p>
+<p>Médico(a): <span class="fill">&nbsp;</span> CRM: <span class="fill">&nbsp;</span> Serviço: <span class="fill">&nbsp;</span></p>
+<p>Contato do serviço para dúvidas: <span class="fill">&nbsp;</span></p>
+<h5>O que é e para que serve</h5>
+<p>Durante a consulta, poderá ser usado o programa <span class="fill">&nbsp;</span>, fornecido pela empresa <span class="fill">&nbsp;</span>. Ele escuta a conversa, transforma a fala em texto e prepara um rascunho do registro no prontuário. O objetivo é que o médico possa dedicar mais atenção a você e menos tempo ao computador.</p>
+<h5>O que continua sendo do médico</h5>
+<p>O programa não faz diagnóstico nem decide o tratamento. O médico lê, corrige e assina todo o registro e responde por ele.</p>
+<h5>Riscos e cuidados</h5>
+<ul>
+<li>O programa pode deixar de registrar uma informação ou registrar algo de forma errada; por isso o médico revisa o texto antes de assinar.</li>
+<li>Como todo sistema que guarda dados, existe risco de acesso indevido. O serviço adota medidas de segurança e tem o dever de comunicar incidentes relevantes à autoridade e a você.</li>
+</ul>
+<h5>Seus dados</h5>
+<ul>
+<li>O áudio fica armazenado em <span class="fill">&nbsp;</span> (país/provedor) e é apagado <span class="fill">&nbsp;</span> (por exemplo: logo após a geração do rascunho; em 30 dias).</li>
+<li>O texto final faz parte do seu prontuário e segue as regras de sigilo e de guarda do prontuário.</li>
+<li>O tratamento dos seus dados de saúde se apoia na tutela da saúde (LGPD, art. 11, II, f); este consentimento se refere apenas ao uso do programa.</li>
+<li>Os dados só serão usados para aprimorar o programa se você autorizar aqui, separadamente: <span class="fill">&nbsp;</span> (autorizo / não autorizo).</li>
+</ul>
+<h5>Alternativa e direito de recusa</h5>
+<p>Você pode recusar o uso do programa ou pedir que ele seja desligado em qualquer momento da consulta, inclusive em parte dela. A recusa não altera em nada o seu atendimento.</p>
+<h5>Declaração</h5>
+<p>Declaro que recebi estas informações em linguagem clara, que pude fazer perguntas e que <span class="fill">&nbsp;</span> (concordo / não concordo) com o uso do programa nesta consulta. Sei que posso mudar de ideia a qualquer momento.</p>
+<div class="sig"><div>Paciente ou representante legal</div><div>Médico(a) e CRM</div></div>
+<p style="margin-top:10px;font-size:.85rem">Local e data: <span class="fill">&nbsp;</span> · Emitido em duas vias: uma para o paciente e outra para o prontuário.</p>
+</div>
+<div class="actions"><button type="button" data-copy="t1">Copiar o termo</button></div>
+</article>
+<article class="item" id="m2">
+<h3><span class="n">2</span>Termo do responsável e assentimento da criança ou do adolescente</h3>
+<p>Crianças e adolescentes devem participar do processo de informação, com linguagem adaptada; o assentimento não substitui o consentimento do responsável <sup class="r"><a href="#ref-69">[69]</a></sup>. Na adolescência, lembre do sigilo garantido ao paciente com capacidade de discernimento <sup class="r"><a href="#ref-70">[70]</a></sup>. O adolescente com capacidade de discernimento que vem sozinho à consulta pode, ele próprio, consentir ou recusar o uso do programa.</p>
+<div class="cols">
+<div class="doc" id="t2a">
+<h4>Para o responsável</h4>
+<p>Eu, <span class="fill">&nbsp;</span>, responsável por <span class="fill">&nbsp;</span>, fui informado(a) de que nesta consulta poderá ser usado o programa <span class="fill">&nbsp;</span>, que escuta a conversa e prepara um rascunho do registro. O(a) médico(a) <span class="fill">&nbsp;</span>, CRM <span class="fill">&nbsp;</span>, lê, corrige e assina todo o texto.</p>
+<p>Entendi que o programa pode errar e que por isso o texto é revisado; que o áudio fica em <span class="fill">&nbsp;</span> e é apagado <span class="fill">&nbsp;</span>; e que posso recusar ou pedir que ele seja desligado a qualquer momento, sem prejuízo ao atendimento.</p>
+<p>Também fui informado(a) de que, em assuntos sensíveis, o(a) médico(a) poderá desligar o programa e conversar a sós com o adolescente, respeitando o sigilo previsto no Código de Ética Médica.</p>
+<p>Se a criança ou o adolescente não quiser, o programa não será usado.</p>
+<p><span class="fill">&nbsp;</span> (concordo / não concordo) com o uso do programa.</p>
+<div class="sig"><div>Responsável</div><div>Médico(a) e CRM</div></div>
+</div>
+<div class="doc" id="t2b">
+<h4>Assentimento (linguagem para criança e adolescente)</h4>
+<p>Hoje eu, seu médico ou sua médica, quero usar um programa que escuta a nossa conversa e escreve um resumo para mim. Assim eu consigo olhar para você em vez de ficar olhando para o computador.</p>
+<p>Depois eu leio tudo e arrumo o que estiver errado. Se você não quiser, ou se quiser falar alguma coisa com ele desligado, é só me dizer. Você não vai ter nenhum problema por isso.</p>
+<p>Você topa que eu use o programa hoje? <span class="fill">&nbsp;</span> (sim / não)</p>
+<div class="sig"><div>Nome ou desenho da criança/adolescente</div><div>Médico(a)</div></div>
+</div>
+</div>
+<div class="actions"><button type="button" data-copy="t2a">Copiar termo do responsável</button><button type="button" data-copy="t2b">Copiar assentimento</button></div>
+</article>
+<article class="item" id="m3">
+<h3><span class="n">3</span>Roteiros de 20 segundos para pedir licença</h3>
+<p>Três elementos em todos: o que a ferramenta faz, que você revisa, e que a recusa não muda o atendimento <sup class="r"><a href="#ref-45">[45]</a></sup><sup class="r"><a href="#ref-48">[48]</a></sup>.</p>
+<div class="cols">
+<div class="cell"><h4>Adulto</h4><p class="say" id="s1">Vou usar um programa que escuta a consulta e prepara um rascunho do registro. Eu leio e corrijo tudo antes de assinar. Posso usar hoje? Se preferir que não, seu atendimento será o mesmo.</p><button type="button" data-copy="s1">Copiar</button></div>
+<div class="cell"><h4>Responsável</h4><p class="say" id="s2">Para registrar a consulta, vou usar um programa que escuta a nossa conversa e faz um rascunho. Eu leio e corrijo tudo antes de assinar. Posso usar? Se preferir que não, o atendimento será exatamente o mesmo.</p><button type="button" data-copy="s2">Copiar</button></div>
+<div class="cell"><h4>Adolescente</h4><p class="say" id="s3">Este programa anota a consulta para eu não ficar olhando para a tela. Se em algum momento você quiser falar algo sem ele ligado, é só me dizer que eu desligo, sem problema nenhum.</p><button type="button" data-copy="s3">Copiar</button></div>
+</div>
+</article>
+<article class="item" id="m4">
+<h3><span class="n">4</span>Frases prontas para o prontuário</h3>
+<p>O registro do uso de IA e da resposta do paciente é a melhor prova de que a conversa aconteceu <sup class="r"><a href="#ref-45">[45]</a></sup><sup class="r"><a href="#ref-14">[14]</a></sup><sup class="r"><a href="#ref-50">[50]</a></sup>.</p>
+<div class="rec" id="r1">Paciente (ou responsável, <span class="fill">nome</span>) informado(a) sobre o uso de escriba de IA (<span class="fill">ferramenta</span>) para rascunho do registro; concordou verbalmente. Texto revisado pelo(a) médico(a) antes da assinatura.</div>
+<div class="actions"><button type="button" data-copy="r1">Copiar: concordância</button></div>
+<div class="rec" id="r2">Paciente (ou responsável) recusou o uso de escriba de IA. Consulta registrada sem a ferramenta, sem prejuízo ao atendimento.</div>
+<div class="actions"><button type="button" data-copy="r2">Copiar: recusa</button></div>
+<div class="rec" id="r3">Escriba de IA desligado a pedido do(a) paciente durante parte da consulta. Trecho registrado manualmente.</div>
+<div class="actions"><button type="button" data-copy="r3">Copiar: desligamento parcial</button></div>
+</article>
+<article class="item" id="m5">
+<h3><span class="n">5</span>Quando desligar o escriba</h3>
+<ul class="check">
+<li>Quando o paciente ou o responsável pedir, a qualquer momento <sup class="r"><a href="#ref-45">[45]</a></sup>.</li>
+<li>Na conversa a sós com o adolescente sobre sexualidade, uso de substâncias ou violência, em respeito ao sigilo <sup class="r"><a href="#ref-70">[70]</a></sup>.</li>
+<li>Na suspeita de maus-tratos, quando a presença de um gravador pode inibir o relato.</li>
+<li>Em notícias difíceis, quando o silêncio e o olhar importam mais que o registro.</li>
+<li>Com intérprete ou ambiente muito ruidoso, mantenha o escriba só se puder revisar com o dobro de atenção <sup class="r"><a href="#ref-31">[31]</a></sup><sup class="r"><a href="#ref-32">[32]</a></sup>.</li>
+</ul>
+</article>
+</div></section>
+<!-- QUEM ESCREVE -->
+<section class="block" id="escreve"><div class="wrap">
+<header><p class="eyebrow">Quem escreve?</p><h2>A máquina redige, você assina</h2>
+<p class="muted">Em notas geradas por modelo de linguagem, 1,47% das frases tinham alucinação e 3,45% das informações foram omitidas <sup class="r"><a href="#ref-2">[2]</a></sup>. Nenhum de sete escribas comerciais testados no Reino Unido produziu nota sem erro <sup class="r"><a href="#ref-3">[3]</a></sup>.</p></header>
+<article class="item" id="m6">
+<h3><span class="n">6</span>O caso da Laura: toque nos trechos que você não assinaria</h3>
+<p class="muted">Caso fictício. Na consulta, a mãe contou febre de 39 °C que cedeu ontem, e a otoscopia não foi feita.</p>
+<div class="case" id="caso">
+Mãe refere tosse há 3 dias, <span class="hot" data-err="negacao" tabindex="0" role="button">sem febre</span>.<br>
+Exame: <span class="hot" data-err="" tabindex="0" role="button">bom estado geral</span>, <span class="hot" data-err="fabricacao" tabindex="0" role="button">otoscopia sem alterações</span>, pulmões limpos.<br>
+Hipótese: resfriado comum. Sintomáticos.
+</div>
+<p class="feedback" id="caso-fb" aria-live="polite">Encontrados: 0 de 2.</p>
+</article>
+<article class="item" id="m7">
+<h3><span class="n">7</span>Revisão em 60 segundos</h3>
+<p>Comece pelos pontos onde os erros se concentram <sup class="r"><a href="#ref-2">[2]</a></sup><sup class="r"><a href="#ref-31">[31]</a></sup>.</p>
+<ul class="check" id="rev">
+<li><label><input type="checkbox" id="rv1"> Exame físico: tudo o que está escrito foi feito? Fabricações foram 43% das alucinações.</label></li>
+<li><label><input type="checkbox" id="rv2"> Negativas: "nega" e "refere" estão do lado certo? Negações invertidas foram 30%.</label></li>
+<li><label><input type="checkbox" id="rv3"> Plano terapêutico: a seção mais afetada por alucinações.</label></li>
+<li><label><input type="checkbox" id="rv4"> Quem disse o quê: mãe, criança, acompanhante ou intérprete.</label></li>
+<li><label><input type="checkbox" id="rv5"> Doses, lateralidade e datas conferidas com a fala real.</label></li>
+</ul>
+</article>
+<article class="item" id="m8">
+<h3><span class="n">8</span>Preparar a sala</h3>
+<div class="cols">
+<div class="cell"><h4>Microfone</h4><p>Até 2 metros quase não houve perda; a 4,5 metros, todas as informações foram perdidas. Evite o microfone embutido do notebook <sup class="r"><a href="#ref-32">[32]</a></sup>.</p></div>
+<div class="cell"><h4>Ruído</h4><p>Conversa de criança pequena ao fundo e chuva forte aumentaram os erros, sobretudo omissões <sup class="r"><a href="#ref-32">[32]</a></sup>.</p></div>
+<div class="cell"><h4>Intérprete</h4><p>O escriba repassou para a nota os erros do intérprete; revise a atribuição das falas <sup class="r"><a href="#ref-31">[31]</a></sup>.</p></div>
+</div>
+</article>
+<article class="item" id="m9">
+<h3><span class="n">9</span>E se a nota errada já foi assinada?</h3>
+<p>O prontuário é documento com valor ético e legal, e dados assinados não devem ser apagados. Registre um adendo datado, com a correção e o motivo, e assine. O registro precisa trazer data, hora, assinatura e CRM em cada avaliação <sup class="r"><a href="#ref-70">[70]</a></sup>, e o médico não pode emitir documento que não corresponda à verdade <sup class="r"><a href="#ref-70">[70]</a></sup>.</p>
+<div class="rec" id="r4">Adendo em <span class="fill">data/hora</span>: retifico a evolução de <span class="fill">data/hora</span>, gerada com apoio de escriba de IA. Onde se lê "<span class="fill">trecho</span>", leia-se "<span class="fill">correção</span>". Motivo: erro de transcrição identificado na revisão.</div>
+<div class="actions"><button type="button" data-copy="r4">Copiar adendo</button></div>
+</article>
+</div></section>
+<!-- QUEM DECIDE -->
+<section class="block" id="decide"><div class="wrap">
+<header><p class="eyebrow">Quem decide?</p><h2>A sugestão é da máquina; a conduta é sua</h2>
+<p class="muted">Dar o modelo aos médicos não melhorou o raciocínio diagnóstico (76% contra 74%) <sup class="r"><a href="#ref-35">[35]</a></sup>. Um modelo enviesado derrubou a acurácia dos clínicos em 11,3 pontos <sup class="r"><a href="#ref-41">[41]</a></sup>.</p></header>
+<article class="item" id="m10">
+<h3><span class="n">10</span>Calculadora das zebras</h3>
+<p>Ajuste a prevalência e o desempenho do teste ou da sugestão da IA e veja quantos alarmes são verdadeiros. Em vermelho, os erros: falsos positivos e doentes que o teste deixou passar. Com prevalência de 1:1.000 e 5% de falso-positivo, só cerca de 2% dos positivos têm a doença, e apenas 23% dos médicos e estudantes acertaram essa conta <sup class="r"><a href="#ref-37">[37]</a></sup>.</p>
+<div class="calc">
+<div style="display:grid;gap:14px">
+<label for="prev">Prevalência: 1 em <output id="prevOut">1.000</output>
+<input type="range" id="prev" min="1" max="4" step="0.01" value="3"></label>
+<label for="sens">Sensibilidade: <output id="sensOut">100%</output>
+<input type="range" id="sens" min="50" max="100" step="1" value="100"></label>
+<label for="fp">Falso-positivo: <output id="fpOut">5%</output>
+<input type="range" id="fp" min="0.5" max="30" step="0.5" value="5"></label>
+<div><div class="big" id="ppv">2%</div><p class="muted" id="ppvTxt">dos resultados positivos são doença de verdade.</p></div>
+</div>
+<div><canvas id="dots" width="800" height="440" aria-label="Pontos representando pessoas testadas"></canvas>
+<p class="muted" style="font-size:.9rem;margin-top:6px"><span style="color:var(--green)">●</span> verdadeiro-positivo · <span style="color:var(--red)">●</span> falso-positivo (erro) · <span style="color:var(--red)">○</span> falso-negativo (erro) · em 10.000 pessoas, cada ponto vale 10</p></div>
+</div>
+</article>
+<article class="item" id="m11">
+<h3><span class="n">11</span>Como registrar o raciocínio quando a IA sugere</h3>
+<p>A decisão cabe sempre ao médico, que pode acolher ou rejeitar a sugestão, e o uso de IA como apoio à decisão deve constar do prontuário <sup class="r"><a href="#ref-45">[45]</a></sup>.</p>
+<div class="rec" id="r5">Ferramenta de apoio à decisão <span class="fill">nome/versão</span> sugeriu <span class="fill">hipóteses</span>. Considero <span class="fill">mais/menos</span> provável porque <span class="fill">dados clínicos, exame, prevalência local</span>. Conduta definida pelo(a) médico(a): <span class="fill">conduta</span>.</div>
+<div class="actions"><button type="button" data-copy="r5">Copiar modelo</button></div>
+</article>
+<article class="item" id="m12">
+<h3><span class="n">12</span>Se der errado, quem responde na Justiça</h3>
+<div class="cols">
+<div class="cell"><h4>Médico</h4><p>Responde se houver culpa: negligência, imprudência ou imperícia <sup class="r"><a href="#ref-46">[46]</a></sup><sup class="r"><a href="#ref-47">[47]</a></sup>.</p></div>
+<div class="cell"><h4>Hospital</h4><p>Responde sem culpa pelos próprios serviços; por ato do médico, só se houver culpa do profissional <sup class="r"><a href="#ref-47">[47]</a></sup>.</p></div>
+<div class="cell"><h4>Fabricante</h4><p>Responde por defeito do produto, inclusive informação insuficiente sobre riscos <sup class="r"><a href="#ref-47">[47]</a></sup>. Enquadrar software de IA como produto ainda é tema em debate.</p></div>
+<div class="cell"><h4>Dever de informar</h4><p>Consentimento genérico não basta e cabe ao médico provar que informou <sup class="r"><a href="#ref-50">[50]</a></sup>; falhar nesse dever gera responsabilidade civil <sup class="r"><a href="#ref-51">[51]</a></sup>.</p></div>
+</div>
+</article>
+<article class="item" id="m13">
+<h3><span class="n">13</span>Antídotos contra o viés de automação</h3>
+<p>O viés de automação é a tendência de confiar demais na máquina. Ele cresce com pressa, carga de trabalho e tarefas complexas, e diminui com treino e responsabilização <sup class="r"><a href="#ref-42">[42]</a></sup>.</p>
+<ul class="check">
+<li>Forme sua hipótese antes de abrir a sugestão da IA.</li>
+<li>Pergunte: qual é a prevalência disso no meu ambulatório?</li>
+<li>Procure um dado que contradiga a sugestão.</li>
+<li>Desconfie mais nos plantões cheios e no fim do dia.</li>
+</ul>
+</article>
+</div></section>
+<!-- QUEM GUARDA -->
+<section class="block" id="guarda"><div class="wrap">
+<header><p class="eyebrow">Quem guarda?</p><h2>O áudio fica onde, com quem e por quanto tempo?</h2>
+<p class="muted">No material público consultado em 19/10/2026, nenhum fornecedor brasileiro informava hospedagem no Brasil, registro na Anvisa ou certificação SBIS <sup class="r"><a href="#ref-19">[19]</a></sup>. Pergunte por escrito.</p></header>
+<article class="item" id="m14">
+<h3><span class="n">14</span>Quinze perguntas para o fornecedor, por escrito</h3>
+<div class="doc" id="t3">
+<h4>Questionário de conformidade para ferramenta de transcrição ou escriba de IA</h4>
+<ol>
+<li>Em que país e em qual provedor ficam o áudio, a transcrição e a nota?</li>
+<li>Por quanto tempo o áudio é guardado? E a transcrição?</li>
+<li>Os dados são usados para treinar ou aprimorar modelos? É possível recusar?</li>
+<li>O contrato define por escrito quem é controlador e quem é operador dos dados?</li>
+<li>Quais medidas de segurança são adotadas (criptografia em trânsito e em repouso, controle e registro de acessos)?</li>
+<li>Em que prazo e de que forma a empresa comunica um incidente de segurança?</li>
+<li>Há transferência internacional de dados? Com qual garantia prevista na LGPD (por exemplo, cláusulas-padrão da ANPD)?</li>
+<li>Quais certificações a empresa possui (ISO/IEC 27001, SOC 2)? Nos EUA, assina BAA?</li>
+<li>A ferramenta sugere diagnóstico ou conduta? Se sim, qual é o enquadramento na Anvisa como software dispositivo médico?</li>
+<li>Integra-se ao prontuário eletrônico do serviço? Como a nota final é assinada?</li>
+<li>Há estudo de acurácia em português brasileiro, com taxas de omissão e de alucinação?</li>
+<li>O sistema guarda o histórico de versões entre o rascunho e a nota assinada?</li>
+<li>Quem, dentro da empresa e entre subcontratados, pode acessar os dados?</li>
+<li>Ao fim do contrato, como os dados são devolvidos ou eliminados?</li>
+<li>Quem é o encarregado de dados e como o paciente exerce seus direitos?</li>
+</ol>
+</div>
+<p class="muted" style="font-size:.92rem">Base: LGPD, arts. 33, 39, 46 e 48 <sup class="r"><a href="#ref-52">[52]</a></sup>; Resolução CD/ANPD 19/2024 <sup class="r"><a href="#ref-56">[56]</a></sup>; software como dispositivo médico <sup class="r"><a href="#ref-71">[71]</a></sup>; modelo de BAA <sup class="r"><a href="#ref-53">[53]</a></sup>; certificação HDS <sup class="r"><a href="#ref-54">[54]</a></sup>.</p>
+<div class="actions"><button type="button" data-copy="t3">Copiar questionário</button></div>
+</article>
+<article class="item" id="m15">
+<h3><span class="n">15</span>Ferramentas em uso e onde fica o áudio</h3>
+<p class="muted">Retrato sem endosso, conforme páginas públicas e imprensa setorial; números de escala são declarados pelas empresas <sup class="r"><a href="#ref-16">[16]</a></sup><sup class="r"><a href="#ref-17">[17]</a></sup><sup class="r"><a href="#ref-19">[19]</a></sup><sup class="r"><a href="#ref-55">[55]</a></sup>.</p>
+<div class="tbl"><table>
+<thead><tr><th>Ferramenta</th><th>Origem</th><th>Uso declarado</th><th>Áudio e dados</th></tr></thead>
+<tbody>
+<tr><td>Dragon Copilot (Microsoft)</td><td>EUA</td><td>Mais de 100 mil clínicos em uso diário</td><td>Até 90 dias na política do The Ottawa Hospital, com dados no Canadá</td></tr>
+<tr><td>Abridge</td><td>EUA</td><td>Mais de 300 sistemas de saúde</td><td>Áudio e transcrição apagados após 30 dias em cliente (UC Davis)</td></tr>
+<tr><td>Epic AI Charting</td><td>EUA</td><td>Lançado em fevereiro de 2026</td><td>Não informado</td></tr>
+<tr><td>Suki</td><td>EUA</td><td>Integrado a Epic, Oracle, athenahealth e MEDITECH</td><td>Áudio e transcrição apagados em 30 dias; assina BAA</td></tr>
+<tr><td>Commure</td><td>EUA</td><td>Parceria com a HCA em 188 hospitais</td><td>O cliente escolhe se o áudio é apagado após a transcrição</td></tr>
+<tr><td>Freed</td><td>EUA</td><td>Não informado</td><td>Áudio apagado após a nota; BAA; SOC 2</td></tr>
+<tr><td>Tandem Health</td><td>Suécia</td><td>Primeiro escriba com certificação MDR classe IIa (mai/2026)</td><td>Áudio apagado após a transcrição; dados na União Europeia</td></tr>
+<tr><td>Tortus</td><td>Reino Unido</td><td>UKCA classe IIa (jun/2026)</td><td>Não informado</td></tr>
+<tr><td>Heidi Health</td><td>Austrália</td><td>2,8 milhões de visitas por semana</td><td>Declara que o áudio não é salvo; ISO 27001</td></tr>
+<tr><td>Lyrebird Health</td><td>Austrália</td><td>Cerca de 30 mil consultas por dia</td><td>Áudio destruído após a transcrição; dados na Austrália</td></tr>
+<tr><td>Voa Health</td><td>Brasil</td><td>Mais de 3 milhões de atendimentos</td><td>Termos de uso: áudio processado e excluído; médico como controlador</td></tr>
+<tr><td>Noa Notes (Doctoralia)</td><td>Brasil e Espanha</td><td>Mais de 9 mil médicos no Brasil</td><td>Declara LGPD e GDPR; região da nuvem não informada</td></tr>
+<tr><td>iClinic IA (Afya)</td><td>Brasil</td><td>Incluído nos planos do iClinic</td><td>Declara conformidade com a LGPD, sem detalhes</td></tr>
+<tr><td>Amélia (Amplimed)</td><td>Brasil</td><td>Não informado</td><td>Declara LGPD e criptografia</td></tr>
+<tr><td>Telepatia</td><td>Colômbia e Brasil</td><td>Hospitais privados e pronto atendimento SUS</td><td>Não informado</td></tr>
+</tbody>
+</table></div>
+</article>
+<article class="item" id="m16">
+<h3><span class="n">16</span>Política institucional modelo, em uma página</h3>
+<p>Instituições que usam IA devem fazer avaliação preliminar de risco e informar o paciente <sup class="r"><a href="#ref-45">[45]</a></sup>. Use este esqueleto como ponto de partida.</p>
+<div class="doc" id="t4">
+<h4>Política de uso de escribas de IA na documentação clínica</h4>
+<ol>
+<li><b>Objetivo:</b> reduzir a carga de documentação e melhorar a atenção ao paciente, sem prejuízo da veracidade do prontuário.</li>
+<li><b>Ferramentas autorizadas:</b> somente as aprovadas pela comissão responsável, após questionário de conformidade e avaliação de risco.</li>
+<li><b>Consentimento:</b> informar o paciente antes de ligar o escriba, respeitar a recusa e registrar a resposta no prontuário.</li>
+<li><b>Revisão obrigatória:</b> nenhuma nota é assinada sem leitura integral pelo profissional, com atenção a exame físico, negativas e plano.</li>
+<li><b>Registro:</b> constar no prontuário o uso da ferramenta.</li>
+<li><b>Situações de não uso:</b> pedido do paciente, temas sensíveis, conversa a sós com adolescente e outras definidas pela equipe.</li>
+<li><b>Dados:</b> local de hospedagem, prazo de guarda do áudio e uso para treinamento definidos em contrato.</li>
+<li><b>Treinamento:</b> capacitação inicial sobre erros típicos e viés de automação.</li>
+<li><b>Auditoria:</b> revisão periódica de amostra de notas e canal para relato de erros.</li>
+</ol>
+</div>
+<div class="actions"><button type="button" data-copy="t4">Copiar política</button></div>
+</article>
+<article class="item" id="m17">
+<h3><span class="n">17</span>Linha do tempo regulatória</h3>
+<ul class="tl">
+<li><b>ago 2018</b><span>LGPD sancionada; dados de saúde são dados sensíveis <sup class="r"><a href="#ref-52">[52]</a></sup></span></li>
+<li><b>dez 2024</b><span>Senado aprova o PL 2.338/2023, marco legal da IA; hoje aguarda parecer na Câmara <sup class="r"><a href="#ref-67">[67]</a></sup></span></li>
+<li><b>abr 2025</b><span>NHS England publica guia para escribas de IA <sup class="r"><a href="#ref-9">[9]</a></sup></span></li>
+<li><b>jul 2025</b><span>Decreto 12.560 institui a Rede Nacional de Dados em Saúde <sup class="r"><a href="#ref-57">[57]</a></sup></span></li>
+<li><b>fev 2026</b><span>CFM publica a Resolução 2.454, sobre IA na medicina <sup class="r"><a href="#ref-45">[45]</a></sup></span></li>
+<li><b>jun 2026</b><span>Rhode Island aprova a primeira lei estadual específica para escribas <sup class="r"><a href="#ref-66">[66]</a></sup></span></li>
+<li><b>jul 2026</b><span>Omnibus Digital adia obrigações de alto risco do AI Act europeu <sup class="r"><a href="#ref-65">[65]</a></sup></span></li>
+<li><b>ago 2026</b><span>Resolução CFM 2.454 entra em vigor; transparência do AI Act passa a valer <sup class="r"><a href="#ref-45">[45]</a></sup><sup class="r"><a href="#ref-64">[64]</a></sup></span></li>
+<li><b>2026</b><span>PL 931/2026, sobre IA na saúde, tramita no Senado <sup class="r"><a href="#ref-68">[68]</a></sup></span></li>
+<li><b>dez 2027</b><span>Alto risco do Anexo III do AI Act; dispositivos médicos em ago/2028 <sup class="r"><a href="#ref-65">[65]</a></sup></span></li>
+</ul>
+</article>
+</div></section>
+<!-- PARA IR ALÉM -->
+<section class="block" id="alem"><div class="wrap">
+<header><p class="eyebrow">Para ir além</p><h2>Evidências, teste e glossário</h2></header>
+<article class="item" id="m18">
+<h3><span class="n">18</span>As evidências da aula em uma tabela</h3>
+<div class="tbl"><table>
+<thead><tr><th>Estudo</th><th>Desenho e amostra</th><th>Achado principal</th></tr></thead>
+<tbody>
+<tr><td>Sinsky 2016 <sup class="r"><a href="#ref-7">[7]</a></sup></td><td>Tempo e movimento, 57 médicos</td><td class="num">27% do tempo com o paciente; 49% com prontuário e tarefas de mesa</td></tr>
+<tr><td>Kaiser Permanente 2025 <sup class="r"><a href="#ref-11">[11]</a></sup></td><td>Implantação, 7.260 médicos</td><td class="num">2,6 milhões de consultas; cerca de 15,8 mil horas poupadas</td></tr>
+<tr><td>GOSH/NHS 2026 <sup class="r"><a href="#ref-12">[12]</a></sup></td><td>Avaliação em 9 serviços, 17.452 encontros</td><td class="num">Documentação 51,7% menor; cuidado direto de 70,0% para 86,5%</td></tr>
+<tr><td>Rotenstein 2026 <sup class="r"><a href="#ref-26">[26]</a></sup></td><td>Coorte, 8.581 clínicos (1.809 usuários)</td><td class="num">16 min a menos de documentação a cada 8 h de agenda</td></tr>
+<tr><td>Afshar 2025 <sup class="r"><a href="#ref-27">[27]</a></sup></td><td>Ensaio randomizado, 66 profissionais</td><td class="num">Cerca de 22 min/dia a menos em notas; menos esgotamento</td></tr>
+<tr><td>Olson 2025 <sup class="r"><a href="#ref-24">[24]</a></sup></td><td>Antes e depois, 263 clínicos</td><td class="num">Esgotamento de 51,9% para 38,8%</td></tr>
+<tr><td>Asgari 2025 <sup class="r"><a href="#ref-2">[2]</a></sup></td><td>450 notas geradas por modelo</td><td class="num">1,47% de alucinações (44% graves); 3,45% de omissões</td></tr>
+<tr><td>Draper 2025 <sup class="r"><a href="#ref-3">[3]</a></sup></td><td>7 produtos, 8 cenários</td><td class="num">83,8% dos erros eram omissões; nenhum sem erro</td></tr>
+<tr><td>Goh 2024 <sup class="r"><a href="#ref-35">[35]</a></sup></td><td>Ensaio randomizado, 50 médicos</td><td class="num">76% com o modelo contra 74% sem</td></tr>
+<tr><td>Jabbour 2023 <sup class="r"><a href="#ref-41">[41]</a></sup></td><td>Vinhetas randomizadas, 457 clínicos</td><td class="num">Modelo enviesado: menos 11,3 pontos; com explicação, menos 9,1</td></tr>
+<tr><td>Manrai 2014 <sup class="r"><a href="#ref-37">[37]</a></sup></td><td>Questionário, 61 participantes</td><td class="num">Só 23% calcularam o valor preditivo de 2%</td></tr>
+<tr><td>Lawrence 2025 <sup class="r"><a href="#ref-48">[48]</a></sup></td><td>Pesquisa, 103 pacientes</td><td class="num">Consentimento de 81,6% com explicação básica e 55,3% com detalhada</td></tr>
+<tr><td>Taylor 2026 <sup class="r"><a href="#ref-23">[23]</a></sup></td><td>Diferença em diferenças, 31.917 questionários</td><td class="num">Sem mudança na satisfação dos pacientes</td></tr>
+</tbody>
+</table></div>
+</article>
+<article class="item" id="m19">
+<h3><span class="n">19</span>Teste em 5 perguntas</h3>
+<div id="quiz"></div>
+<p class="feedback" id="quiz-score" aria-live="polite"></p>
+<h3 style="margin-top:22px">Glossário</h3>
+<dl class="gloss">
+<dt>Escriba de IA</dt><dd>Ferramenta que escuta a consulta, transcreve a fala e redige o rascunho do registro.</dd>
+<dt>Alucinação</dt><dd>Informação que o modelo inventa e que não estava na consulta.</dd>
+<dt>Omissão</dt><dd>Informação dita na consulta que não aparece na nota.</dd>
+<dt>Negação invertida</dt><dd>"Refere" trocado por "nega", ou o contrário.</dd>
+<dt>Viés de automação</dt><dd>Tendência de confiar demais na sugestão da máquina.</dd>
+<dt>Valor preditivo positivo</dt><dd>Probabilidade de ter a doença quando o resultado é positivo; depende da prevalência.</dd>
+<dt>Controlador</dt><dd>Quem decide sobre o tratamento dos dados pessoais (LGPD).</dd>
+<dt>Operador</dt><dd>Quem trata os dados em nome do controlador, segundo as instruções dele.</dd>
+<dt>BAA</dt><dd>Business Associate Agreement, contrato exigido pela HIPAA nos EUA de quem trata dados de saúde.</dd>
+<dt>HDS</dt><dd>Certificação francesa para hospedagem de dados de saúde.</dd>
+<dt>SaMD</dt><dd>Software como dispositivo médico, regulado no Brasil pela Anvisa.</dd>
+</dl>
+</article>
+</div></section>
+<!-- REFERÊNCIAS -->
+<section class="block" id="referencias"><div class="wrap">
+<header><p class="eyebrow">Material 20</p><h2>Referências</h2>
+<p class="muted">A numeração de 1 a 68 é a mesma dos rodapés dos slides. As referências seguintes foram usadas apenas neste site.</p></header>
+<ol class="refs">
+<li id="ref-1" value="1">Conselho Federal de Medicina. Resolução CFM nº 1.595, de 18 de maio de 2000. Propaganda de equipamentos e produtos farmacêuticos junto à categoria médica. Diário Oficial da União. 2000.</li>
+<li id="ref-2" value="2">Asgari E, Montaña-Brown N, Dubois M, Khalil S, Balloch J, Yeung JA, et al. A framework to assess clinical safety and hallucination rates of LLMs for medical text summarisation. NPJ Digit Med. 2025;8(1):274. <a href="https://doi.org/10.1038/s41746-025-01670-7" target="_blank" rel="noopener">doi:10.1038/s41746-025-01670-7</a></li>
+<li id="ref-3" value="3">Draper TC, Cox T, Lamb-Riddell K, Moretti LA, McCormick J, Trowell S, et al. Clinical AI scribes in primary care: accuracy, error severity and implications for clinical practice. BMJ Digit Health AI. 2025;1(1):e000092. <a href="https://doi.org/10.1136/bmjdhai-2025-000092" target="_blank" rel="noopener">doi:10.1136/bmjdhai-2025-000092</a></li>
+<li id="ref-4" value="4">VII Congresso de Ética Médica do Distrito Federal. Programação, Mesa 3: Medicina e Inteligência Artificial. Brasília: CRM-DF; 22 out 2026.</li>
+<li id="ref-5" value="5">Núcleo de Informação e Coordenação do Ponto BR (NIC.br), Cetic.br. Pesquisa TIC Saúde 2025: resumo executivo. São Paulo: NIC.br; 2026.</li>
+<li id="ref-6" value="6">Núcleo de Informação e Coordenação do Ponto BR (NIC.br), Cetic.br. Pesquisa TIC Saúde 2024: resumo executivo. São Paulo: NIC.br; 2025.</li>
+<li id="ref-7" value="7">Sinsky C, Colligan L, Li L, Prgomet M, Reynolds S, Goeders L, et al. Allocation of physician time in ambulatory practice: a time and motion study in 4 specialties. Ann Intern Med. 2016;165(11):753-60. <a href="https://doi.org/10.7326/M16-0961" target="_blank" rel="noopener">doi:10.7326/M16-0961</a></li>
+<li id="ref-8" value="8">Arndt BG, Beasley JW, Watkinson MD, Temte JL, Tuan WJ, Sinsky CA, et al. Tethered to the EHR: primary care physician workload assessment using EHR event log data and time-motion observations. Ann Fam Med. 2017;15(5):419-26. <a href="https://doi.org/10.1370/afm.2121" target="_blank" rel="noopener">doi:10.1370/afm.2121</a></li>
+<li id="ref-9" value="9">NHS England. Guidance on the use of AI-enabled ambient scribing products in health and care settings. Londres: NHS England; abr 2025 (versão 2).</li>
+<li id="ref-10" value="10">Tierney AA, Gayre G, Hoberman B, Mattern B, Ballesca M, Kipnis P, et al. Ambient artificial intelligence scribes to alleviate the burden of clinical documentation. NEJM Catal Innov Care Deliv. 2024;5(3). <a href="https://doi.org/10.1056/CAT.23.0404" target="_blank" rel="noopener">doi:10.1056/CAT.23.0404</a></li>
+<li id="ref-11" value="11">Feldheim B. AI scribes save 15,000 hours and restore the human side of medicine. American Medical Association [Internet]. 12 jun 2025 (resume o seguimento da The Permanente Medical Group publicado em NEJM Catal Innov Care Deliv. 2025. <a href="https://doi.org/10.1056/CAT.25.0040)" target="_blank" rel="noopener">doi:10.1056/CAT.25.0040)</a>.</li>
+<li id="ref-12" value="12">Great Ormond Street Hospital DRIVE. The use of Ambient Voice Technology with Generative AI in multiple clinical settings across the NHS: Phase 4 evaluation report for NHS England. Versão 1.3. Londres: GOSH; 11 fev 2026.</li>
+<li id="ref-13" value="13">Canada Health Infoway. AI Scribe Program. Toronto: Canada Health Infoway; 2025-2026.</li>
+<li id="ref-14" value="14">Australian Health Practitioner Regulation Agency. Meeting your professional obligations when using artificial intelligence in healthcare. Melbourne: Ahpra; 2024.</li>
+<li id="ref-15" value="15">The Royal Australian College of General Practitioners. Artificial intelligence (AI) scribes. Melbourne: RACGP; atualizado em 29 jun 2026.</li>
+<li id="ref-16" value="16">HIT Consultant. Microsoft Dragon Copilot at HIMSS 2026 [Internet]. 5 mar 2026 (hitconsultant.net); Fierce Healthcare. Abridge expands AI decision support [Internet]. 17 ago 2026; Fierce Healthcare. Epic rolls out AI Charting [Internet]. fev 2026 (fiercehealthcare.com) [acesso em 19 out 2026].</li>
+<li id="ref-17" value="17">Tandem Health. Tandem&#x27;s AI scribe is now MDR class IIa certified [Internet]. 21 maio 2026; TORTUS. About [Internet]. 2026; Accurx. Accurx and Tandem Health partner on Accurx Scribe [Internet]. 27 maio 2025; ActuIA. Doctolib et son assistant de consultation [Internet]. out 2024.</li>
+<li id="ref-18" value="18">NHS England Digital. Ambient Voice Technology Self-Certified Supplier Registry [Internet]. Londres: NHS England; consultado em 19 out 2026 (30 fornecedores em 8 out 2026).</li>
+<li id="ref-19" value="19">Doctoralia. IA humaniza consultas médicas e alivia rotina de profissionais de saúde [Internet]. 18 nov 2025; Saúde Digital News. Voa Health amplia seu agente de apoio clínico [Internet]. 16 set 2026; Bloomberg Línea. Telepatia [Internet]. 18 jun 2026; páginas institucionais de iClinic (Afya) e Amplimed, consultadas em 19 out 2026.</li>
+<li id="ref-20" value="20">Consumidor Moderno. 200 horas devolvidas: Einstein e IA [Internet]. 20 jul 2026; Medicina S/A. Hapvida e IA [Internet]. 14 jul 2026; MundoCoop. Unimed-BH adota prontuário eletrônico com assistente de voz [Internet]. 19 ago 2026.</li>
+<li id="ref-21" value="21">Shah SJ, Murtagh KN, Char D, Jeong Y, Crowell T, Smith M, et al. Patient perspectives on clinicians&#x27; use of ambient AI scribes. JAMIA Open. 2026;9(3):ooag104. <a href="https://doi.org/10.1093/jamiaopen/ooag104" target="_blank" rel="noopener">doi:10.1093/jamiaopen/ooag104</a></li>
+<li id="ref-22" value="22">Tan JYE, Rafi IBM, Sng GGR, Tung JYM, Lim DYZ, Ong JCL, et al. Impact of an ambient AI scribe among clinicians and patients: real-world prospective observational time-motion study. JMIR Med Inform. 2026;14:e85580. <a href="https://doi.org/10.2196/85580" target="_blank" rel="noopener">doi:10.2196/85580</a></li>
+<li id="ref-23" value="23">Taylor SL, Aizenberg D, Jost M, Ren Y, Lyles CR, Adams JY. Effect of use of ambient listening technology on patient-reported communication and satisfaction ratings. J Am Med Inform Assoc. 2026;33(9):1780-4. <a href="https://doi.org/10.1093/jamia/ocag103" target="_blank" rel="noopener">doi:10.1093/jamia/ocag103</a></li>
+<li id="ref-24" value="24">Olson KD, Meeker D, Troup M, Barker TD, Nguyen VH, Manders JB, et al. Use of ambient AI scribes to reduce administrative burden and professional burnout. JAMA Netw Open. 2025;8(10):e2534976. <a href="https://doi.org/10.1001/jamanetworkopen.2025.34976" target="_blank" rel="noopener">doi:10.1001/jamanetworkopen.2025.34976</a></li>
+<li id="ref-25" value="25">You JG, Dbouk RH, Landman A, Ting DY, Dutta S, Wang JC, et al. Ambient documentation technology in clinician experience of documentation burden and burnout. JAMA Netw Open. 2025;8(8):e2528056. <a href="https://doi.org/10.1001/jamanetworkopen.2025.28056" target="_blank" rel="noopener">doi:10.1001/jamanetworkopen.2025.28056</a></li>
+<li id="ref-26" value="26">Rotenstein LS, Holmgren AJ, Thombley R, Sriram A, Dbouk RH, Jost M, et al. Changes in clinician time expenditure and visit quantity with adoption of artificial intelligence-powered scribes: a multisite study. JAMA. 2026;335(16):1408-17. <a href="https://doi.org/10.1001/jama.2026.2253" target="_blank" rel="noopener">doi:10.1001/jama.2026.2253</a></li>
+<li id="ref-27" value="27">Afshar M, Baumann MR, Resnik F, Hintzke J, Sullivan AG, Wills G, et al. A pragmatic randomized controlled trial of ambient artificial intelligence to improve health practitioner well-being. NEJM AI. 2025;2(12). <a href="https://doi.org/10.1056/AIoa2500945" target="_blank" rel="noopener">doi:10.1056/AIoa2500945</a></li>
+<li id="ref-28" value="28">Lukac PJ, Turner W, Vangala S, Chin AT, Khalili J, Shih YT, et al. Ambient AI scribes in clinical practice: a randomized trial. NEJM AI. 2025;2(12). <a href="https://doi.org/10.1056/AIoa2501000" target="_blank" rel="noopener">doi:10.1056/AIoa2501000</a></li>
+<li id="ref-29" value="29">Koenecke A, Choi ASG, Mei KX, Schellmann H, Sloane M. Careless Whisper: speech-to-text hallucination harms. In: Proceedings of the 2024 ACM Conference on Fairness, Accountability, and Transparency (FAccT &#x27;24). New York: ACM; 2024. <a href="https://doi.org/10.1145/3630106.3658996" target="_blank" rel="noopener">doi:10.1145/3630106.3658996</a></li>
+<li id="ref-30" value="30">Anderson TN, Mohan V, Dorr DA, Ratwani RM, Biro JM, Gold JA. Evaluating the quality and safety of ambient digital scribe platforms using simulated ambulatory encounters. Mayo Clin Proc Digit Health. 2025;3(4):100292. <a href="https://doi.org/10.1016/j.mcpdig.2025.100292" target="_blank" rel="noopener">doi:10.1016/j.mcpdig.2025.100292</a></li>
+<li id="ref-31" value="31">Rabotin A, Aguilar E, Sandoval Gonzalez S, Iniguez A, Jung C, Lee E, et al. Propagation of interpreter errors by ambient AI scribes: study using simulated clinical encounters. JMIR Med Inform. 2026;14:e88734. <a href="https://doi.org/10.2196/88734" target="_blank" rel="noopener">doi:10.2196/88734</a></li>
+<li id="ref-32" value="32">Draper TC, Leake J, Lamb-Riddell K, Cox T, McCormick J, Trowell S, et al. Impact of acoustic and informational noise on AI-generated clinical summaries. BMJ Digit Health AI. 2025;1(1):e000057. <a href="https://doi.org/10.1136/bmjdhai-2025-000057" target="_blank" rel="noopener">doi:10.1136/bmjdhai-2025-000057</a></li>
+<li id="ref-33" value="33">Superior Tribunal de Justiça. Mantida condenação de médico que negligenciou preenchimento de prontuário de gestante [Internet]. Brasília: STJ; 29 jul 2021 (3ª Turma, rel. Min. Ricardo Villas Bôas Cueva; processo em segredo de justiça).</li>
+<li id="ref-34" value="34">Superior Tribunal de Justiça. Quinta Turma rejeita relatório produzido por IA como prova em ação penal [Internet]. Brasília: STJ; 8 abr 2026 (HC 1.059.475/SP, rel. Min. Reynaldo Soares da Fonseca).</li>
+<li id="ref-35" value="35">Goh E, Gallo R, Hom J, Strong E, Weng Y, Kerman H, et al. Large language model influence on diagnostic reasoning: a randomized clinical trial. JAMA Netw Open. 2024;7(10):e2440969. <a href="https://doi.org/10.1001/jamanetworkopen.2024.40969" target="_blank" rel="noopener">doi:10.1001/jamanetworkopen.2024.40969</a></li>
+<li id="ref-36" value="36">Goh E, Gallo RJ, Strong E, Weng Y, Kerman H, Freed JA, et al. GPT-4 assistance for improvement of physician performance on patient care tasks: a randomized controlled trial. Nat Med. 2025;31(4):1233-8. <a href="https://doi.org/10.1038/s41591-024-03456-y" target="_blank" rel="noopener">doi:10.1038/s41591-024-03456-y</a></li>
+<li id="ref-37" value="37">Manrai AK, Bhatia G, Strymish J, Kohane IS, Jain SH. Medicine&#x27;s uncomfortable relationship with math: calculating positive predictive value. JAMA Intern Med. 2014;174(6):991-3. <a href="https://doi.org/10.1001/jamainternmed.2014.1059" target="_blank" rel="noopener">doi:10.1001/jamainternmed.2014.1059</a></li>
+<li id="ref-38" value="38">Kanjee Z, Crowe B, Rodman A. Accuracy of a generative artificial intelligence model in a complex diagnostic challenge. JAMA. 2023;330(1):78-80. <a href="https://doi.org/10.1001/jama.2023.8288" target="_blank" rel="noopener">doi:10.1001/jama.2023.8288</a></li>
+<li id="ref-39" value="39">McDuff D, Schaekermann M, Tu T, Palepu A, Wang A, Garrison J, et al. Towards accurate differential diagnosis with large language models. Nature. 2025;642(8067):451-7. <a href="https://doi.org/10.1038/s41586-025-08869-4" target="_blank" rel="noopener">doi:10.1038/s41586-025-08869-4</a></li>
+<li id="ref-40" value="40">Hager P, Jungmann F, Holland R, Bhagat K, Hubrecht I, Knauer M, et al. Evaluation and mitigation of the limitations of large language models in clinical decision-making. Nat Med. 2024;30(9):2613-22. <a href="https://doi.org/10.1038/s41591-024-03097-1" target="_blank" rel="noopener">doi:10.1038/s41591-024-03097-1</a></li>
+<li id="ref-41" value="41">Jabbour S, Fouhey D, Shepard S, Valley TS, Kazerooni EA, Banovic N, et al. Measuring the impact of AI in the diagnosis of hospitalized patients: a randomized clinical vignette survey study. JAMA. 2023;330(23):2275-84. <a href="https://doi.org/10.1001/jama.2023.22295" target="_blank" rel="noopener">doi:10.1001/jama.2023.22295</a></li>
+<li id="ref-42" value="42">Goddard K, Roudsari A, Wyatt JC. Automation bias: a systematic review of frequency, effect mediators, and mitigators. J Am Med Inform Assoc. 2012;19(1):121-7. <a href="https://doi.org/10.1136/amiajnl-2011-000089" target="_blank" rel="noopener">doi:10.1136/amiajnl-2011-000089</a></li>
+<li id="ref-43" value="43">World Medical Association. WMA Statement on Artificial and Augmented Intelligence in Medical Care. 76ª Assembleia Geral, Porto; out 2025.</li>
+<li id="ref-44" value="44">Federation of State Medical Boards. Navigating the responsible and ethical incorporation of artificial intelligence into clinical practice. Euless (TX): FSMB; abr 2024.</li>
+<li id="ref-45" value="45">Conselho Federal de Medicina. Resolução CFM nº 2.454, de 11 de fevereiro de 2026. Normatiza o uso da inteligência artificial na medicina. Diário Oficial da União. 27 fev 2026;Seção 1:158.</li>
+<li id="ref-46" value="46">Brasil. Lei nº 10.406, de 10 de janeiro de 2002. Código Civil, art. 951. Diário Oficial da União. 11 jan 2002.</li>
+<li id="ref-47" value="47">Brasil. Lei nº 8.078, de 11 de setembro de 1990. Código de Defesa do Consumidor, arts. 12, 14 e 14, § 4º. Diário Oficial da União. 12 set 1990.</li>
+<li id="ref-48" value="48">Lawrence K, Kuram VS, Levine DL, Sharif S, Polet C, Malhotra K, et al. Informed consent for ambient documentation using generative AI in ambulatory care. JAMA Netw Open. 2025;8(7):e2522400. <a href="https://doi.org/10.1001/jamanetworkopen.2025.22400" target="_blank" rel="noopener">doi:10.1001/jamanetworkopen.2025.22400</a></li>
+<li id="ref-49" value="49">Nong P, Platt J. Patients&#x27; trust in health systems to use artificial intelligence. JAMA Netw Open. 2025;8(2):e2460628. <a href="https://doi.org/10.1001/jamanetworkopen.2024.60628" target="_blank" rel="noopener">doi:10.1001/jamanetworkopen.2024.60628</a></li>
+<li id="ref-50" value="50">Superior Tribunal de Justiça. REsp 1.540.580/DF. 4ª Turma, rel. p/ acórdão Min. Luis Felipe Salomão, julgado em 2 ago 2018. Informativo de Jurisprudência nº 632.</li>
+<li id="ref-51" value="51">Superior Tribunal de Justiça. REsp 1.848.862/RN. 3ª Turma, rel. Min. Marco Aurélio Bellizze, julgado em 5 abr 2022, DJe 8 abr 2022. Informativo de Jurisprudência nº 733.</li>
+<li id="ref-52" value="52">Brasil. Lei nº 13.709, de 14 de agosto de 2018. Lei Geral de Proteção de Dados Pessoais (LGPD). Diário Oficial da União. 15 ago 2018 (com alterações da Lei nº 13.853/2019).</li>
+<li id="ref-53" value="53">U.S. Department of Health and Human Services. Business Associate Contracts: sample business associate agreement provisions. Washington (DC): HHS; 2013 (atualizado).</li>
+<li id="ref-54" value="54">França. Code de la santé publique, art. L1111-8; Arrêté du 26 avril 2024 relatif au référentiel de certification des hébergeurs de données de santé. Journal officiel. 16 mai 2024.</li>
+<li id="ref-55" value="55">Políticas públicas de dados consultadas em 19 out 2026: Tandem Health (Data security); Lyrebird Health (Compliance); Heidi Health (certificação ISO 27001); Voa Health (Termos de uso); Suki (Security FAQ); UC Davis Health (Clinical note-taking technology, Abridge); The Ottawa Hospital (Nuance DAX Copilot); Commure (Enterprise security).</li>
+<li id="ref-56" value="56">Autoridade Nacional de Proteção de Dados. Resolução CD/ANPD nº 19, de 23 de agosto de 2024. Regulamento de Transferência Internacional de Dados. Diário Oficial da União. 2024.</li>
+<li id="ref-57" value="57">Brasil. Decreto nº 12.560, de 23 de julho de 2025. Dispõe sobre a Rede Nacional de Dados em Saúde e sobre as Plataformas SUS Digital. Diário Oficial da União. 24 jul 2025.</li>
+<li id="ref-58" value="58">COSEMS/SP. Ministério da Saúde oficializa RNDS como plataforma do SUS e adota CPF como identificador nacional [Internet]. São Paulo: COSEMS/SP; jul 2025.</li>
+<li id="ref-59" value="59">Chief Healthcare Executive. Epic says AI Charting for clinicians gets strong feedback [Internet]. 2026 [acesso em 19 out 2026]. Disponível em: chiefhealthcareexecutive.com/view/epic-says-ai-charting-for-clinicians-gets-strong-feedback</li>
+<li id="ref-60" value="60">Revista Pesquisa FAPESP. Plano nacional de IA elenca áreas prioritárias para receber investimentos [Internet]. São Paulo: FAPESP; ago 2024 (Plano Brasileiro de Inteligência Artificial 2024-2028).</li>
+<li id="ref-61" value="61">Rodriguez G, Hernández P, Kirwan C, Dunham L, Dutta S. Comparative evaluation of machine translation accuracy of emergency department discharge instructions: a non-inferiority study. Acad Emerg Med. 2026;33(4):e70289. <a href="https://doi.org/10.1111/acem.70289" target="_blank" rel="noopener">doi:10.1111/acem.70289</a></li>
+<li id="ref-62" value="62">Zaretsky J, Kim JM, Baskharoun S, Zhao Y, Austrian J, Aphinyanaphongs Y, et al. Generative artificial intelligence to transform inpatient discharge summaries to patient-friendly language and format. JAMA Netw Open. 2024;7(3):e240357. <a href="https://doi.org/10.1001/jamanetworkopen.2024.0357" target="_blank" rel="noopener">doi:10.1001/jamanetworkopen.2024.0357</a></li>
+<li id="ref-63" value="63">Garcia P, Ma SP, Shah S, Smith M, Jeong Y, Devon-Sand A, et al. Artificial intelligence-generated draft replies to patient inbox messages. JAMA Netw Open. 2024;7(3):e243201. <a href="https://doi.org/10.1001/jamanetworkopen.2024.3201" target="_blank" rel="noopener">doi:10.1001/jamanetworkopen.2024.3201</a></li>
+<li id="ref-64" value="64">União Europeia. Regulamento (UE) 2024/1689 do Parlamento Europeu e do Conselho, de 13 de junho de 2024 (Regulamento da Inteligência Artificial). Jornal Oficial da União Europeia. 12 jul 2024; arts. 14 e 50.</li>
+<li id="ref-65" value="65">União Europeia. Regulamento (UE) 2026/1744, de 8 de julho de 2026 (Omnibus Digital sobre IA), que altera o Regulamento (UE) 2024/1689. Jornal Oficial da União Europeia. 24 jul 2026.</li>
+<li id="ref-66" value="66">Becker&#x27;s Hospital Review. 13 state healthcare AI laws to know [Internet]. 2026 (Califórnia AB 3030; Texas SB 1188 e HB 149; Rhode Island H7538).</li>
+<li id="ref-67" value="67">Brasil. Câmara dos Deputados. Projeto de Lei nº 2.338/2023 (dispõe sobre o uso da inteligência artificial). Ficha de tramitação: aguardando parecer do relator na Comissão Especial [Internet]. Consultado em 19 out 2026.</li>
+<li id="ref-68" value="68">Brasil. Senado Federal. Projeto de Lei nº 931/2026 (diretrizes para o uso de inteligência artificial na saúde). Ficha de tramitação [Internet]. Consultado em 19 out 2026.</li>
+<li id="ref-69" value="69">Conselho Federal de Medicina. Recomendação CFM nº 1/2016. Dispõe sobre o processo de obtenção de consentimento livre e esclarecido na assistência médica. Brasília: CFM; 21 jan 2016.</li>
+<li id="ref-70" value="70">Conselho Federal de Medicina. Resolução CFM nº 2.217, de 27 de setembro de 2018. Código de Ética Médica. Diário Oficial da União. 1º nov 2018 (com alterações das Resoluções CFM nº 2.222/2018 e 2.226/2019). Arts. 74, 80 e 87.</li>
+<li id="ref-71" value="71">Agência Nacional de Vigilância Sanitária. Resolução RDC nº 657, de 24 de março de 2022. Dispõe sobre a regularização de software como dispositivo médico (SaMD). Diário Oficial da União. 30 mar 2022.</li>
+</ol>
+</div></section>
+<footer class="end"><div class="wrap">
+<p class="motto">A IA pode escrever o prontuário. Só o médico pode assiná-lo.</p>
+<p>Getúlio Bernardo Morato Filho · CRM-DF 13610 · <code>drgetulio@gmail.com</code></p>
+<p class="muted" style="font-size:.9rem">Material educativo do VII Congresso de Ética Médica do DF. Os modelos são referências para adaptação e não substituem a orientação jurídica do seu serviço. Marcas citadas sem endosso. Consulta às fontes em 19/10/2026.</p>
+</div></footer>
+<script>
+(function(){
+// copiar
+function copyText(txt, btn){
+var done=function(){ var o=btn.textContent; btn.textContent="Copiado"; btn.classList.add("done"); setTimeout(function(){btn.textContent=o;btn.classList.remove("done")},1600); };
+var fallback=function(el){ try{ var r=document.createRange(); r.selectNodeContents(el); var s=getSelection(); s.removeAllRanges(); s.addRange(r); btn.textContent="Texto selecionado"; }catch(e){} };
+try{ navigator.clipboard.writeText(txt).then(done,function(){ fallback(btn._src||btn); }); }catch(e){ fallback(btn._src||btn); }
+}
+document.querySelectorAll("button[data-copy]").forEach(function(b){
+b.addEventListener("click",function(){ var el=document.getElementById(b.dataset.copy); b._src=el; copyText(el.innerText.replace(/ /g," ____ "),b); });
+});
+document.querySelectorAll("button[data-copy-text]").forEach(function(b){
+b.addEventListener("click",function(){ b._src=document.getElementById("email"); copyText(b.dataset.copyText,b); });
+});
+// lista de revisão lembrada no navegador
+document.querySelectorAll("#rev input").forEach(function(c){
+try{ c.checked=localStorage.getItem(c.id)==="1"; }catch(e){}
+c.addEventListener("change",function(){ try{ localStorage.setItem(c.id,c.checked?"1":"0"); }catch(e){} });
+});
+// caso da Laura
+var found=new Set(), fb=document.getElementById("caso-fb");
+var msg={negacao:"Negação invertida: a mãe relatou febre de 39 °C. Esse tipo respondeu por 30% das alucinações.",fabricacao:"Fabricação: a otoscopia não foi feita. Esse tipo respondeu por 43% das alucinações."};
+document.querySelectorAll("#caso .hot").forEach(function(h){
+var act=function(){ var e=h.dataset.err; if(e){ h.classList.add("found"); found.add(e); fb.textContent="Encontrados: "+found.size+" de 2. "+msg[e]+(found.size===2?" Agora corrija o rascunho antes de assinar.":""); } else { h.classList.add("ok"); fb.textContent="Esse trecho confere com a consulta. Encontrados: "+found.size+" de 2."; } };
+h.addEventListener("click",act); h.addEventListener("keydown",function(ev){ if(ev.key==="Enter"||ev.key===" "){ ev.preventDefault(); act(); } });
+});
+// calculadora
+var css;
+var cv=document.getElementById("dots"), ctx=cv.getContext("2d");
+function fmt(n,d){ return n.toLocaleString("pt-BR",{maximumFractionDigits:d}); }
+function calc(){
+var prev=Math.round(Math.pow(10,+document.getElementById("prev").value));
+var se=+document.getElementById("sens").value/100, fp=+document.getElementById("fp").value/100;
+document.getElementById("prevOut").textContent=fmt(prev,0);
+document.getElementById("sensOut").textContent=fmt(se*100,0)+"%";
+document.getElementById("fpOut").textContent=fmt(fp*100,1)+"%";
+var N=10000, D=N/prev, tp=D*se, fpos=(N-D)*fp, ppv=tp/(tp+fpos);
+document.getElementById("ppv").textContent=fmt(ppv*100, ppv<0.1?1:0)+"%";
+var fneg=D*(1-se);
+var ptx=document.getElementById("ppvTxt"); ptx.innerHTML="dos positivos são doença de verdade: "+fmt(tp,1)+" verdadeiros para <b class=\"err\">"+fmt(fpos,0)+" alarmes falsos</b>"+(fneg>0.05?" e <b class=\"err\">"+fmt(fneg,1)+" doentes não detectados</b>":"")+", em 10.000 pessoas.";
+css=getComputedStyle(document.documentElement);
+var g=css.getPropertyValue("--green").trim(), au=css.getPropertyValue("--red").trim(), mu=css.getPropertyValue("--line").trim();
+ctx.clearRect(0,0,cv.width,cv.height);
+var cols=40, rows=25, cw=cv.width/cols, ch=cv.height/rows, r=Math.min(cw,ch)*0.32;
+var nTP=Math.round(tp/10), nFP=Math.round(fpos/10), nFN=Math.round(fneg/10);
+if(tp>0 && nTP===0) nTP=1; if(fneg>=1 && nFN===0) nFN=1;
+var idx=[]; for(var i=0;i<1000;i++) idx.push(i);
+var seed=11; function rnd(){ seed=(seed*16807)%2147483647; return seed/2147483647; }
+for(var j=idx.length-1;j>0;j--){ var k=Math.floor(rnd()*(j+1)); var t=idx[j]; idx[j]=idx[k]; idx[k]=t; }
+var color=new Array(1000).fill(mu);
+for(var a=0;a<Math.min(nTP,1000);a++) color[idx[a]]=g;
+for(var b=nTP;b<Math.min(nTP+nFP,1000);b++) color[idx[b]]=au;
+var ring=new Array(1000).fill(false);
+for(var c=nTP+nFP;c<Math.min(nTP+nFP+nFN,1000);c++) ring[idx[c]]=true;
+for(var p=0;p<1000;p++){ var x=(p%cols+0.5)*cw, y=(Math.floor(p/cols)+0.5)*ch; ctx.beginPath();
+if(ring[p]){ ctx.strokeStyle=au; ctx.lineWidth=3; ctx.arc(x,y,r*1.2,0,Math.PI*2); ctx.stroke(); }
+else { ctx.fillStyle=color[p]; ctx.arc(x,y, color[p]===g? r*1.35 : r,0,Math.PI*2); ctx.fill(); } }
+}
+["prev","sens","fp"].forEach(function(id){ document.getElementById(id).addEventListener("input",calc); });
+calc();
+// teste
+var Q=[
+{q:"Quem responde pela nota gerada por um escriba de IA?",o:["A empresa que fornece a ferramenta","O médico que revisa e assina","Ninguém, se o erro for da máquina"],a:1,e:"O médico permanece integralmente responsável pelos atos praticados com IA (Resolução CFM 2.454/2026, art. 7º)."},
+{q:"Qual é o tipo de erro mais frequente nos escribas comerciais testados no Reino Unido?",o:["Omissão","Alucinação","Erro de ortografia"],a:0,e:"Omissões foram 83,8% dos erros (Draper 2025)."},
+{q:"Prevalência de 1:1.000 e 5% de falso-positivo. Qual a chance de doença após um positivo?",o:["95%","50%","Cerca de 2%"],a:2,e:"De cada 51 positivos, só 1 é verdadeiro (Manrai 2014)."},
+{q:"O paciente recusou o escriba. O que fazer?",o:["Usar mesmo assim e revisar com cuidado","Atender sem a ferramenta e registrar a recusa","Encaminhar para outro médico"],a:1,e:"A recusa informada deve ser respeitada, sem prejuízo ao atendimento (Resolução CFM 2.454/2026, art. 5º, § 3º)."},
+{q:"Qual é a pergunta de ouro antes de contratar um escriba?",o:["Quanto custa por mês?","Onde fica o áudio e quando ele é apagado?","Quantos idiomas ele reconhece?"],a:1,e:"As políticas variam de apagar o áudio logo após a nota até guardá-lo por 90 dias."}
+];
+var box=document.getElementById("quiz"), score=0, answered=0, out=document.getElementById("quiz-score");
+Q.forEach(function(it,i){
+var d=document.createElement("div"); d.className="q";
+var h=document.createElement("p"); h.innerHTML="<b>"+(i+1)+". "+it.q+"</b>"; d.appendChild(h);
+var os=document.createElement("div"); os.className="opts";
+var ex=document.createElement("p"); ex.className="muted"; ex.setAttribute("aria-live","polite");
+it.o.forEach(function(t,k){
+var b=document.createElement("button"); b.type="button"; b.className="opt"; b.textContent=t;
+b.addEventListener("click",function(){ if(d.dataset.done) return; d.dataset.done=1; answered++;
+if(k===it.a){ b.classList.add("right"); score++; } else { b.classList.add("wrong"); os.children[it.a].classList.add("right"); }
+ex.textContent=it.e; if(answered===Q.length) out.textContent="Você acertou "+score+" de "+Q.length+"."; });
+os.appendChild(b);
+});
+d.appendChild(os); d.appendChild(ex); box.appendChild(d);
+});
+})();
+</script>
+</body>
+</html>
